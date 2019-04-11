@@ -18,6 +18,9 @@ import javafx.stage.Stage;
  * @author mlecoeuvre
  */
 public class Round extends Application {
+    private int nbTurnMax;
+    private int nbTurn;
+    private int nbPlayer;
     
     @Override
     public void start(Stage primaryStage) {
