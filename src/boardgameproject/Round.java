@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author mlecoeuvre
  */
-public class BoardGameProject extends Application {
+public class Round extends Application {
     
     @Override
     public void start(Stage primaryStage) {
@@ -45,9 +45,7 @@ public class BoardGameProject extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //launch(args);
-        System.out.println("Ceci est un test");
-        System.out.println("Ceci est un deuxième test");
+        
     }
     
 }
