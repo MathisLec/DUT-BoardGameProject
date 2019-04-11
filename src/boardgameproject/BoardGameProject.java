@@ -47,6 +47,7 @@ public class BoardGameProject extends Application {
     public static void main(String[] args) {
         //launch(args);
         System.out.println("Ceci est un test");
+        System.out.println("Ceci est un deuxième test");
     }
     
 }
