@@ -5,6 +5,7 @@
  */
 package boardgameproject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,4 +19,27 @@ public class Player {
     private int nbBuildings;
     private List<Building> Buildings;
     public static List<Building> Pile;
+
+    public Player() {
+        this.nbEnergy = 16;
+        this.nbWorkers = 8;
+        this.nbMaterials = 8;
+        this.nbBuildings = 5;
+        this.Buildings = new ArrayList<>();
+    }
+    
+    
+    
+    private boolean checkAddBuilding(){
+        return false;
+    }
+    private boolean checkAddWorker(){
+        return false;
+    }
+    public void addBuilding(){
+        
+    }
+    public void addWorker(){
+        
+    }
 }
