@@ -45,7 +45,8 @@ public class BoardGameProject extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        System.out.println("Ceci est un test");
     }
     
 }
