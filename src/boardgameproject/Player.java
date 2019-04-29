@@ -31,15 +31,25 @@ public class Player {
     
     
     private boolean checkAddBuilding(){
-        return false;
+        boolean isValid = false;
+            
+        return isValid;
     }
+    
     private boolean checkAddWorker(){
-        return false;
+        boolean isValid = false;
+            
+        return isValid;
     }
+    
     public void addBuilding(){
-        
+        if(checkAddBuilding()){
+            
+        }
     }
     public void addWorker(){
-        
+        if(checkAddWorker()){
+            
+        }
     }
 }
