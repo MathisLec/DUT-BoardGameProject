@@ -68,4 +68,12 @@ public final class Pile {
         return nbBuildingsPile;
     }
     
+    public void deleteBuilding(Building building){
+        pile.remove(building);
+        updateNbBuildingPile();
+    }
+    
+    private void updateNbBuildingPile(){
+        nbBuildingsPile = pile.size();
+    }
 }
