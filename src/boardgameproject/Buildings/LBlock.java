@@ -5,10 +5,12 @@
  */
 package boardgameproject.Buildings;
 
+import boardgameproject.Building;
+
 /**
  *
  * @author mlecoeuvre
  */
-public class LBlock {
+public class LBlock extends Building{
     
 }
