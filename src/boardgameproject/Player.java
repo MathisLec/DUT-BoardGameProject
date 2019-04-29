@@ -36,9 +36,11 @@ public class Player {
         return isValid;
     }
     
-    private boolean checkAddWorker(){
-        boolean isValid = false;
-            
+    private boolean checkAddWorker(Cell cell){
+        boolean isValid = true;
+            if(cell.hasWorker || nbWorkers>=0){
+                isValid = !isValid;
+            }
         return isValid;
     }
     
@@ -47,9 +49,9 @@ public class Player {
             
         }
     }
-    public void addWorker(){
-        if(checkAddWorker()){
-            
+    public void addWorker(Cell cell){
+        if(checkAddWorker(cell)){
+            nbWorkers--;
         }
     }
 }
