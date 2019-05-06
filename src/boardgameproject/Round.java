@@ -26,7 +26,7 @@ public class Round extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
 
         Scene scene = new Scene(root);
-        
+
         stage.setTitle("Jeu");
         stage.setScene(scene);
         stage.show();
@@ -37,6 +37,18 @@ public class Round extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-     }
+    }
+
+    public int getNbTurnMax() {
+        return nbTurnMax;
+    }
+
+    public int getNbTurn() {
+        return nbTurn;
+    }
+
+    public int getNbPlayer() {
+        return nbPlayer;
+    }
 
 }

@@ -5,6 +5,7 @@
  */
 package boardgameproject;
 
+import boardgameproject.Buildings.Building;
 import boardgameproject.Buildings.*;
 import java.util.ArrayList;
 import java.util.List;

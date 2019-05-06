@@ -3,27 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package boardgameproject;
+package boardgameproject.Buildings;
 
 /**
  *
  * @author mlecoeuvre
  */
 public abstract class Building {
+
     protected int id;
     protected char role;
     protected int nbWorkers;
-    
-    public void buildingShape(){
-        
+    protected int energyConsume;
+
+    public void buildingShape() {
+
     }
-    public void buildingRole(){
-        
+
+    protected void buildingRole() {
+
     }
-    public void rotateBuilding(){
-        
+
+    public void rotateBuilding() {
+
     }
-    public int nbWorkerIn(){
+
+    public int nbWorkerIn() {
         return 0;
     }
+
+    public int getEnergyConsume() {
+        return energyConsume;
+    }
+
 }

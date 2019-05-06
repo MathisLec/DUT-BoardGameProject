@@ -5,8 +5,6 @@
  */
 package boardgameproject.Buildings;
 
-import boardgameproject.Building;
-
 /**
  *
  * @author mlecoeuvre
