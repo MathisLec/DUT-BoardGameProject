@@ -10,16 +10,16 @@ package boardgameproject;
  * @author mlecoeuvre
  */
 public class Cell {
-    Integer idBuilding;
+    Integer idCell;
     boolean hasWorker;
 
     public Cell() {
-        this.idBuilding = null;
+        this.idCell = null;
         hasWorker = false;
     }
 
-    public void setIdBuilding(Integer idBuilding) {
-        this.idBuilding = idBuilding;
+    public void setIdBuilding(Integer idCell) {
+        this.idCell = idCell;
     }
     
     public void changeWorkerStatus(){
