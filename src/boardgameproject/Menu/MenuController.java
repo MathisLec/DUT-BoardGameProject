@@ -8,7 +8,7 @@ public class MenuController {
 
     @FXML
     void onPlayClick(ActionEvent event) {
-
+        int abv;
     }
 
     @FXML
