@@ -23,13 +23,16 @@ public class Round extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
-
-        Scene scene = new Scene(root);
-
-        stage.setTitle("Jeu");
-        stage.setScene(scene);
-        stage.show();
+        Player player = new Player();
+        Board board = new Board(this,player);
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
+//
+//        Scene scene = new Scene(root);
+//
+//        stage.setTitle("Jeu");
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     /**

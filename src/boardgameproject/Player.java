@@ -30,32 +30,14 @@ public class Player {
         this.Buildings = new ArrayList<>();
     }
 
-    private boolean checkAddBuilding() {
-        boolean isValid = false;
-
-        return isValid;
+    public void placeBuilding(Building building) {
+        Buildings.remove(building);
     }
 
-    private boolean checkAddWorker(Cell cell) {
-        boolean isValid = true;
-        if (cell.hasWorker() || nbWorkers >= 0) {
-            isValid = !isValid;
-        }
-        return isValid;
+    public void placeWorker(Cell cell) {
+        nbWorkers--;
     }
-
-    public void addBuilding() {
-        if (checkAddBuilding()) {
-
-        }
-    }
-
-    public void addWorker(Cell cell) {
-        if (checkAddWorker(cell)) {
-            nbWorkers--;
-        }
-    }
-
+    
     public int getNbEnergy() {
         return nbEnergy;
     }
