@@ -24,37 +24,37 @@ public final class Board {
         this.player = player;
         initializeBoard();
     }
-    
-    public void initializeBoard(){
+
+    public void initializeBoard() {
         for (int i = 0; i < Board.length - 1; i++) {
             for (int j = 0; j < Board[i].length - 1; j++) {
-                Board[i][j] = new Cell(i,j);
+                Board[i][j] = new Cell(i, j);
             }
         }
     }
-    
-    public void addBuilding(Building building, int x, int y){
-        
+
+    public void addBuilding(Building building, int x, int y) {
+        if (checkAddBuilding()) {
+            Board[x][y].changeBuildingStatus(building);
+        }
     }
-    
-    public void addWorker(Cell cell){
-        cell.changeWorkerStatus();
+
+    public void addWorker(Cell cell) {
+        if (checkAddWorker(cell)) {
+            cell.changeWorkerStatus();
+        }
     }
-    
+
     private boolean checkAddBuilding() {
-        boolean isValid = false;
-        
-        return isValid;
+        return false;
     }
 
     private boolean checkAddWorker(Cell cell) {
-        boolean isValid = true;
-        if (cell.hasWorker() || player.getNbWorkers() >= 0 || !cell.hasBuilding()) {
-            isValid = !isValid;
-        }
-        return isValid;
+        return !cell.hasWorker()
+                && player.getNbWorkers() > 0
+                && cell.hasBuilding();
     }
-    
+
     public void checkRemoveWorker() {
         for (Cell c : boardToList()) {
             if (c.hasWorker()) {
@@ -72,7 +72,6 @@ public final class Board {
     public Cell[][] getBoard() {
         return Board;
     }
-    
 
     private ArrayList<Cell> boardToList() {
         ArrayList<Cell> cells = new ArrayList<>();

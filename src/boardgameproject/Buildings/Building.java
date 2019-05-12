@@ -5,35 +5,45 @@
  */
 package boardgameproject.Buildings;
 
+import boardgameproject.Cell;
+import java.util.ArrayList;
+
 /**
  *
  * @author mlecoeuvre
  */
 public abstract class Building {
 
-    protected int id;
     protected char role;
     protected int nbWorkers;
+    protected int energyCost;
     protected int energyConsume;
+    protected ArrayList<Cell> cells;
 
-    public void buildingShape() {
+    public abstract void buildingShape(int x, int y);
 
-    }
+    protected abstract void buildingRole();
 
-    protected void buildingRole() {
+    public abstract void rotateBuilding();
 
-    }
-
-    public void rotateBuilding() {
-
-    }
-
-    public int nbWorkerIn() {
-        return 0;
+    public int getNbWorkerIn() {
+        return nbWorkers;
     }
 
     public int getEnergyConsume() {
         return energyConsume;
+    }
+
+    public void addWorker() {
+        nbWorkers++;
+    }
+
+    public void removeWorker() {
+        nbWorkers--;
+    }
+
+    public ArrayList<Cell> getCells() {
+        return cells;
     }
 
 }

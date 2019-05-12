@@ -10,5 +10,20 @@ package boardgameproject.Buildings;
  * @author mlecoeuvre
  */
 public class SBlock extends Building{
+
+    @Override
+    public void buildingShape(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void buildingRole() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void rotateBuilding() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

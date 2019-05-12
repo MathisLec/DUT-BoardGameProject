@@ -16,7 +16,7 @@ public class Cell {
     private boolean hasWorker;
     private boolean hasBuilding;
     private Building buildingType;
-    private int x, y;
+    private  final int x, y;
 
     public Cell() {
         this.hasWorker = false;
