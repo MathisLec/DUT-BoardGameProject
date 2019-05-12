@@ -13,12 +13,15 @@ import java.util.ArrayList;
  * @author mlecoeuvre
  */
 public class IBlock extends Building {
-    
-    public IBlock(){
-        super.role='I';
-        super.nbWorkers=0;
-        super.cells = new ArrayList<>();
-        buildingShape(0,0);
+
+    public IBlock() {
+        super();
+        super.role = 'I';
+    }
+
+    public IBlock(ArrayList<Cell> list) {
+        super(list);
+        super.role = 'I';
     }
 
     @Override
@@ -36,15 +39,36 @@ public class IBlock extends Building {
 
     @Override
     public void rotateBuildingLeft() {
-        for(Cell c : cells){
-            c.setX(c.getY());
-            c.setY(c.getX());
+        switch (state) {
+            case TOP:
+            case BOTTOM:
+            case LEFT:
+            case RIGHT:
+                for (Cell c : cells) {
+                    int cache = c.getX();
+                    c.setX(c.getY());
+                    c.setY(cache);
+                }
+                break;
         }
+        changeStateRotateLeft();
     }
 
     @Override
     public void rotateBuildingRight() {
-        rotateBuildingLeft();
+        switch (state) {
+            case TOP:
+            case BOTTOM:
+            case LEFT:
+            case RIGHT:
+                for (Cell c : cells) {
+                    int cache = c.getX();
+                    c.setX(c.getY());
+                    c.setY(cache);
+                }
+                break;
+        }
+        changeStateRotateRight();
     }
 
 }
