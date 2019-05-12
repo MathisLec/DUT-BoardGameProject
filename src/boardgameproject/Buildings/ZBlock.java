@@ -22,7 +22,12 @@ public class ZBlock extends Building{
     }
 
     @Override
-    public void rotateBuilding() {
+    public void rotateBuildingLeft() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void rotateBuildingRight() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

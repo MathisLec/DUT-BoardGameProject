@@ -24,7 +24,9 @@ public abstract class Building {
 
     protected abstract void buildingRole();
 
-    public abstract void rotateBuilding();
+    public abstract void rotateBuildingLeft();
+    
+    public abstract void rotateBuildingRight();
 
     public int getNbWorkerIn() {
         return nbWorkers;

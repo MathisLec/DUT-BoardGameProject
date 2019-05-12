@@ -16,7 +16,7 @@ public class Cell {
     private boolean hasWorker;
     private boolean hasBuilding;
     private Building buildingType;
-    private  final int x, y;
+    private int x, y;
 
     public Cell() {
         this.hasWorker = false;
@@ -25,15 +25,15 @@ public class Cell {
         this.x = 0;
         this.y = 0;
     }
-    
-        public Cell(int x, int y) {
+
+    public Cell(int x, int y) {
         this.hasWorker = false;
         this.hasBuilding = false;
         this.buildingType = null;
         this.x = x;
         this.y = y;
     }
-    
+
     public void changeWorkerStatus() {
         hasWorker = !hasWorker;
     }
@@ -42,7 +42,7 @@ public class Cell {
         hasBuilding = !hasBuilding;
         buildingType = building;
     }
-    
+
     public void changeBuildingStatus() {
         hasBuilding = false;
         buildingType = null;
@@ -66,6 +66,14 @@ public class Cell {
 
     public int getY() {
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
     }
 
 }
