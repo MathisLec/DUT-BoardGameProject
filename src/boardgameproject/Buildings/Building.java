@@ -37,7 +37,7 @@ public abstract class Building {
 
     protected abstract void buildingRole();
 
-    public abstract void rotateBuildingLeft();
+    public abstract void rotateBuildingLeft(int x, int y);
 
     protected void changeStateRotateLeft() {
         switch (state) {
@@ -56,7 +56,7 @@ public abstract class Building {
         }
     }
 
-    public abstract void rotateBuildingRight();
+    public abstract void rotateBuildingRight(int x, int y);
     
     protected void changeStateRotateRight() {
         switch (state) {
