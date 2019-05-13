@@ -7,7 +7,7 @@ package boardgameproject.View;
 
 import boardgameproject.Board;
 import boardgameproject.Buildings.Building;
-import boardgameproject.Buildings.IBlock;
+import boardgameproject.Buildings.*;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.net.URL;
@@ -18,7 +18,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 
 /**
  *
@@ -30,6 +29,7 @@ public class GameViewController implements Initializable {
     private Round Round;
     Board board = new Board(Round, player);
     Building I = new IBlock();
+    Building J = new JBlock();
 
     @FXML
     private Canvas GameBoard;
@@ -49,19 +49,24 @@ public class GameViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         board.drawBoard(GameBoard);
+        
         I.drawBuilding(BuildingHand1);
+        
         I.rotateBuildingLeft(0, 1);
         GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
         gc.clearRect(0, 0, 100, 100);
+        
         I.drawBuilding(BuildingHand1);
-        I.drawBuilding(BuildingHand2);
-        I.drawBuilding(BuildingHand3);
-        I.drawBuilding(BuildingHand4);
-        I.drawBuilding(BuildingHand5);
-        I.drawBuilding(BuildingHand6);
         
-        
-
+        J.drawBuilding(BuildingHand2);
+        J.rotateBuildingLeft(1, 1);
+        J.drawBuilding(BuildingHand3);
+        J.rotateBuildingLeft(1, 1);
+        J.drawBuilding(BuildingHand4);
+        J.rotateBuildingLeft(1, 1);
+        J.drawBuilding(BuildingHand5);
+        J.rotateBuildingLeft(1, 1);
+        J.drawBuilding(BuildingHand6);
     }
 
     @FXML

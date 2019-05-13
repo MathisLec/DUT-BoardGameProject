@@ -18,6 +18,7 @@ public class JBlock extends Building {
     public JBlock() {
         super();
         super.role = 'J';
+        buildingShape(1,1);
     }
 
     public JBlock(ArrayList<Cell> list) {
@@ -124,7 +125,9 @@ public class JBlock extends Building {
 
     @Override
     public void drawBuilding(Canvas c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (Cell s : cells) {
+            s.drawCell(c, s.getX(), s.getY());
+        }
     }
 
 }
