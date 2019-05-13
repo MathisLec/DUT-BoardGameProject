@@ -40,102 +40,6 @@ public class JBlock extends Building {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//    public void rotateBuildingLeft() {
-//        switch (state) {
-//            case TOP:
-//                for (int i = 0; i < 3; i++) {
-//                    Cell cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY());
-//                    cell.setY(cache - 1);
-//                }
-//                Cell cell = super.cells.get(3);
-//                cell.setX(cell.getX() + 2);
-//                cell.setY(cell.getY() - 1);
-//                break;
-//            case BOTTOM:
-//                for (int i = 0; i < 3; i++) {
-//                    cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY());
-//                    cell.setY(cache + 1);
-//                }
-//                cell = super.cells.get(3);
-//                cell.setX(cell.getX() - 1);
-//                break;
-//            case LEFT:
-//                for (int i = 0; i < 3; i++) {
-//                    cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY() - 1);
-//                    cell.setY(cache);
-//                }
-//                cell = super.cells.get(3);
-//                cell.setX(cell.getX() - 1);
-//                cell.setY(cell.getY() - 1);
-//                break;
-//            case RIGHT:
-//                for (int i = 0; i < 3; i++) {
-//                    cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY() + 1);
-//                    cell.setY(cache);
-//                }
-//                cell = super.cells.get(3);
-//                cell.setX(cell.getX() - 2);
-//                cell.setY(cell.getY() + 1);
-//                break;
-//        }
-//        changeStateRotateLeft();
-//    }
-//    public void rotateBuildingRight() {
-//        switch (state) {
-//            case TOP:
-//                for (int i = 0; i < 3; i++) {
-//                    Cell cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY());
-//                    cell.setY(cache);
-//                }
-//                Cell cell = super.cells.get(3);
-//                cell.setY(cell.getY() - 2);
-//                break;
-//            case BOTTOM:
-//                for (int i = 0; i < 3; i++) {
-//                    cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY());
-//                    cell.setY(cache);
-//                }
-//                cell = super.cells.get(3);
-//                cell.setX(cell.getX() + 1);
-//                cell.setY(cell.getY() + 1);
-//                break;
-//            case LEFT:
-//                for (int i = 0; i < 3; i++) {
-//                    cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY() + 1);
-//                    cell.setY(cache);
-//                }
-//                cell = super.cells.get(3);
-//                cell.setX(cell.getX() - 2);
-//                cell.setY(cell.getY() + 1);
-//                break;
-//            case RIGHT:
-//                for (int i = 0; i < 3; i++) {
-//                    cell = cells.get(i);
-//                    int cache = cell.getX();
-//                    cell.setX(cell.getY() - 1);
-//                    cell.setY(cache);
-//                }
-//                cell = super.cells.get(3);
-//                cell.setX(cell.getX() - 1);
-//                cell.setY(cell.getY() - 1);
-//                break;
-//        }
-//        changeStateRotateRight();
-//    }
     @Override
     public void rotateBuildingLeft(int x, int y) {
         cells.clear();
@@ -151,6 +55,47 @@ public class JBlock extends Building {
                 break;
             case BOTTOM:
                 for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x, y + i);
+                    super.cells.add(cell);
+                }
+                cell = new Cell(x + 1, y);
+                super.cells.add(cell);
+                break;
+            case LEFT:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x + i, y);
+                    super.cells.add(cell);
+                }
+                cell = new Cell(x, y);
+                super.cells.add(cell);
+                break;
+            case RIGHT:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x, y + i);
+                    super.cells.add(cell);
+                }
+                cell = new Cell(x, y + 2);
+                super.cells.add(cell);
+                break;
+        }
+        changeStateRotateLeft();
+    }
+
+    @Override
+    public void rotateBuildingRight(int x, int y) {
+        cells.clear();
+        Cell cell;
+        switch (state) {
+            case TOP:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x, y + i);
+                    super.cells.add(cell);
+                }
+                cell = new Cell(x + 1, y);
+                super.cells.add(cell);
+                break;
+            case BOTTOM:
+                for (int i = 0; i < 3; i++) {
                     cell = new Cell(x + i, y);
                     super.cells.add(cell);
                 }
@@ -158,15 +103,23 @@ public class JBlock extends Building {
                 super.cells.add(cell);
                 break;
             case LEFT:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x, y + i);
+                    super.cells.add(cell);
+                }
+                cell = new Cell(x, y + 2);
+                super.cells.add(cell);
                 break;
             case RIGHT:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x + i, y);
+                    super.cells.add(cell);
+                }
+                cell = new Cell(x, y);
+                super.cells.add(cell);
                 break;
         }
-    }
-
-    @Override
-    public void rotateBuildingRight(int x, int y) {
-
+        changeStateRotateRight();
     }
 
     @Override

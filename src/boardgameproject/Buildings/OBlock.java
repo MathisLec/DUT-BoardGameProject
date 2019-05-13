@@ -5,6 +5,7 @@
  */
 package boardgameproject.Buildings;
 
+import boardgameproject.Cell;
 import javafx.scene.canvas.Canvas;
 
 /**
@@ -15,7 +16,9 @@ public class OBlock extends Building {
 
     @Override
     public void buildingShape(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < 4; i++) {
+            Cell cell = new Cell(x + i, y + i);
+        }
     }
 
     @Override

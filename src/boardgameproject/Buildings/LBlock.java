@@ -15,7 +15,6 @@ import javafx.scene.canvas.Canvas;
  */
 public class LBlock extends Building {
 
-    
     public LBlock() {
         super();
         super.role = 'L';
@@ -25,6 +24,7 @@ public class LBlock extends Building {
         super(list);
         super.role = 'L';
     }
+
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 3; i++) {
@@ -42,49 +42,40 @@ public class LBlock extends Building {
 
     @Override
     public void rotateBuildingLeft(int x, int y) {
+        cells.clear();
+        Cell cell;
         switch (state) {
             case TOP:
                 for (int i = 0; i < 3; i++) {
-                    Cell cell = cells.get(i);
-                    int cache = cell.getX();
-                    cell.setX(cell.getY());
-                    cell.setY(cache+1);
+                    cell = new Cell(x + i, y);
+                    cells.add(cell);
                 }
-                Cell cell = super.cells.get(3);
-                cell.setX(cell.getX() + 1);
-                cell.setY(cell.getY() + 1);
+                cell = new Cell(x + 2, y - 1);
+                super.cells.add(cell);
                 break;
             case BOTTOM:
                 for (int i = 0; i < 3; i++) {
-                    cell = cells.get(i);
-                    int cache = cell.getX();
-                    cell.setX(cell.getY());
-                    cell.setY(cache);
+                    cell = new Cell(x + i, y);
+                    cells.add(cell);
                 }
-                cell = super.cells.get(3);
-                cell.setY(cell.getY() - 2);
+                cell = new Cell(x, y + 1);
+                super.cells.add(cell);
                 break;
             case LEFT:
                 for (int i = 0; i < 3; i++) {
-                    cell = cells.get(i);
-                    int cache = cell.getX();
-                    cell.setX(cell.getY() - 1);
-                    cell.setY(cache);
+                    cell = new Cell(x + 1, y + i);
+                    cells.add(cell);
                 }
-                cell = super.cells.get(3);
-                cell.setX(cell.getX() - 1);
-                cell.setY(cell.getY() - 1);
+                cell = new Cell(x, y);
+                super.cells.add(cell);
                 break;
             case RIGHT:
                 for (int i = 0; i < 3; i++) {
-                    cell = cells.get(i);
-                    int cache = cell.getX();
-                    cell.setX(cell.getY() + 1);
-                    cell.setY(cache);
+                    cell = new Cell(x + 1, y + i);
+                    cells.add(cell);
                 }
-                cell = super.cells.get(3);
-                cell.setX(cell.getX() - 2);
-                cell.setY(cell.getY() + 1);
+                cell = new Cell(x, y);
+                super.cells.add(cell);
                 break;
         }
         changeStateRotateLeft();
@@ -92,7 +83,43 @@ public class LBlock extends Building {
 
     @Override
     public void rotateBuildingRight(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        cells.clear();
+        Cell cell;
+        switch (state) {
+            case TOP:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x + i, y);
+                    cells.add(cell);
+                }
+                cell = new Cell(x, y + 1);
+                super.cells.add(cell);
+                break;
+            case BOTTOM:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x + i, y);
+                    cells.add(cell);
+                }
+                cell = new Cell(x + 2, y - 1);
+                super.cells.add(cell);
+                break;
+            case LEFT:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x + 1, y + i);
+                    cells.add(cell);
+                }
+                cell = new Cell(x, y);
+                super.cells.add(cell);
+                break;
+            case RIGHT:
+                for (int i = 0; i < 3; i++) {
+                    cell = new Cell(x + 1, y + i);
+                    cells.add(cell);
+                }
+                cell = new Cell(x, y);
+                super.cells.add(cell);
+                break;
+        }
+        changeStateRotateRight();
     }
 
     @Override
