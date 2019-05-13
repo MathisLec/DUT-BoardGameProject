@@ -6,6 +6,8 @@
 package boardgameproject.View;
 
 import boardgameproject.Board;
+import boardgameproject.Buildings.Building;
+import boardgameproject.Buildings.IBlock;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.net.URL;
@@ -14,26 +16,54 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 
 /**
  *
  * @author adesaleneuve
  */
-public class GameViewController implements Initializable{
+public class GameViewController implements Initializable {
 
     private Player player;
     private Round Round;
-    Board board = new Board(Round,player);
-    
+    Board board = new Board(Round, player);
+    Building I = new IBlock();
+
     @FXML
     private Canvas GameBoard;
-    
+    @FXML
+    private Canvas BuildingHand1;
+    @FXML
+    private Canvas BuildingHand2;
+    @FXML
+    private Canvas BuildingHand3;
+    @FXML
+    private Canvas BuildingHand4;
+    @FXML
+    private Canvas BuildingHand5;
+    @FXML
+    private Canvas BuildingHand6;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         board.drawBoard(GameBoard);
+        I.drawBuilding(BuildingHand1);
+        I.rotateBuildingLeft(0, 1);
+        GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
+        gc.clearRect(0, 0, 100, 100);
+        I.drawBuilding(BuildingHand1);
+        I.drawBuilding(BuildingHand2);
+        I.drawBuilding(BuildingHand3);
+        I.drawBuilding(BuildingHand4);
+        I.drawBuilding(BuildingHand5);
+        I.drawBuilding(BuildingHand6);
+        
+        
+
     }
-    
+
     @FXML
     private Label nbEnergy;
     @FXML
@@ -43,7 +73,7 @@ public class GameViewController implements Initializable{
 
     @FXML
     private void endTurn(ActionEvent event) {
-        
+
     }
 
     @FXML
@@ -52,6 +82,7 @@ public class GameViewController implements Initializable{
 
     @FXML
     private void RotateLeft(ActionEvent event) {
+        I.rotateBuildingLeft(0, 0);
     }
-    
+
 }

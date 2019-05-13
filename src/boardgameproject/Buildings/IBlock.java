@@ -18,11 +18,12 @@ public class IBlock extends Building {
     public IBlock() {
         super();
         super.role = 'I';
+        buildingShape(1,0);
     }
 
     public IBlock(ArrayList<Cell> list) {
         super(list);
-        super.role = 'I';
+        super.role = 'I';  
     }
 
     @Override
@@ -68,7 +69,9 @@ public class IBlock extends Building {
 
     @Override
     public void drawBuilding(Canvas c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for(Cell s : cells){
+            s.drawCell(c, s.getX(), s.getY());
+        }
     }
 
 }

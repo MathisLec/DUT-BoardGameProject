@@ -35,5 +35,11 @@
       </Label>
       <Label fx:id="nbWorkers" layoutX="680.0" layoutY="98.0" text="8" />
       <Canvas fx:id="GameBoard" height="400.0" layoutX="67.0" layoutY="58.0" width="200.0" />
+      <Canvas fx:id="BuildingHand1" height="81.0" layoutX="425.0" layoutY="126.0" width="81.0" />
+      <Canvas fx:id="BuildingHand2" height="81.0" layoutX="538.0" layoutY="126.0" width="81.0" />
+      <Canvas fx:id="BuildingHand3" height="81.0" layoutX="640.0" layoutY="126.0" width="81.0" />
+      <Canvas fx:id="BuildingHand4" height="81.0" layoutX="425.0" layoutY="243.0" width="81.0" />
+      <Canvas fx:id="BuildingHand5" height="81.0" layoutX="538.0" layoutY="243.0" width="81.0" />
+      <Canvas fx:id="BuildingHand6" height="81.0" layoutX="640.0" layoutY="243.0" width="81.0" />
    </children>
 </AnchorPane>
