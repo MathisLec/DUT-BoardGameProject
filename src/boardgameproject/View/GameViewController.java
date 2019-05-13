@@ -5,6 +5,9 @@
  */
 package boardgameproject.View;
 
+import boardgameproject.Board;
+import boardgameproject.Player;
+import boardgameproject.Round;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -19,11 +22,16 @@ import javafx.scene.control.Label;
  */
 public class GameViewController implements Initializable{
 
+    private Player player;
+    private Round Round;
+    Board board = new Board(Round,player);
+    
     @FXML
     private Canvas GameBoard;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        board.drawBoard(GameBoard);
     }
     
     @FXML
@@ -35,6 +43,7 @@ public class GameViewController implements Initializable{
 
     @FXML
     private void endTurn(ActionEvent event) {
+        
     }
 
     @FXML
