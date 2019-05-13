@@ -10,25 +10,39 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Label;
 
 /**
- * FXML Controller class
  *
  * @author adesaleneuve
  */
-public class GameViewController implements Initializable {
+public class GameViewController implements Initializable{
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Canvas GameBoard;
+    
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-    }    
+    public void initialize(URL location, ResourceBundle resources) {
+    }
+    
+    @FXML
+    private Label nbEnergy;
+    @FXML
+    private Label nbMaterials;
+    @FXML
+    private Label nbWorkers;
 
     @FXML
     private void endTurn(ActionEvent event) {
-        
+    }
+
+    @FXML
+    private void RotateRight(ActionEvent event) {
+    }
+
+    @FXML
+    private void RotateLeft(ActionEvent event) {
     }
     
 }

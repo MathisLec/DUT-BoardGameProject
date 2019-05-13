@@ -1,10 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="516.0" prefWidth="742.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.GameViewController">
    <children>
-      <Button layoutX="595.0" layoutY="449.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="28.0" prefWidth="77.0" text="End Turn" />
+      <Button layoutX="589.0" layoutY="452.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="28.0" prefWidth="77.0" text="End Turn" />
+      <Button layoutX="634.0" layoutY="413.0" mnemonicParsing="false" onAction="#RotateRight" text="Rotate Right" />
+      <Button layoutX="530.0" layoutY="413.0" mnemonicParsing="false" onAction="#RotateLeft" text="Rotate Left" />
+      <Label layoutX="516.0" layoutY="14.0" prefHeight="35.0" prefWidth="120.0" text="Ressources">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="435.0" layoutY="58.0" text="Energy">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="539.0" layoutY="58.0" text="Materials">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nbEnergy" layoutX="455.0" layoutY="98.0" text="16" />
+      <Label fx:id="nbMaterials" layoutX="567.0" layoutY="98.0" text="8" />
+      <Label layoutX="651.0" layoutY="58.0" text="Workers">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nbWorkers" layoutX="680.0" layoutY="98.0" text="8" />
+      <Canvas fx:id="GameBoard" height="400.0" layoutX="67.0" layoutY="58.0" width="200.0" />
    </children>
 </AnchorPane>

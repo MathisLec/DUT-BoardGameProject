@@ -19,8 +19,7 @@ public class MenuViewController implements Initializable {
 
     @FXML
     void onPlayClick(ActionEvent event) throws IOException {
-        Stage stage = (Stage) PlayButton.getScene().getWindow(); 
-    // do what you have to do 
+        Stage stage = (Stage) PlayButton.getScene().getWindow();
         stage.close(); 
         
         Stage stage2 = new Stage();

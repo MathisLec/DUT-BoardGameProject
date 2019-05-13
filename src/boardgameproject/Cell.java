@@ -6,6 +6,8 @@
 package boardgameproject;
 
 import boardgameproject.Buildings.Building;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
@@ -17,6 +19,7 @@ public class Cell {
     private boolean hasBuilding;
     private Building buildingType;
     private int x, y;
+    private final int cellShape = 20;
 
     public Cell() {
         this.hasWorker = false;
@@ -32,6 +35,10 @@ public class Cell {
         this.buildingType = null;
         this.x = x;
         this.y = y;
+    }   
+    
+    public void drawCell(Canvas c,int x, int y){
+        GraphicsContext gc = c.getGraphicsContext2D();
     }
 
     public void changeWorkerStatus() {
