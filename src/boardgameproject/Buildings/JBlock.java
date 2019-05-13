@@ -136,13 +136,13 @@ public class JBlock extends Building {
 //        changeStateRotateRight();
 //    }
     @Override
-    public void rotateBuildingLeft(int x, int y) {
+    public void rotateBuildingLeft() {
         cells.clear();
         Cell cell;
         switch (state) {
             case TOP:
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell
+                    cell = new Cell();
                 }
                 break;
             case BOTTOM:
@@ -155,7 +155,7 @@ public class JBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingRight(int x, int y) {
+    public void rotateBuildingRight() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

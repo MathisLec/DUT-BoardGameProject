@@ -20,19 +20,21 @@ public class Round extends Application {
     private int nbTurnMax;
     private int nbTurn;
     private int nbPlayer;
+    public Scene scene;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Player player = new Player();
-        Board board = new Board(this,player);
+        // Player player = new Player();
+        // Board board = new Board(this,player);
+
+        Parent root = FXMLLoader.load(getClass().getResource("View/MenuView.fxml"));
+
+        scene = new Scene(root);
+
+        stage.setTitle("Jeu");
+        stage.setScene(scene);
+        stage.show();
         
-//        Parent root = FXMLLoader.load(getClass().getResource("Menu/Menu.fxml"));
-//
-//        Scene scene = new Scene(root);
-//
-//        stage.setTitle("Jeu");
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     /**
@@ -52,6 +54,9 @@ public class Round extends Application {
 
     public int getNbPlayer() {
         return nbPlayer;
+    }
+    public Scene getScene(){
+        return scene;
     }
 
 }
