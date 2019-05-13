@@ -8,6 +8,7 @@ package boardgameproject;
 import boardgameproject.Buildings.Building;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -39,6 +40,10 @@ public class Cell {
     
     public void drawCell(Canvas c,int x, int y){
         GraphicsContext gc = c.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.fillRect(x*cellShape, y*cellShape, cellShape, cellShape);
+        gc.setFill(Color.BLACK);
+        gc.strokeRect(x*cellShape, y*cellShape, cellShape, cellShape);
     }
 
     public void changeWorkerStatus() {

@@ -7,6 +7,7 @@ package boardgameproject;
 
 import boardgameproject.Buildings.Building;
 import java.util.ArrayList;
+import javafx.scene.canvas.Canvas;
 
 /**
  *
@@ -33,10 +34,10 @@ public final class Board {
         }
     }
 
-    public void drawBoard() {
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 10; j++) {
-
+    public void drawBoard(Canvas c) {
+        for (int i = 0; i < 10 - 1; i++) {
+            for (int j = 0; j < 20 - 1; j++) {
+                Board[i][j].drawCell(c,i,j);
             }
         }
     }
