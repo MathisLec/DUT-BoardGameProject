@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Cell;
 import java.util.ArrayList;
+import javafx.scene.canvas.Canvas;
 
 /**
  *
@@ -40,7 +41,7 @@ public class LBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingLeft() {
+    public void rotateBuildingLeft(int x, int y) {
         switch (state) {
             case TOP:
                 for (int i = 0; i < 3; i++) {
@@ -90,7 +91,12 @@ public class LBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingRight() {
+    public void rotateBuildingRight(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void drawBuilding(Canvas c) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

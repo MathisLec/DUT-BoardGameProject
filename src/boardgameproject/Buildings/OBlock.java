@@ -5,11 +5,13 @@
  */
 package boardgameproject.Buildings;
 
+import javafx.scene.canvas.Canvas;
+
 /**
  *
  * @author mlecoeuvre
  */
-public class OBlock extends Building{
+public class OBlock extends Building {
 
     @Override
     public void buildingShape(int x, int y) {
@@ -22,13 +24,18 @@ public class OBlock extends Building{
     }
 
     @Override
-    public void rotateBuildingLeft() {
+    public void rotateBuildingLeft(int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void rotateBuildingRight() {
+    public void rotateBuildingRight(int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public void drawBuilding(Canvas c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

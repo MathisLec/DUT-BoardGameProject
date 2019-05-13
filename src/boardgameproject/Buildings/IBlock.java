@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Cell;
 import java.util.ArrayList;
+import javafx.scene.canvas.Canvas;
 
 /**
  *
@@ -38,16 +39,21 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingLeft() {
+    public void rotateBuildingLeft(int x, int y) {
+        cells.clear();
         switch (state) {
             case TOP:
             case BOTTOM:
+                for (int i = 0; i < 4; i++) {
+                    Cell cell = new Cell(x + i, y);
+                    super.cells.add(cell);
+                }
+                break;
             case LEFT:
             case RIGHT:
-                for (Cell c : cells) {
-                    int cache = c.getX();
-                    c.setX(c.getY());
-                    c.setY(cache);
+                for (int i = 0; i < 4; i++) {
+                    Cell cell = new Cell(x, y + i);
+                    super.cells.add(cell);
                 }
                 break;
         }
@@ -55,20 +61,14 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingRight() {
-        switch (state) {
-            case TOP:
-            case BOTTOM:
-            case LEFT:
-            case RIGHT:
-                for (Cell c : cells) {
-                    int cache = c.getX();
-                    c.setX(c.getY());
-                    c.setY(cache);
-                }
-                break;
-        }
+    public void rotateBuildingRight(int x, int y) {
+        rotateBuildingLeft(x, y);
         changeStateRotateRight();
+    }
+
+    @Override
+    public void drawBuilding(Canvas c) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
