@@ -18,7 +18,7 @@ public class IBlock extends Building {
     public IBlock() {
         super();
         super.role = 'I';
-        buildingShape(1, 0);
+        buildingShape(0, 0);
     }
 
     public IBlock(ArrayList<Cell> list) {
@@ -60,7 +60,21 @@ public class IBlock extends Building {
 
     @Override
     public void rotateBuildingRight(int x, int y) {
-        rotateBuildingLeft(x, y);
+        cells.clear();
+        switch (state) {
+            case TOP:
+            case BOTTOM:
+                for (int i = 0; i < 4; i++) {
+                    super.cells.add(new Cell(x + i, y));
+                }
+                break;
+            case LEFT:
+            case RIGHT:
+                for (int i = 0; i < 4; i++) {
+                    super.cells.add(new Cell(x, y + i));
+                }
+                break;
+        }
         changeStateRotateRight();
     }
 

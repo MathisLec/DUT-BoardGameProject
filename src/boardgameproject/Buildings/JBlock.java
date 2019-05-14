@@ -18,7 +18,7 @@ public class JBlock extends Building {
     public JBlock() {
         super();
         super.role = 'J';
-        buildingShape(1,1);
+        buildingShape(1, 0);
     }
 
     public JBlock(ArrayList<Cell> list) {

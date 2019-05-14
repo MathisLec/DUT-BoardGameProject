@@ -52,21 +52,22 @@ public class GameViewController implements Initializable {
         
         I.drawBuilding(BuildingHand1);
         
-        I.rotateBuildingLeft(0, 1);
+        //I.rotateBuildingLeft(0, 0);
+        
         GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
         gc.clearRect(0, 0, 100, 100);
         
         I.drawBuilding(BuildingHand1);
         
         J.drawBuilding(BuildingHand2);
-        J.rotateBuildingLeft(1, 1);
+        J.rotateBuildingLeft(1, 0);
         J.drawBuilding(BuildingHand3);
         J.rotateBuildingLeft(1, 1);
         J.drawBuilding(BuildingHand4);
-        J.rotateBuildingLeft(1, 1);
-        J.drawBuilding(BuildingHand5);
-        J.rotateBuildingLeft(1, 1);
-        J.drawBuilding(BuildingHand6);
+//        J.rotateBuildingLeft(1, 1);
+//        J.drawBuilding(BuildingHand5);
+//        J.rotateBuildingLeft(1, 1);
+//        J.drawBuilding(BuildingHand6);
     }
 
     @FXML
