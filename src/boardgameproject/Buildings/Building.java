@@ -20,6 +20,7 @@ public abstract class Building {
     protected int energyCost;
     protected int energyConsume;
     protected ArrayList<Cell> cells;
+    protected int origineX, origineY;
     State state;
 
     public Building() {
@@ -38,7 +39,7 @@ public abstract class Building {
 
     protected abstract void buildingRole();
 
-    public abstract void rotateBuildingLeft(int x, int y);
+    public abstract void rotateBuildingLeft();
 
     protected void changeStateRotateLeft() {
         switch (state) {
@@ -57,7 +58,7 @@ public abstract class Building {
         }
     }
 
-    public abstract void rotateBuildingRight(int x, int y);
+    public abstract void rotateBuildingRight();
 
     protected void changeStateRotateRight() {
         switch (state) {
@@ -76,7 +77,11 @@ public abstract class Building {
         }
     }
 
-    public abstract void drawBuilding(Canvas c);
+    public void drawBuilding(Canvas c) {
+        for (Cell s : cells) {
+            s.drawCell(c, s.getX(), s.getY());
+        }
+    }
 
     public int getNbWorkerIn() {
         return nbWorkers;

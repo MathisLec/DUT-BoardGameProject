@@ -6,6 +6,7 @@
 package boardgameproject.Buildings;
 
 import boardgameproject.Cell;
+import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 
 /**
@@ -14,10 +15,26 @@ import javafx.scene.canvas.Canvas;
  */
 public class OBlock extends Building {
 
+    public OBlock() {
+        super();
+        super.role = 'O';
+        super.origineX = 0;
+        super.origineY = 0;
+        buildingShape(origineX, origineY);
+    }
+
+    public OBlock(ArrayList<Cell> list) {
+        super(list);
+        super.role = 'O';
+    }
+
     @Override
     public void buildingShape(int x, int y) {
-        for (int i = 0; i < 4; i++) {
-            Cell cell = new Cell(x + i, y + i);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                Cell cell = new Cell(x + i, y + j);
+                cells.add(cell);
+            }
         }
     }
 
@@ -27,18 +44,11 @@ public class OBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingLeft(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void rotateBuildingLeft() {
     }
 
     @Override
-    public void rotateBuildingRight(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void drawBuilding(Canvas c) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void rotateBuildingRight() {
     }
 
 }

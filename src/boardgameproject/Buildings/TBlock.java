@@ -24,12 +24,12 @@ public class TBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingLeft(int x, int y) {
+    public void rotateBuildingLeft() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void rotateBuildingRight(int x, int y) {
+    public void rotateBuildingRight() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

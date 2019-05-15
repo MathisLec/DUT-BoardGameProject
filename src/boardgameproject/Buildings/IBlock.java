@@ -18,7 +18,9 @@ public class IBlock extends Building {
     public IBlock() {
         super();
         super.role = 'I';
-        buildingShape(0, 0);
+        super.origineX = 0;
+        super.origineY = 0;
+        buildingShape(origineX, origineY);
     }
 
     public IBlock(ArrayList<Cell> list) {
@@ -39,19 +41,19 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingLeft(int x, int y) {
+    public void rotateBuildingLeft() {
         cells.clear();
         switch (state) {
             case TOP:
             case BOTTOM:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(x + i, y));
+                    super.cells.add(new Cell(origineX + i, origineY));
                 }
                 break;
             case LEFT:
             case RIGHT:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(x, y + i));
+                    super.cells.add(new Cell(origineX, origineY + i));
                 }
                 break;
         }
@@ -59,30 +61,23 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void rotateBuildingRight(int x, int y) {
+    public void rotateBuildingRight() {
         cells.clear();
         switch (state) {
             case TOP:
             case BOTTOM:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(x + i, y));
+                    super.cells.add(new Cell(origineX + i, origineY));
                 }
                 break;
             case LEFT:
             case RIGHT:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(x, y + i));
+                    super.cells.add(new Cell(origineX, origineY + i));
                 }
                 break;
         }
         changeStateRotateRight();
-    }
-
-    @Override
-    public void drawBuilding(Canvas c) {
-        for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY());
-        }
     }
 
 }
