@@ -30,6 +30,8 @@ public class GameViewController implements Initializable {
     Board board = new Board(Round, player);
     Building I = new IBlock();
     Building J = new JBlock();
+    Building L = new LBlock();
+    Building o = new OBlock();
 
     @FXML
     private Canvas GameBoard;
@@ -50,24 +52,14 @@ public class GameViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         board.drawBoard(GameBoard);
         
-        I.drawBuilding(BuildingHand1);
-        
-        //I.rotateBuildingLeft(0, 0);
-        
         GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
         gc.clearRect(0, 0, 100, 100);
         
         I.drawBuilding(BuildingHand1);
-        
         J.drawBuilding(BuildingHand2);
-        J.rotateBuildingLeft(1, 0);
-        J.drawBuilding(BuildingHand3);
-        J.rotateBuildingLeft(1, 1);
-        J.drawBuilding(BuildingHand4);
-//        J.rotateBuildingLeft(1, 1);
-//        J.drawBuilding(BuildingHand5);
-//        J.rotateBuildingLeft(1, 1);
-//        J.drawBuilding(BuildingHand6);
+        L.drawBuilding(BuildingHand3);
+        o.drawBuilding(BuildingHand4);
+
     }
 
     @FXML
@@ -88,7 +80,8 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void RotateLeft(ActionEvent event) {
-        I.rotateBuildingLeft(0, 0);
+        I.rotateBuildingLeft();
+        
     }
 
 }
