@@ -5,6 +5,7 @@
  */
 package boardgameproject.Buildings;
 
+import boardgameproject.Board;
 import boardgameproject.Cell;
 import java.util.ArrayList;
 
@@ -16,6 +17,14 @@ public class IBlock extends Building {
 
     public IBlock() {
         super();
+        super.role = 'I';
+        super.origineX = 0;
+        super.origineY = 0;
+        buildingShape(origineX, origineY);
+    }
+
+    public IBlock(Board board) {
+        super(board);
         super.role = 'I';
         super.origineX = 0;
         super.origineY = 0;

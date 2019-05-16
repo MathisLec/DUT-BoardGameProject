@@ -5,6 +5,7 @@
  */
 package boardgameproject.Buildings;
 
+import boardgameproject.Board;
 import boardgameproject.Cell;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
@@ -21,12 +22,21 @@ public abstract class Building {
     protected int energyConsume;
     protected ArrayList<Cell> cells;
     protected int origineX, origineY;
-    State state;
+    protected State state;
+    protected Board board;
 
     public Building() {
         this.nbWorkers = 0;
         this.cells = new ArrayList<>();
         this.state = State.TOP;
+        this.board = null;
+    }
+
+    public Building(Board board) {
+        this.nbWorkers = 0;
+        this.cells = new ArrayList<>();
+        this.state = State.TOP;
+        this.board = board;
     }
 
     public Building(ArrayList<Cell> list) {
@@ -100,6 +110,10 @@ public abstract class Building {
     }
 
     public ArrayList<Cell> getCells() {
+        return cells;
+    }
+
+    public ArrayList<Cell> getPreviewsShape() {
         return cells;
     }
 

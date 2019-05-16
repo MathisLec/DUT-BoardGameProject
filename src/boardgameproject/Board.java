@@ -37,13 +37,13 @@ public final class Board {
     public void drawBoard(Canvas c) {
         for (int i = 0; i < 10 - 1; i++) {
             for (int j = 0; j < 20 - 1; j++) {
-                Board[i][j].drawCell(c,i,j);
+                Board[i][j].drawCell(c, i, j);
             }
         }
     }
 
     public void addBuilding(Building building, int x, int y) {
-        if (checkAddBuilding()) {
+        if (checkAddBuilding(building, x, y)) {
             Board[x][y].changeBuildingStatus(building);
         }
     }
@@ -54,7 +54,9 @@ public final class Board {
         }
     }
 
-    private boolean checkAddBuilding() {
+    private boolean checkAddBuilding(Building building, int x, int y) {
+        for(Cell c : boardToList()){
+        }
         return false;
     }
 
