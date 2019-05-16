@@ -23,9 +23,9 @@ public class Player {
     public static List<Building> Pile;
 
     public Player() {
-        this.nbEnergy = 16;
-        this.nbWorkers = 8;
-        this.nbMaterials = 8;
+        this.nbEnergy = 100;
+        this.nbWorkers = 100;
+        this.nbMaterials = 100;
         this.nbBuildings = 5;
         this.Buildings = new ArrayList<>();
     }

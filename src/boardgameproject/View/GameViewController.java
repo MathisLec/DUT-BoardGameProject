@@ -25,13 +25,13 @@ import javafx.scene.control.Label;
  */
 public class GameViewController implements Initializable {
 
-    private Player player;
+    private Player player = new Player();
     private Round Round;
     Board board = new Board(Round, player);
     Building I = new IBlock();
     Building J = new JBlock();
     Building L = new LBlock();
-    Building o = new OBlock();
+    Building O = new OBlock();
 
     @FXML
     private Canvas GameBoard;
@@ -54,11 +54,18 @@ public class GameViewController implements Initializable {
         
         GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
         gc.clearRect(0, 0, 100, 100);
-        
-        I.drawBuilding(BuildingHand1);
-        J.drawBuilding(BuildingHand2);
-        L.drawBuilding(BuildingHand3);
-        o.drawBuilding(BuildingHand4);
+        nbEnergy.setText(Integer.toString(player.getNbEnergy()));
+        nbMaterials.setText(Integer.toString(player.getNbMaterials()));
+        nbWorkers.setText(Integer.toString(player.getNbWorkers()));
+        O.drawBuilding(BuildingHand1);
+        O.rotateBuildingLeft();
+        O.drawBuilding(BuildingHand2);
+        O.rotateBuildingLeft();
+        O.drawBuilding(BuildingHand3);
+        O.rotateBuildingLeft();
+        O.drawBuilding(BuildingHand4);
+        O.rotateBuildingLeft();
+        O.drawBuilding(BuildingHand5);
 
     }
 
@@ -82,6 +89,11 @@ public class GameViewController implements Initializable {
     private void RotateLeft(ActionEvent event) {
         I.rotateBuildingLeft();
         
+    }
+
+    @FXML
+    private void QuitGame(ActionEvent event) {
+        System.exit(0);
     }
 
 }

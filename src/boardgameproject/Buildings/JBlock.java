@@ -7,7 +7,6 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Cell;
 import java.util.ArrayList;
-import javafx.scene.canvas.Canvas;
 
 /**
  *
