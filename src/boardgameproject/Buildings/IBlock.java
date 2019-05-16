@@ -30,7 +30,7 @@ public class IBlock extends Building {
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 4; i++) {
-            super.cells.add(new Cell(x, y + i));
+            cells.add(new Cell(x, y + i));
         }
     }
 
@@ -46,13 +46,13 @@ public class IBlock extends Building {
             case TOP:
             case BOTTOM:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(origineX + i, origineY));
+                    cells.add(new Cell(origineX + i, origineY));
                 }
                 break;
             case LEFT:
             case RIGHT:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(origineX, origineY + i));
+                    cells.add(new Cell(origineX, origineY + i));
                 }
                 break;
         }
@@ -66,13 +66,13 @@ public class IBlock extends Building {
             case TOP:
             case BOTTOM:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(origineX + i, origineY));
+                    cells.add(new Cell(origineX + i, origineY));
                 }
                 break;
             case LEFT:
             case RIGHT:
                 for (int i = 0; i < 4; i++) {
-                    super.cells.add(new Cell(origineX, origineY + i));
+                    cells.add(new Cell(origineX, origineY + i));
                 }
                 break;
         }

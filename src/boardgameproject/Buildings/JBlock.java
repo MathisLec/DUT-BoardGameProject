@@ -30,11 +30,9 @@ public class JBlock extends Building {
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 3; i++) {
-            Cell cell = new Cell(x, y + i);
-            super.cells.add(cell);
+            cells.add(new Cell(x, y + i));
         }
-        Cell cell = new Cell(x - 1, y + 2);
-        super.cells.add(cell);
+        cells.add(new Cell(x - 1, y + 2));
     }
 
     @Override
@@ -45,47 +43,38 @@ public class JBlock extends Building {
     @Override
     public void rotateBuildingLeft() {
         cells.clear();
-        Cell cell;
         switch (state) {
             case TOP:
                 origineX = 0;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX + i, origineY);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX + i, origineY));
                 }
-                cell = new Cell(origineX + 2, origineY + 1);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX + 2, origineY + 1));
                 break;
             case BOTTOM:
                 origineX = 0;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX + i, origineY + 1);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX + i, origineY + 1));
                 }
-                cell = new Cell(origineX, origineY);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX, origineY));
                 break;
             case LEFT:
                 origineX = 0;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX, origineY + i);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX, origineY + i));
                 }
-                cell = new Cell(origineX + 1, origineY);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX + 1, origineY));
                 break;
             case RIGHT:
                 origineX = 1;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX, origineY + i);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX, origineY + i));
                 }
-                cell = new Cell(origineX - 1, origineY + 2);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX - 1, origineY + 2));
                 break;
         }
         changeStateRotateLeft();
@@ -100,41 +89,33 @@ public class JBlock extends Building {
                 origineX = 0;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX + i, origineY + 1);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX + i, origineY + 1));
                 }
-                cell = new Cell(origineX, origineY);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX, origineY));
                 break;
             case BOTTOM:
                 origineX = 0;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX + i, origineY);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX + i, origineY));
                 }
-                cell = new Cell(origineX + 2, origineY + 1);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX + 2, origineY + 1));
                 break;
             case LEFT:
                 origineX = 1;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX, origineY + i);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX, origineY + i));
                 }
-                cell = new Cell(origineX - 1, origineY + 2);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX - 1, origineY + 2));
                 break;
             case RIGHT:
                 origineX = 0;
                 origineY = 0;
                 for (int i = 0; i < 3; i++) {
-                    cell = new Cell(origineX, origineY + i);
-                    super.cells.add(cell);
+                    cells.add(new Cell(origineX, origineY + i));
                 }
-                cell = new Cell(origineX + 1, origineY);
-                super.cells.add(cell);
+                cells.add(new Cell(origineX + 1, origineY));
                 break;
         }
         changeStateRotateRight();

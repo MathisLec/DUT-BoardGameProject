@@ -31,8 +31,7 @@ public class OBlock extends Building {
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
-                Cell cell = new Cell(x + i, y + j);
-                cells.add(cell);
+                cells.add(new Cell(x + i, y + j));
             }
         }
     }
@@ -44,10 +43,12 @@ public class OBlock extends Building {
 
     @Override
     public void rotateBuildingLeft() {
+        //do nothing
     }
 
     @Override
     public void rotateBuildingRight() {
+        //do nothing
     }
 
 }
