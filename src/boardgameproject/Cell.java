@@ -38,9 +38,9 @@ public class Cell {
         this.y = y;
     }   
     
-    public void drawCell(Canvas c,int x, int y){
+    public void drawCell(Canvas c,int x, int y, Color col){
         GraphicsContext gc = c.getGraphicsContext2D();
-        gc.setFill(Color.WHITE);
+        gc.setFill(col);
         gc.fillRect(x*cellShape, y*cellShape, cellShape, cellShape);
         gc.setFill(Color.BLACK);
         gc.strokeRect(x*cellShape, y*cellShape, cellShape, cellShape);

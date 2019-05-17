@@ -8,6 +8,7 @@ package boardgameproject.Buildings;
 import boardgameproject.Cell;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -79,7 +80,7 @@ public abstract class Building {
 
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY());
+            s.drawCell(c, s.getX(), s.getY(),Color.WHITE);
         }
     }
 

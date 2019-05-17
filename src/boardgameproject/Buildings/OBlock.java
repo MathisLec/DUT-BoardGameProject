@@ -7,6 +7,9 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Cell;
 import java.util.ArrayList;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -33,6 +36,13 @@ public class OBlock extends Building {
             for (int j = 0; j < 2; j++) {
                 cells.add(new Cell(x + i, y + j));
             }
+        }
+    }
+    
+    @Override
+    public void drawBuilding(Canvas c) {
+        for (Cell s : cells) {
+            s.drawCell(c, s.getX(), s.getY(),Color.BLUE);
         }
     }
 

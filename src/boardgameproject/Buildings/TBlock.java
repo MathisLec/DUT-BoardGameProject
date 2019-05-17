@@ -8,6 +8,7 @@ package boardgameproject.Buildings;
 import boardgameproject.Cell;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -34,6 +35,13 @@ public class TBlock extends Building {
             cells.add(new Cell(x + i - 1, y + 1));
         }
         cells.add(new Cell(x, y));
+    }
+    
+    @Override
+     public void drawBuilding(Canvas c) {
+        for (Cell s : cells) {
+            s.drawCell(c, s.getX(), s.getY(),Color.BROWN);
+        }
     }
 
     @Override

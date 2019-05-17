@@ -8,6 +8,7 @@ package boardgameproject;
 import boardgameproject.Buildings.Building;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -37,7 +38,7 @@ public final class Board {
     public void drawBoard(Canvas c) {
         for (int i = 0; i < 10 - 1; i++) {
             for (int j = 0; j < 20 - 1; j++) {
-                Board[i][j].drawCell(c,i,j);
+                Board[i][j].drawCell(c,i,j,Color.WHITE);
             }
         }
     }

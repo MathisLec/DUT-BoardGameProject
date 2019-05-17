@@ -7,6 +7,8 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Cell;
 import java.util.ArrayList;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -34,6 +36,13 @@ public class SBlock extends Building {
             Cell cell1 = new Cell(x + 1, y + 1 + i);
             cells.add(cell);
             cells.add(cell1);
+        }
+    }
+    
+    @Override
+     public void drawBuilding(Canvas c) {
+        for (Cell s : cells) {
+            s.drawCell(c, s.getX(), s.getY(),Color.YELLOW);
         }
     }
 
