@@ -21,6 +21,7 @@ public abstract class Building {
     protected int energyCost;
     protected int energyConsume;
     protected ArrayList<Cell> cells;
+    // L'axe des abscisses est représenté par x et l'axe des ordonnées par y
     protected int origineX, origineY;
     protected State state;
     protected Board board;
@@ -113,8 +114,7 @@ public abstract class Building {
         return cells;
     }
 
-    public ArrayList<Cell> getPreviewsShape() {
-        return cells;
-    }
+    // Faire attention ici car l'axe des abscisses et des ordonnées sont inversés dans board
+    public abstract ArrayList<Cell> getPreviewsShape(int x, int y) throws ArrayIndexOutOfBoundsException;
 
 }

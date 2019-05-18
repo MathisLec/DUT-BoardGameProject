@@ -88,4 +88,28 @@ public class IBlock extends Building {
         changeStateRotateRight();
     }
 
+    @Override
+    public ArrayList<Cell> getPreviewsShape(int x, int y) {
+        ArrayList<Cell> shape = new ArrayList<>();
+        try {
+            switch (state) {
+                case TOP:
+                case BOTTOM:
+                    for (int i = 0; i < 4; i++) {
+                        shape.add(board.getBoard()[x + i][y]);
+                    }
+                    break;
+                case LEFT:
+                case RIGHT:
+                    for (int i = 0; i < 4; i++) {
+                        shape.add(board.getBoard()[x][y + i]);
+                    }
+                    break;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            ex.getMessage();
+        }
+        return shape;
+    }
+
 }
