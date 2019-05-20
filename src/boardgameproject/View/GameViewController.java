@@ -21,6 +21,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -41,8 +42,7 @@ public class GameViewController implements Initializable {
     boolean valide3 = false;
     boolean valide4 = false;
     boolean valide5 = false;
-    
-    
+        
     @FXML
     private Canvas GameBoard;
     @FXML
@@ -55,8 +55,6 @@ public class GameViewController implements Initializable {
     private Canvas BuildingHand4;
     @FXML
     private Canvas BuildingHand5;
-    @FXML
-    private Canvas BuildingHand6;
     @FXML
     private Button buttonHand1;
     @FXML
@@ -71,10 +69,6 @@ public class GameViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         board.drawBoard(GameBoard);
-        
-
-        GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
-        gc.clearRect(0, 0, 100, 100);
         
         nbEnergy.setText(Integer.toString(player.getNbEnergy()));
         nbMaterials.setText(Integer.toString(player.getNbMaterials()));
@@ -105,69 +99,72 @@ public class GameViewController implements Initializable {
     private void RotateRight(ActionEvent event) {
         if(valide1){
             GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             O.rotateBuildingRight();
             O.drawBuilding(BuildingHand1);
         }
         if(valide2){
             GraphicsContext gc = BuildingHand2.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             I.rotateBuildingRight();
             I.drawBuilding(BuildingHand2);
         }
         if(valide3){
             GraphicsContext gc = BuildingHand3.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             J.rotateBuildingRight();
             J.drawBuilding(BuildingHand3);
         }
         if(valide4){
             GraphicsContext gc = BuildingHand4.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             S.rotateBuildingRight();
             S.drawBuilding(BuildingHand4);
         }
         if(valide5){
             GraphicsContext gc = BuildingHand5.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             T.rotateBuildingRight();
             T.drawBuilding(BuildingHand5);
         }
+    }
+    
+    public void rotate(Canvas c , Building b){
+        
     }
 
     @FXML
     private void RotateLeft(ActionEvent event) {
         if(valide1){
             GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             O.rotateBuildingLeft();
             O.drawBuilding(BuildingHand1);
         }
         if(valide2){
             GraphicsContext gc = BuildingHand2.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             I.rotateBuildingLeft();
             I.drawBuilding(BuildingHand2);
         }
         if(valide3){
             GraphicsContext gc = BuildingHand3.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             J.rotateBuildingLeft();
             J.drawBuilding(BuildingHand3);
         }
         if(valide4){
             GraphicsContext gc = BuildingHand4.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             S.rotateBuildingLeft();
             S.drawBuilding(BuildingHand4);
         }
         if(valide5){
             GraphicsContext gc = BuildingHand5.getGraphicsContext2D();
-            gc.clearRect(0, 0, 100, 100);
+            gc.clearRect(0, 0, 150, 150);
             T.rotateBuildingLeft();
             T.drawBuilding(BuildingHand5);
         }
-
     }
 
     @FXML
@@ -175,18 +172,11 @@ public class GameViewController implements Initializable {
         System.exit(0);
     }
 
+    @FXML
     private void placeBuilding(MouseEvent event) {
-        O.drawBuilding(GameBoard);
+        I.drawBuilding(GameBoard);
     }
 
-    @FXML
-    private void moveCanvasEnd(MouseEvent event) {
-    }
-
-    @FXML
-    private void buildingOnBoard(MouseEvent event) {
-        
-    }
 
     @FXML
     private void Select1(MouseEvent event) {
@@ -231,6 +221,19 @@ public class GameViewController implements Initializable {
         valide3 = false;
         valide4 = false;
         valide5 = true;
+    }
+
+    @FXML
+    private void Testclick(MouseEvent event) {
+       /* for(Cell c : board.boardToList()){
+            if(c.getX() == (int)event.getX()){
+                c.drawCell(GameBoard, c.getX()*30, c.getY()*30, Color.CORAL);
+            }
+        }*/
+       
+        System.out.println(event.getX());
+        System.out.println((int)event.getX());
+        
     }
 
     

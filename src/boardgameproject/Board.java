@@ -89,7 +89,7 @@ public final class Board {
         return Board;
     }
 
-    private ArrayList<Cell> boardToList() {
+    public ArrayList<Cell> boardToList() {
         ArrayList<Cell> cells = new ArrayList<>();
         for (int i = 0; i < Board.length; i++) {
             for (int j = 0; j < Board[i].length; j++) {

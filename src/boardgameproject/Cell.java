@@ -20,7 +20,7 @@ public class Cell {
     private boolean hasBuilding;
     private Building buildingType;
     private int x, y;
-    private final int cellShape = 20;
+    private final int cellShape = 30;
 
     public Cell() {
         this.hasWorker = false;
