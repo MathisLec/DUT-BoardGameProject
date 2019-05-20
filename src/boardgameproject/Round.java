@@ -5,6 +5,8 @@
  */
 package boardgameproject;
 
+import boardgameproject.Buildings.Building;
+import boardgameproject.Buildings.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,8 +26,13 @@ public class Round extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Player player = new Player();
-        // Board board = new Board(this,player);
+        Player player = new Player();
+        Board board = new Board(this, player);
+        Building block = new IBlock(board);
+        block.rotateBuildingLeft();
+        block.rotateBuildingLeft();
+        block.rotateBuildingLeft();
+        board.addBuilding(block, 0, 9);
 
         Parent root = FXMLLoader.load(getClass().getResource("View/MenuView.fxml"));
 
@@ -34,7 +41,7 @@ public class Round extends Application {
         stage.setTitle("Jeu");
         stage.setScene(scene);
         stage.show();
-        
+
     }
 
     /**
@@ -55,7 +62,8 @@ public class Round extends Application {
     public int getNbPlayer() {
         return nbPlayer;
     }
-    public Scene getScene(){
+
+    public Scene getScene() {
         return scene;
     }
 

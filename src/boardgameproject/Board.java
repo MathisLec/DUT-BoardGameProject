@@ -21,31 +21,31 @@ public final class Board {
     private final Cell[][] Board;
 
     public Board(Round round, Player player) {
-        this.Board = new Cell[10][20];
+        this.Board = new Cell[20][10];
         this.Round = round;
         this.player = player;
         initializeBoard();
     }
 
     public void initializeBoard() {
-        for (int i = 0; i < Board.length - 1; i++) {
-            for (int j = 0; j < Board[i].length - 1; j++) {
+        for (int i = 0; i < Board.length; i++) {
+            for (int j = 0; j < Board[i].length; j++) {
                 Board[i][j] = new Cell(i, j);
             }
         }
     }
 
     public void drawBoard(Canvas c) {
-        for (int i = 0; i < 10 - 1; i++) {
-            for (int j = 0; j < 20 - 1; j++) {
-                Board[i][j].drawCell(c,i,j,Color.WHITE);
-            }
+        for(Cell cell : boardToList()){
+            cell.drawCell(c, cell.getY(), cell.getX(),Color.WHITE);
         }
     }
 
     public void addBuilding(Building building, int x, int y) {
-        if (checkAddBuilding()) {
-            Board[x][y].changeBuildingStatus(building);
+        if (checkAddBuilding(building, x, y)) {
+            for (Cell c : building.getPreviewsShape(x, y)) {
+                c.changeBuildingStatus(building);
+            }
         }
     }
 
@@ -55,8 +55,14 @@ public final class Board {
         }
     }
 
-    private boolean checkAddBuilding() {
-        return false;
+    private boolean checkAddBuilding(Building building, int x, int y) {
+        boolean isValid = true;
+        for (Cell c : building.getPreviewsShape(x, y)) {
+            if (c.hasBuilding()) {
+                isValid = false;
+            }
+        }
+        return isValid;
     }
 
     private boolean checkAddWorker(Cell cell) {
@@ -85,8 +91,8 @@ public final class Board {
 
     private ArrayList<Cell> boardToList() {
         ArrayList<Cell> cells = new ArrayList<>();
-        for (int i = 0; i < Board.length - 1; i++) {
-            for (int j = 0; j < Board[i].length - 1; j++) {
+        for (int i = 0; i < Board.length; i++) {
+            for (int j = 0; j < Board[i].length; j++) {
                 cells.add(Board[i][j]);
             }
         }

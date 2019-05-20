@@ -5,6 +5,7 @@
  */
 package boardgameproject.Buildings;
 
+import boardgameproject.Board;
 import boardgameproject.Cell;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
@@ -18,6 +19,14 @@ public class IBlock extends Building {
 
     public IBlock() {
         super();
+        super.role = 'I';
+        super.origineX = 0;
+        super.origineY = 0;
+        buildingShape(origineX, origineY);
+    }
+
+    public IBlock(Board board) {
+        super(board);
         super.role = 'I';
         super.origineX = 0;
         super.origineY = 0;
@@ -86,6 +95,30 @@ public class IBlock extends Building {
                 break;
         }
         changeStateRotateRight();
+    }
+
+    @Override
+    public ArrayList<Cell> getPreviewsShape(int x, int y) {
+        ArrayList<Cell> shape = new ArrayList<>();
+        try {
+            switch (state) {
+                case TOP:
+                case BOTTOM:
+                    for (int i = 0; i < 4; i++) {
+                        shape.add(board.getBoard()[x + i][y]);
+                    }
+                    break;
+                case LEFT:
+                case RIGHT:
+                    for (int i = 0; i < 4; i++) {
+                        shape.add(board.getBoard()[x][y + i]);
+                    }
+                    break;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            ex.getMessage();
+        }
+        return shape;
     }
 
 }
