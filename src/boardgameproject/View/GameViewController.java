@@ -33,7 +33,6 @@ public class GameViewController implements Initializable {
     private Round Round;
     Board board = new Board(Round, player);
     Building O = new OBlock();
-    Building I = new IBlock();
     Building J = new JBlock();
     Building S = new SBlock();
     Building T = new TBlock();
@@ -42,13 +41,12 @@ public class GameViewController implements Initializable {
     boolean valide3 = false;
     boolean valide4 = false;
     boolean valide5 = false;
-        
+    boolean testDepl = false;
+
     @FXML
     private Canvas GameBoard;
     @FXML
     private Canvas BuildingHand1;
-    @FXML
-    private Canvas BuildingHand2;
     @FXML
     private Canvas BuildingHand3;
     @FXML
@@ -66,20 +64,21 @@ public class GameViewController implements Initializable {
     @FXML
     private Button buttonHand5;
 
+    IBlock testI = new IBlock(board, 19, 4, GameBoard);
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         board.drawBoard(GameBoard);
-        
+
         nbEnergy.setText(Integer.toString(player.getNbEnergy()));
         nbMaterials.setText(Integer.toString(player.getNbMaterials()));
         nbWorkers.setText(Integer.toString(player.getNbWorkers()));
-        
+
+        testI.drawBuilding(GameBoard);
         O.drawBuilding(BuildingHand1);
-        I.drawBuilding(BuildingHand2);
         J.drawBuilding(BuildingHand3);
         S.drawBuilding(BuildingHand4);
         T.drawBuilding(BuildingHand5);
-
 
     }
 
@@ -97,69 +96,57 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void RotateRight(ActionEvent event) {
-        if(valide1){
+        if (valide1) {
             GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             O.rotateBuildingRight();
             O.drawBuilding(BuildingHand1);
         }
-        if(valide2){
-            GraphicsContext gc = BuildingHand2.getGraphicsContext2D();
-            gc.clearRect(0, 0, 150, 150);
-            I.rotateBuildingRight();
-            I.drawBuilding(BuildingHand2);
-        }
-        if(valide3){
+        if (valide3) {
             GraphicsContext gc = BuildingHand3.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             J.rotateBuildingRight();
             J.drawBuilding(BuildingHand3);
         }
-        if(valide4){
+        if (valide4) {
             GraphicsContext gc = BuildingHand4.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             S.rotateBuildingRight();
             S.drawBuilding(BuildingHand4);
         }
-        if(valide5){
+        if (valide5) {
             GraphicsContext gc = BuildingHand5.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             T.rotateBuildingRight();
             T.drawBuilding(BuildingHand5);
         }
     }
-    
-    public void rotate(Canvas c , Building b){
-        
+
+    public void rotate(Canvas c, Building b) {
+
     }
 
     @FXML
     private void RotateLeft(ActionEvent event) {
-        if(valide1){
+        if (valide1) {
             GraphicsContext gc = BuildingHand1.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             O.rotateBuildingLeft();
             O.drawBuilding(BuildingHand1);
         }
-        if(valide2){
-            GraphicsContext gc = BuildingHand2.getGraphicsContext2D();
-            gc.clearRect(0, 0, 150, 150);
-            I.rotateBuildingLeft();
-            I.drawBuilding(BuildingHand2);
-        }
-        if(valide3){
+        if (valide3) {
             GraphicsContext gc = BuildingHand3.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             J.rotateBuildingLeft();
             J.drawBuilding(BuildingHand3);
         }
-        if(valide4){
+        if (valide4) {
             GraphicsContext gc = BuildingHand4.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             S.rotateBuildingLeft();
             S.drawBuilding(BuildingHand4);
         }
-        if(valide5){
+        if (valide5) {
             GraphicsContext gc = BuildingHand5.getGraphicsContext2D();
             gc.clearRect(0, 0, 150, 150);
             T.rotateBuildingLeft();
@@ -174,9 +161,8 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void placeBuilding(MouseEvent event) {
-        I.drawBuilding(GameBoard);
-    }
 
+    }
 
     @FXML
     private void Select1(MouseEvent event) {
@@ -186,7 +172,7 @@ public class GameViewController implements Initializable {
         valide4 = false;
         valide5 = false;
     }
-    
+
     @FXML
     private void Select2(MouseEvent event) {
         valide1 = false;
@@ -225,17 +211,42 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void Testclick(MouseEvent event) {
-       /* for(Cell c : board.boardToList()){
+        /* for(Cell c : board.boardToList()){
             if(c.getX() == (int)event.getX()){
                 c.drawCell(GameBoard, c.getX()*30, c.getY()*30, Color.CORAL);
             }
         }*/
-       
-        System.out.println(event.getX());
-        System.out.println((int)event.getX());
-        
+        GraphicsContext gc = GameBoard.getGraphicsContext2D();
+
+        IBlock p = new IBlock(board, (int) event.getX() / 30, (int) event.getY() / 30, GameBoard);
+        if ((int) event.getX() > 0 && (int) event.getX() < 300
+                && (int) event.getY() > 0 && (int) event.getY() < 600) {
+
+            p.drawBuilding2(GameBoard, (int) event.getX() / 30, (int) event.getY() / 30);
+        }
+        for (Cell cc : p.getCells()) {
+            if ((int) event.getX() / 30 == cc.getX()) {
+                testDepl = !testDepl;
+                gc.clearRect(570, 120, 570, 240);
+            }
+        }
+
+        System.out.println((int) event.getX());
+
+        System.out.println((int) event.getY());
+
     }
 
-    
+    @FXML
+    private void MoveBuilding(MouseEvent event) {
+
+        GraphicsContext gc = GameBoard.getGraphicsContext2D();
+        if (testDepl) {
+            IBlock pp = new IBlock(board, (int) event.getX() / 30, (int) event.getY() / 30, GameBoard);
+            pp.drawBuilding2(GameBoard, (int) event.getX() / 30, (int) event.getY() / 30);
+
+            gc.clearRect((int) event.getX() / 30, (int) event.getY() / 30, (int) event.getX() / 30, (int) event.getY() + 120 / 30);
+        }
+    }
 
 }

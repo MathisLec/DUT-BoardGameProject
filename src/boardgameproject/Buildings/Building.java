@@ -47,7 +47,7 @@ public abstract class Building {
         this.state = State.TOP;
     }
 
-    public abstract void buildingShape(int x, int y);
+    public abstract void buildingShape(Canvas c ,int x, int y);
 
     protected abstract void buildingRole();
 
@@ -117,5 +117,11 @@ public abstract class Building {
 
     // Faire attention ici car l'axe des abscisses et des ordonnées sont inversés dans board
     public abstract ArrayList<Cell> getPreviewsShape(int x, int y) throws ArrayIndexOutOfBoundsException;
+
+    public void drawBuilding2(Canvas GameBoard, int i, int i0) {
+        for (Cell s : cells) {
+            s.drawCell(GameBoard, i,i0,Color.WHITE);
+        }
+    }
 
 }

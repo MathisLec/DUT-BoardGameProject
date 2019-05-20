@@ -27,12 +27,6 @@ public class Round extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Player player = new Player();
-        Board board = new Board(this, player);
-        Building block = new IBlock(board);
-        block.rotateBuildingLeft();
-        block.rotateBuildingLeft();
-        block.rotateBuildingLeft();
-        board.addBuilding(block, 0, 9);
 
         Parent root = FXMLLoader.load(getClass().getResource("View/MenuView.fxml"));
 

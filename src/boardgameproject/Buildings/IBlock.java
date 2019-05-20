@@ -22,15 +22,15 @@ public class IBlock extends Building {
         super.role = 'I';
         super.origineX = 0;
         super.origineY = 0;
-        buildingShape(origineX, origineY);
+        
     }
 
-    public IBlock(Board board) {
+    public IBlock(Board board, int x, int y,Canvas c) {
         super(board);
         super.role = 'I';
-        super.origineX = 0;
-        super.origineY = 0;
-        buildingShape(origineX, origineY);
+        super.origineX = x;
+        super.origineY = y;
+        buildingShape(c,origineX, origineY);
     }
 
     public IBlock(ArrayList<Cell> list) {
@@ -39,16 +39,24 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void buildingShape(int x, int y) {
+    public void buildingShape(Canvas c ,int x, int y) {
         for (int i = 0; i < 4; i++) {
             cells.add(new Cell(x, y + i));
         }
     }
     
     @Override
-     public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c){
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(),Color.RED);
+            s.drawCell(c, s.getX(),s.getY(),Color.RED);
+        }
+    }
+    
+    @Override
+     public void drawBuilding2(Canvas c, int x , int y) {
+        for (Cell s : cells) {
+            s.drawCell(c, x,y,Color.RED);
+            y=y+1;
         }
     }
 
