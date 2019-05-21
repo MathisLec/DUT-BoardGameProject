@@ -16,12 +16,15 @@ import javafx.scene.paint.Color;
  * @author mlecoeuvre
  */
 public class IBlock extends Building {
-
+        
+    
+    
     public IBlock() {
         super();
         super.role = 'I';
         super.origineX = 0;
         super.origineY = 0;
+        super.selectedBuilding = false;
         
     }
 
@@ -30,8 +33,10 @@ public class IBlock extends Building {
         super.role = 'I';
         super.origineX = x;
         super.origineY = y;
+        super.selectedBuilding = false;
         buildingShape(c,origineX, origineY);
     }
+ 
 
     public IBlock(ArrayList<Cell> list) {
         super(list);
@@ -43,6 +48,12 @@ public class IBlock extends Building {
         for (int i = 0; i < 4; i++) {
             cells.add(new Cell(x, y + i));
         }
+    }
+    
+    @Override
+    public void deplaceBuilding(double x, double y){
+        origineX = (int)x;
+        origineY = (int)y; 
     }
     
     @Override

@@ -21,7 +21,7 @@ public class LBlock extends Building {
         super.role = 'L';
         super.origineX = 0;
         super.origineY = 0;
-        buildingShape(origineX, origineY);
+        
     }
 
     public LBlock(ArrayList<Cell> list) {
@@ -30,7 +30,7 @@ public class LBlock extends Building {
     }
 
     @Override
-    public void buildingShape(int x, int y) {
+    public void buildingShape(Canvas c,int x, int y) {
         for (int i = 0; i < 3; i++) {
             cells.add(new Cell(x, y + i));
         }
@@ -133,6 +133,11 @@ public class LBlock extends Building {
 
     @Override
     public ArrayList<Cell> getPreviewsShape(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deplaceBuilding(double x, double y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -22,7 +22,7 @@ public class OBlock extends Building {
         super.role = 'O';
         super.origineX = 0;
         super.origineY = 0;
-        buildingShape(origineX, origineY);
+       
     }
 
     public OBlock(ArrayList<Cell> list) {
@@ -31,7 +31,7 @@ public class OBlock extends Building {
     }
 
     @Override
-    public void buildingShape(int x, int y) {
+    public void buildingShape(Canvas c,int x, int y) {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
                 cells.add(new Cell(x + i, y + j));
@@ -63,6 +63,11 @@ public class OBlock extends Building {
 
     @Override
     public ArrayList<Cell> getPreviewsShape(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deplaceBuilding(double x, double y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

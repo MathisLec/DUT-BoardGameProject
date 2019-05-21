@@ -26,6 +26,7 @@ public abstract class Building {
     protected int origineX, origineY;
     protected State state;
     protected Board board;
+    protected boolean selectedBuilding;
 
     public Building() {
         this.nbWorkers = 0;
@@ -50,6 +51,8 @@ public abstract class Building {
     public abstract void buildingShape(Canvas c ,int x, int y);
 
     protected abstract void buildingRole();
+    
+    public abstract void deplaceBuilding(double x, double y);
 
     public abstract void rotateBuildingLeft();
 
@@ -113,6 +116,14 @@ public abstract class Building {
 
     public ArrayList<Cell> getCells() {
         return cells;
+    }
+    
+    public void setSelectedBuilding(boolean selectedBuilding) {
+        this.selectedBuilding = selectedBuilding;
+    }
+
+    public boolean isSelectedBuilding() {
+        return selectedBuilding;
     }
 
     // Faire attention ici car l'axe des abscisses et des ordonnées sont inversés dans board

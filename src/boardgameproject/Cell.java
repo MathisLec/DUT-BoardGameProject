@@ -19,6 +19,7 @@ public class Cell {
     private boolean hasWorker;
     private boolean hasBuilding;
     private Building buildingType;
+    private boolean selectedCell;
     private int x, y;
     private final int cellShape = 30;
 
@@ -26,6 +27,7 @@ public class Cell {
         this.hasWorker = false;
         this.hasBuilding = false;
         this.buildingType = null;
+        this.selectedCell = false;
         this.x = 0;
         this.y = 0;
     }
@@ -34,14 +36,31 @@ public class Cell {
         this.hasWorker = false;
         this.hasBuilding = false;
         this.buildingType = null;
+        this.selectedCell = false;
         this.x = x;
         this.y = y;
-    }   
+    }
+
+    public void setSelectedCell(boolean selectedCell) {
+        this.selectedCell = selectedCell;
+    }
+
+    public boolean isSelectedCell() {
+        return selectedCell;
+    }
+    
+    public void deplaceCell(double x, double y){
+        this.x = (int)x;
+        this.y = (int)y;
+    }
+
+    public int getCellShape() {
+        return cellShape;
+    }
     
     public void drawCell(Canvas c,int x, int y, Color col){
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setFill(col);
-        if(x == 0 && y == 0) gc.setFill(Color.AQUA);
         gc.fillRect(x*cellShape, y*cellShape, cellShape, cellShape);
         gc.setFill(Color.BLACK);
         gc.strokeRect(x*cellShape, y*cellShape, cellShape, cellShape);

@@ -21,7 +21,6 @@ public class ZBlock extends Building {
         super.role = 'Z';
         super.origineX = 1;
         super.origineY = 0;
-        buildingShape(origineX, origineY);
     }
 
     public ZBlock(ArrayList<Cell> list) {
@@ -30,7 +29,7 @@ public class ZBlock extends Building {
     }
 
     @Override
-    public void buildingShape(int x, int y) {
+    public void buildingShape(Canvas c,int x, int y) {
         for (int i = 0; i < 2; i++) {
             Cell cell = new Cell(x, y + i);
             Cell cell1 = new Cell(x - 1, y + 1 + i);
@@ -105,6 +104,11 @@ public class ZBlock extends Building {
 
     @Override
     public ArrayList<Cell> getPreviewsShape(int x, int y) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void deplaceBuilding(double x, double y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
