@@ -31,13 +31,9 @@ import javafx.scene.paint.Color;
 public class GameViewController implements Initializable {
 
     private Player player = new Player();
-    private Round Round;
-    Board board = new Board(Round, player);
-    ArrayList<Building> buildings = new ArrayList<>();
-    Building O = new OBlock();
-    Building J = new JBlock();
-    Building S = new SBlock();
-    Building T = new TBlock();
+    private Round round;
+    Board board = new Board(round, player);
+
     boolean valide1 = false;
     boolean valide2 = false;
     boolean valide3 = false;
@@ -66,8 +62,9 @@ public class GameViewController implements Initializable {
         nbEnergy.setText(Integer.toString(player.getNbEnergy()));
         nbMaterials.setText(Integer.toString(player.getNbMaterials()));
         nbWorkers.setText(Integer.toString(player.getNbWorkers()));
-        buildings.add(testI);
 
+        IBlock iblock = new IBlock();
+        board.addBuilding(iblock, 0, 0);
     }
 
     public void update() {
@@ -75,9 +72,14 @@ public class GameViewController implements Initializable {
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
         gc.clearRect(0, 0, 1500, 1500);
         for (Cell efg : board.boardToList()) {
-            efg.drawCell(GameBoard, efg.getY(), efg.getX(), Color.WHITE);
+            char role = efg.getBuildingType().getRole();
+            if (role == 'I') {
+                efg.drawCell(GameBoard, efg.getY(), efg.getX(), Color.BLACK);
+            } else {
+                efg.drawCell(GameBoard, efg.getY(), efg.getX(), Color.WHITE);
+            }
         }
-        for (Building ef : buildings) {
+        for (Building ef : board.getBuildings()) {
             ef.drawBuilding(GameBoard);
         }
 
@@ -89,9 +91,11 @@ public class GameViewController implements Initializable {
     private Label nbMaterials;
     @FXML
     private Label nbWorkers;
-
+    
     @FXML
     private void endTurn(ActionEvent event) {
+        round.endTurn();
+        board.endTurn();
     }
 
     @FXML
@@ -108,7 +112,7 @@ public class GameViewController implements Initializable {
     }
 
     Building selectedBuilding = new IBlock();
-    
+
     @FXML
     private void Testclick(MouseEvent event) {
 
@@ -126,15 +130,15 @@ public class GameViewController implements Initializable {
 //                
 //            }
 //        }
-        for (Building mm : buildings) {
+        for (Building mm : board.getBuildings()) {
             for (Cell mmm : mm.getCells()) {
-                
+
                 if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
                         && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
-                    
+
                     selectedBuilding = mm;
                     mm.setSelectedBuilding(!mm.isSelectedBuilding());
-                    
+
                 }
             }
         }
@@ -147,11 +151,10 @@ public class GameViewController implements Initializable {
     @FXML
     private void MoveBuilding(MouseEvent event) {
 
-                for (Cell mlk : selectedBuilding.getCells()) {
-                    mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
-                }
-            
-        
+        for (Cell mlk : selectedBuilding.getCells()) {
+            mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
+        }
+
 //        GraphicsContext gc = GameBoard.getGraphicsContext2D();
 //        
 //          if (testDepl && (int) event.getX() > c.getX()*30 && (int) event.getX() < 300
