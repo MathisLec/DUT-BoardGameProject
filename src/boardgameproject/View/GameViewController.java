@@ -9,6 +9,7 @@ import boardgameproject.Board;
 import boardgameproject.Buildings.Building;
 import boardgameproject.Buildings.*;
 import boardgameproject.Cell;
+import boardgameproject.Pile;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.net.URL;
@@ -30,8 +31,8 @@ import javafx.scene.paint.Color;
  */
 public class GameViewController implements Initializable {
 
-    private Player player = new Player();
     private Round round = new Round();
+    Player player = new Player();
     Board board = new Board(round, player);
 
     boolean valide1 = false;
@@ -40,7 +41,7 @@ public class GameViewController implements Initializable {
     boolean valide4 = false;
     boolean valide5 = false;
     boolean testDepl = false;
-    
+
     Building selectedBuilding;
 
     @FXML
@@ -54,21 +55,17 @@ public class GameViewController implements Initializable {
     @FXML
     private Canvas BuildingHand5;
 
-    IBlock testI = new IBlock(board, 19, 4, GameBoard);
-    Cell c = new Cell(21, 4);
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        IBlock iblock = new IBlock(board);
-        board.addBuilding(iblock, 0, 0);
-        selectedBuilding = iblock;
-        
+        selectedBuilding = new IBlock(board);
+        board.addBuilding(selectedBuilding, 0, 0);
+
         board.drawBoard(GameBoard);
 
-        nbEnergy.setText(Integer.toString(player.getNbEnergy()));
-        nbMaterials.setText(Integer.toString(player.getNbMaterials()));
-        nbWorkers.setText(Integer.toString(player.getNbWorkers()));
-        
+        nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
+        nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
+        nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
+
         update();
     }
 
@@ -76,27 +73,50 @@ public class GameViewController implements Initializable {
 
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
         gc.clearRect(0, 0, 1500, 1500);
+        Color color = Color.WHITE;
         for (Cell efg : board.boardToList()) {
-            char role = efg.getBuildingType();
-            if (role == 'I') {
-                efg.drawCell(GameBoard, efg.getY(), efg.getX(), Color.BLACK);
-            } else {
-                efg.drawCell(GameBoard, efg.getY(), efg.getX(), Color.WHITE);
-            }
+            color = colorSelector(efg,color);
+            efg.drawCell(GameBoard, efg.getY(), efg.getX(), color);
         }
-        for (Building ef : board.getBuildings()) {
-            ef.drawBuilding(GameBoard);
+    }
+    private Color colorSelector(Cell cell, Color color){
+        char role = cell.getBuildingType();
+        switch(role){
+            case 'I':
+                color = Color.RED;
+                break;
+            case 'J':
+                color = Color.GREEN;
+                break;
+            case 'L':
+                color = Color.ORANGE;
+                break;
+            case 'O':
+                color = Color.BLUE;
+                break;
+            case 'S':
+                color = Color.YELLOW;
+                break;
+            case 'T':
+                color = Color.BROWN;
+                break;
+            case 'Z':
+                color = Color.CYAN;
+                break;
+            default:
+                color = Color.WHITE;
+                break;
         }
-
+        return color;
     }
 
     @FXML
-    private Label nbEnergy;
+    private Label nbEnergyLabel;
     @FXML
-    private Label nbMaterials;
+    private Label nbMaterialsLabel;
     @FXML
-    private Label nbWorkers;
-    
+    private Label nbWorkersLabel;
+
     @FXML
     private void endTurn(ActionEvent event) {
         round.endTurn();
@@ -161,7 +181,6 @@ public class GameViewController implements Initializable {
 //        for (Cell mlk : selectedBuilding.getCells()) {
 //            mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
 //        }
-
 //        GraphicsContext gc = GameBoard.getGraphicsContext2D();
 //        
 //          if (testDepl && (int) event.getX() > c.getX()*30 && (int) event.getX() < 300

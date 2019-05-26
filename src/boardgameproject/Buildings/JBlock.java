@@ -132,13 +132,9 @@ public class JBlock extends Building {
     }
 
     @Override
-    public ArrayList<Cell> getPreviewsShape(int x, int y) {
+    public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public void deplaceBuilding(double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

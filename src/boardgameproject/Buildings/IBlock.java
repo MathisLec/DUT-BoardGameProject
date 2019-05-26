@@ -28,7 +28,6 @@ public class IBlock extends Building {
     }
 
     public IBlock(Board board) {
-        super(board);
         super.role = 'I';
         super.origineX = 0;
         super.origineY = 0;
@@ -36,7 +35,6 @@ public class IBlock extends Building {
     }
 
     public IBlock(Board board, int x, int y, Canvas c) {
-        super(board);
         super.role = 'I';
         super.origineX = x;
         super.origineY = y;
@@ -57,23 +55,9 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void deplaceBuilding(double x, double y) {
-        origineX = (int) x;
-        origineY = (int) y;
-    }
-
-    @Override
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
             s.drawCell(c, s.getX(), s.getY(), Color.RED);
-        }
-    }
-
-    @Override
-    public void drawBuilding2(Canvas c, int x, int y) {
-        for (Cell s : cells) {
-            s.drawCell(c, x, y, Color.RED);
-            y = y + 1;
         }
     }
 
@@ -123,7 +107,7 @@ public class IBlock extends Building {
     }
 
     @Override
-    public ArrayList<Cell> getPreviewsShape(int x, int y) {
+    public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
         ArrayList<Cell> shape = new ArrayList<>();
         try {
             switch (state) {
@@ -141,7 +125,8 @@ public class IBlock extends Building {
                     break;
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
-            ex.getMessage();
+            shape = new ArrayList<>();
+            System.out.println("ça sort du cadre légal");
         }
         return shape;
     }

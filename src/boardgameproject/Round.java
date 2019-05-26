@@ -19,7 +19,7 @@ import javafx.stage.Stage;
  */
 public class Round extends Application {
 
-    private int nbTurnMax;
+    private final int NB_TURN_MAX = 30;
     private int nbTurn;
     private int nbPlayer;
     public Scene scene;
@@ -41,11 +41,13 @@ public class Round extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
+        Player player = new Player();
+        Round round = new Round();
     }
 
     public int getNbTurnMax() {
-        return nbTurnMax;
+        return NB_TURN_MAX;
     }
 
     public int getNbTurn() {

@@ -18,7 +18,7 @@ public final class Board {
 
     private final Player player;
     private final Round round;
-    private final Cell[][] board;
+    public final Cell[][] board;
     private final ArrayList<Building> buildings;
 
     public Board(Round round, Player player) {
@@ -45,7 +45,7 @@ public final class Board {
 
     public void addBuilding(Building building, int x, int y) {
         if (checkAddBuilding(building, x, y)) {
-            for (Cell c : building.getPreviewsShape(x, y)) {
+            for (Cell c : building.getPreviewsShape(this, x, y)) {
                 c.changeBuildingStatus(building);
             }
             buildings.add(building);
@@ -60,7 +60,7 @@ public final class Board {
 
     private boolean checkAddBuilding(Building building, int x, int y) {
         boolean isValid = true;
-        for (Cell c : building.getPreviewsShape(x, y)) {
+        for (Cell c : building.getPreviewsShape(this, x, y)) {
             if (c.hasBuilding()) {
                 isValid = false;
             }
@@ -111,4 +111,5 @@ public final class Board {
             b.buildingRole(player, this);
         }
     }
+    
 }

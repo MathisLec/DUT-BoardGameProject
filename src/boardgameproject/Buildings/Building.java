@@ -26,21 +26,12 @@ public abstract class Building {
     // L'axe des abscisses est représenté par x et l'axe des ordonnées par y
     protected int origineX, origineY;
     protected State state;
-    protected Board board;
     protected boolean selectedBuilding;
 
     public Building() {
         this.nbWorkers = 0;
         this.cells = new ArrayList<>();
         this.state = State.TOP;
-        this.board = null;
-    }
-
-    public Building(Board board) {
-        this.nbWorkers = 0;
-        this.cells = new ArrayList<>();
-        this.state = State.TOP;
-        this.board = board;
     }
 
     public Building(ArrayList<Cell> list) {
@@ -56,8 +47,6 @@ public abstract class Building {
     public char getRole() {
         return role;
     }
-
-    public abstract void deplaceBuilding(double x, double y);
 
     public abstract void rotateBuildingLeft();
 
@@ -132,12 +121,7 @@ public abstract class Building {
     }
 
     // Faire attention ici car l'axe des abscisses et des ordonnées sont inversés dans board
-    public abstract ArrayList<Cell> getPreviewsShape(int x, int y) throws ArrayIndexOutOfBoundsException;
+    public abstract ArrayList<Cell> getPreviewsShape(Board board, int x, int y) throws ArrayIndexOutOfBoundsException;
 
-    public void drawBuilding2(Canvas GameBoard, int i, int i0) {
-        for (Cell s : cells) {
-            s.drawCell(GameBoard, i, i0, Color.WHITE);
-        }
-    }
 
 }
