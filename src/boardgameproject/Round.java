@@ -60,5 +60,10 @@ public class Round extends Application {
     public Scene getScene() {
         return scene;
     }
+    
+    public void endTurn(){
+        nbTurn++;
+        System.out.println("nbTurn:"+nbTurn);
+    }
 
 }

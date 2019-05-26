@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Player;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -48,10 +49,14 @@ public abstract class Building {
         this.state = State.TOP;
     }
 
-    public abstract void buildingShape(Canvas c ,int x, int y);
+    public abstract void buildingShape(Canvas c, int x, int y);
 
-    protected abstract void buildingRole();
-    
+    public abstract void buildingRole(Player player, Board board);
+
+    public char getRole() {
+        return role;
+    }
+
     public abstract void deplaceBuilding(double x, double y);
 
     public abstract void rotateBuildingLeft();
@@ -94,7 +99,7 @@ public abstract class Building {
 
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(),Color.WHITE);
+            s.drawCell(c, s.getX(), s.getY(), Color.WHITE);
         }
     }
 
@@ -117,7 +122,7 @@ public abstract class Building {
     public ArrayList<Cell> getCells() {
         return cells;
     }
-    
+
     public void setSelectedBuilding(boolean selectedBuilding) {
         this.selectedBuilding = selectedBuilding;
     }
@@ -131,7 +136,7 @@ public abstract class Building {
 
     public void drawBuilding2(Canvas GameBoard, int i, int i0) {
         for (Cell s : cells) {
-            s.drawCell(GameBoard, i,i0,Color.WHITE);
+            s.drawCell(GameBoard, i, i0, Color.WHITE);
         }
     }
 

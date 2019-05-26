@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Player;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -72,8 +73,8 @@ public class IBlock extends Building {
     }
 
     @Override
-    protected void buildingRole() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void buildingRole(Player player, Board board) {
+        System.out.println("Coucou les amis, c'est le IBlock");
     }
 
     @Override
