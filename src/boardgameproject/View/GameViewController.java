@@ -57,14 +57,15 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        IBlock iblock = new IBlock(board);
+        board.addBuilding(iblock, 0, 0);
+        
         board.drawBoard(GameBoard);
 
         nbEnergy.setText(Integer.toString(player.getNbEnergy()));
         nbMaterials.setText(Integer.toString(player.getNbMaterials()));
         nbWorkers.setText(Integer.toString(player.getNbWorkers()));
 
-        IBlock iblock = new IBlock();
-        board.addBuilding(iblock, 0, 0);
     }
 
     public void update() {
@@ -72,7 +73,7 @@ public class GameViewController implements Initializable {
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
         gc.clearRect(0, 0, 1500, 1500);
         for (Cell efg : board.boardToList()) {
-            char role = efg.getBuildingType().getRole();
+            char role = efg.getBuildingType();
             if (role == 'I') {
                 efg.drawCell(GameBoard, efg.getY(), efg.getX(), Color.BLACK);
             } else {
@@ -130,18 +131,18 @@ public class GameViewController implements Initializable {
 //                
 //            }
 //        }
-        for (Building mm : board.getBuildings()) {
-            for (Cell mmm : mm.getCells()) {
-
-                if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
-                        && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
-
-                    selectedBuilding = mm;
-                    mm.setSelectedBuilding(!mm.isSelectedBuilding());
-
-                }
-            }
-        }
+////        for (Building mm : board.getBuildings()) {
+////            for (Cell mmm : mm.getCells()) {
+////
+////                if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
+////                        && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
+////
+////                    selectedBuilding = mm;
+////                    mm.setSelectedBuilding(!mm.isSelectedBuilding());
+////
+////                }
+////            }
+////        }
         System.out.println((int) event.getX());
 
         System.out.println((int) event.getY());

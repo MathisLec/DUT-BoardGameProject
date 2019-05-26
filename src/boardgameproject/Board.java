@@ -77,9 +77,9 @@ public final class Board {
     public void checkRemoveWorker() {
         for (Cell c : boardToList()) {
             if (c.hasWorker()) {
-                if (c.getBuildingType().getEnergyConsume() > player.getNbEnergy()) {
-                    removeWorker(c);
-                }
+//                if (c.getBuildingType().getEnergyConsume() > player.getNbEnergy()) {
+//                    removeWorker(c);
+//                }
             }
         }
     }

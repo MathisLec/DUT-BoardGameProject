@@ -31,7 +31,7 @@ public class JBlock extends Building {
     }
 
     @Override
-    public void buildingShape(Canvas c,int x, int y) {
+    public void buildingShape(int x, int y) {
         for (int i = 0; i < 3; i++) {
             cells.add(new Cell(x, y + i));
         }

@@ -17,27 +17,32 @@ import javafx.scene.paint.Color;
  * @author mlecoeuvre
  */
 public class IBlock extends Building {
-        
-    
-    
+
     public IBlock() {
         super();
         super.role = 'I';
         super.origineX = 0;
         super.origineY = 0;
         super.selectedBuilding = false;
-        
+
     }
 
-    public IBlock(Board board, int x, int y,Canvas c) {
+    public IBlock(Board board) {
+        super(board);
+        super.role = 'I';
+        super.origineX = 0;
+        super.origineY = 0;
+        super.selectedBuilding = false;
+    }
+
+    public IBlock(Board board, int x, int y, Canvas c) {
         super(board);
         super.role = 'I';
         super.origineX = x;
         super.origineY = y;
         super.selectedBuilding = false;
-        buildingShape(c,origineX, origineY);
+        buildingShape(origineX, origineY);
     }
- 
 
     public IBlock(ArrayList<Cell> list) {
         super(list);
@@ -45,30 +50,30 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void buildingShape(Canvas c ,int x, int y) {
+    public void buildingShape(int x, int y) {
         for (int i = 0; i < 4; i++) {
             cells.add(new Cell(x, y + i));
         }
     }
-    
+
     @Override
-    public void deplaceBuilding(double x, double y){
-        origineX = (int)x;
-        origineY = (int)y; 
+    public void deplaceBuilding(double x, double y) {
+        origineX = (int) x;
+        origineY = (int) y;
     }
-    
+
     @Override
-    public void drawBuilding(Canvas c){
+    public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(),s.getY(),Color.RED);
+            s.drawCell(c, s.getX(), s.getY(), Color.RED);
         }
     }
-    
+
     @Override
-     public void drawBuilding2(Canvas c, int x , int y) {
+    public void drawBuilding2(Canvas c, int x, int y) {
         for (Cell s : cells) {
-            s.drawCell(c, x,y,Color.RED);
-            y=y+1;
+            s.drawCell(c, x, y, Color.RED);
+            y = y + 1;
         }
     }
 

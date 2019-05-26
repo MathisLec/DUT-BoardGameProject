@@ -31,7 +31,7 @@ public class SBlock extends Building {
     }
 
     @Override
-    public void buildingShape(Canvas c,int x, int y) {
+    public void buildingShape(int x, int y) {
         for (int i = 0; i < 2; i++) {
             Cell cell = new Cell(x, y + i);
             Cell cell1 = new Cell(x + 1, y + 1 + i);

@@ -18,7 +18,7 @@ public class Cell {
 
     private boolean hasWorker;
     private boolean hasBuilding;
-    private Building buildingType;
+    private char buildingType;
     private boolean selectedCell;
     private int x, y;
     private final int cellShape = 30;
@@ -26,7 +26,7 @@ public class Cell {
     public Cell() {
         this.hasWorker = false;
         this.hasBuilding = false;
-        this.buildingType = null;
+        this.buildingType = 'B';
         this.selectedCell = false;
         this.x = 0;
         this.y = 0;
@@ -35,7 +35,7 @@ public class Cell {
     public Cell(int x, int y) {
         this.hasWorker = false;
         this.hasBuilding = false;
-        this.buildingType = null;
+        this.buildingType = 'B';
         this.selectedCell = false;
         this.x = x;
         this.y = y;
@@ -72,12 +72,12 @@ public class Cell {
 
     public void changeBuildingStatus(Building building) {
         hasBuilding = !hasBuilding;
-        buildingType = building;
+        buildingType = building.getRole();
     }
 
     public void changeBuildingStatus() {
         hasBuilding = false;
-        buildingType = null;
+        buildingType = 'B';
     }
 
     public boolean hasWorker() {
@@ -88,7 +88,7 @@ public class Cell {
         return hasBuilding;
     }
 
-    public Building getBuildingType() {
+    public char getBuildingType() {
         return buildingType;
     }
 

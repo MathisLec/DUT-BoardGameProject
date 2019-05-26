@@ -49,7 +49,7 @@ public abstract class Building {
         this.state = State.TOP;
     }
 
-    public abstract void buildingShape(Canvas c, int x, int y);
+    public abstract void buildingShape(int x, int y);
 
     public abstract void buildingRole(Player player, Board board);
 

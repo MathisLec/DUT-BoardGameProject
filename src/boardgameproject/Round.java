@@ -26,7 +26,6 @@ public class Round extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Player player = new Player();
 
         Parent root = FXMLLoader.load(getClass().getResource("View/MenuView.fxml"));
 
