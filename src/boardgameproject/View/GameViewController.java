@@ -31,7 +31,7 @@ import javafx.scene.paint.Color;
 public class GameViewController implements Initializable {
 
     private Player player = new Player();
-    private Round round;
+    private Round round = new Round();
     Board board = new Board(round, player);
 
     boolean valide1 = false;
@@ -40,6 +40,8 @@ public class GameViewController implements Initializable {
     boolean valide4 = false;
     boolean valide5 = false;
     boolean testDepl = false;
+    
+    Building selectedBuilding;
 
     @FXML
     private Canvas GameBoard;
@@ -59,13 +61,15 @@ public class GameViewController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         IBlock iblock = new IBlock(board);
         board.addBuilding(iblock, 0, 0);
+        selectedBuilding = iblock;
         
         board.drawBoard(GameBoard);
 
         nbEnergy.setText(Integer.toString(player.getNbEnergy()));
         nbMaterials.setText(Integer.toString(player.getNbMaterials()));
         nbWorkers.setText(Integer.toString(player.getNbWorkers()));
-
+        
+        update();
     }
 
     public void update() {
@@ -101,18 +105,20 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void RotateRight(ActionEvent event) {
+        selectedBuilding.rotateBuildingRight();
+        update();
     }
 
     @FXML
     private void RotateLeft(ActionEvent event) {
+        selectedBuilding.rotateBuildingLeft();
+        update();
     }
 
     @FXML
     private void QuitGame(ActionEvent event) {
         System.exit(0);
     }
-
-    Building selectedBuilding = new IBlock();
 
     @FXML
     private void Testclick(MouseEvent event) {
@@ -152,9 +158,9 @@ public class GameViewController implements Initializable {
     @FXML
     private void MoveBuilding(MouseEvent event) {
 
-        for (Cell mlk : selectedBuilding.getCells()) {
-            mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
-        }
+//        for (Cell mlk : selectedBuilding.getCells()) {
+//            mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
+//        }
 
 //        GraphicsContext gc = GameBoard.getGraphicsContext2D();
 //        
@@ -163,7 +169,7 @@ public class GameViewController implements Initializable {
 //            
 //            testI.deplace(event.getX(), event.getY());
 //        }
-        update();
+        //update();
     }
 
 }
