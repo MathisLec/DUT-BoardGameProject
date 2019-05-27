@@ -57,8 +57,8 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        selectedBuilding = new IBlock(board);
-        board.addBuilding(selectedBuilding, 0, 0);
+        selectedBuilding = new OBlock();
+        board.addBuilding(selectedBuilding, 1, 3);
 
         board.drawBoard(GameBoard);
 
@@ -83,25 +83,25 @@ public class GameViewController implements Initializable {
         char role = cell.getBuildingType();
         switch(role){
             case 'I':
-                color = Color.RED;
+                color = Color.CYAN;
                 break;
             case 'J':
-                color = Color.GREEN;
+                color = Color.BLUE;
                 break;
             case 'L':
                 color = Color.ORANGE;
                 break;
             case 'O':
-                color = Color.BLUE;
-                break;
-            case 'S':
                 color = Color.YELLOW;
                 break;
+            case 'S':
+                color = Color.GREEN;
+                break;
             case 'T':
-                color = Color.BROWN;
+                color = Color.PURPLE;
                 break;
             case 'Z':
-                color = Color.CYAN;
+                color = Color.RED;
                 break;
             default:
                 color = Color.WHITE;
