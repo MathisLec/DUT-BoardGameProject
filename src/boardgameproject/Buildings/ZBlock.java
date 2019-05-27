@@ -39,11 +39,11 @@ public class ZBlock extends Building {
             cells.add(cell1);
         }
     }
-    
+
     @Override
-     public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(),Color.CYAN);
+            s.drawCell(c, s.getX(), s.getY(), Color.CYAN);
         }
     }
 
@@ -106,8 +106,29 @@ public class ZBlock extends Building {
 
     @Override
     public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Cell> shape = new ArrayList<>();
+        try {
+            switch (state) {
+                case TOP:
+                case BOTTOM:
+                    for (int i = 0; i < 2; i++) {
+                        shape.add(board.getBoard()[x + i][y]);
+                        shape.add(board.getBoard()[x + 1 + i][y - 1]);
+                    }
+                    break;
+                case LEFT:
+                case RIGHT:
+                    for (int i = 0; i < 2; i++) {
+                        shape.add(board.getBoard()[x][y - i]);
+                        shape.add(board.getBoard()[x + 1][y + i]);
+                    }
+                    break;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            shape = new ArrayList<>();
+            System.out.println("ça sort du cadre légal");
+        }
+        return shape;
     }
-
 
 }

@@ -57,7 +57,7 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        selectedBuilding = new TBlock();
+        selectedBuilding = new ZBlock();
         board.addBuilding(selectedBuilding, 1, 3);
 
         board.drawBoard(GameBoard);
@@ -75,13 +75,14 @@ public class GameViewController implements Initializable {
         gc.clearRect(0, 0, 1500, 1500);
         Color color = Color.WHITE;
         for (Cell efg : board.boardToList()) {
-            color = colorSelector(efg,color);
+            color = colorSelector(efg, color);
             efg.drawCell(GameBoard, efg.getY(), efg.getX(), color);
         }
     }
-    private Color colorSelector(Cell cell, Color color){
+
+    private Color colorSelector(Cell cell, Color color) {
         char role = cell.getBuildingType();
-        switch(role){
+        switch (role) {
             case 'I':
                 color = Color.CYAN;
                 break;
