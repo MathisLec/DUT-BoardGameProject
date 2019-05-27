@@ -57,8 +57,8 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        selectedBuilding = new SBlock();
-        board.addBuilding(selectedBuilding, 0, 3);
+        selectedBuilding = new TBlock();
+        board.addBuilding(selectedBuilding, 1, 3);
 
         board.drawBoard(GameBoard);
 
