@@ -23,7 +23,7 @@ public class LBlock extends Building {
         super.role = 'L';
         super.origineX = 0;
         super.origineY = 0;
-        
+
     }
 
     public LBlock(ArrayList<Cell> list) {
@@ -38,11 +38,11 @@ public class LBlock extends Building {
         }
         cells.add(new Cell(x + 1, y + 2));
     }
-    
+
     @Override
-     public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(),Color.GREEN);
+            s.drawCell(c, s.getX(), s.getY(), Color.GREEN);
         }
     }
 
@@ -135,8 +135,39 @@ public class LBlock extends Building {
 
     @Override
     public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Cell> shape = new ArrayList<>();
+        try {
+            switch (state) {
+                case TOP:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x + i][y]);
+                    }
+                    shape.add(board.getBoard()[x + 2][y + 1]);
+                    break;
+                case BOTTOM:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x + i][y + 1]);
+                    }
+                    shape.add(board.getBoard()[x][y]);
+                    break;
+                case LEFT:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x + 1][y - i]);
+                    }
+                    shape.add(board.getBoard()[x][y]);
+                    break;
+                case RIGHT:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x][y + i]);
+                    }
+                    shape.add(board.getBoard()[x + 1][y]);
+                    break;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            shape = new ArrayList<>();
+            System.out.println("ça sort du cadre légal");
+        }
+        return shape;
     }
-
 
 }

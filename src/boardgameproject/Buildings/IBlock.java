@@ -27,13 +27,6 @@ public class IBlock extends Building {
 
     }
 
-    public IBlock(Board board) {
-        super.role = 'I';
-        super.origineX = 0;
-        super.origineY = 0;
-        super.selectedBuilding = false;
-    }
-
     public IBlock(Board board, int x, int y, Canvas c) {
         super.role = 'I';
         super.origineX = x;

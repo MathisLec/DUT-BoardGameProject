@@ -24,7 +24,7 @@ public class OBlock extends Building {
         super.role = 'O';
         super.origineX = 0;
         super.origineY = 0;
-       
+
     }
 
     public OBlock(ArrayList<Cell> list) {
@@ -40,11 +40,11 @@ public class OBlock extends Building {
             }
         }
     }
-    
+
     @Override
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(),Color.BLUE);
+            s.drawCell(c, s.getX(), s.getY(), Color.BLUE);
         }
     }
 
@@ -65,8 +65,25 @@ public class OBlock extends Building {
 
     @Override
     public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Cell> shape = new ArrayList<>();
+        try {
+            switch (state) {
+                case TOP:
+                case BOTTOM:
+                case LEFT:
+                case RIGHT:
+                    for (int i = 0; i < 2; i++) {
+                        for (int j = 0; j < 2; j++) {
+                            shape.add(board.getBoard()[x + j][y + i]);
+                        }
+                    }
+                    break;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            shape = new ArrayList<>();
+            System.out.println("ça sort du cadre légal");
+        }
+        return shape;
     }
-
 
 }
