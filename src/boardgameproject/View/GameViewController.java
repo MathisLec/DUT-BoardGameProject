@@ -130,12 +130,12 @@ public class GameViewController implements Initializable {
             for (Cell mmm : mm.getCells()) {
                 
                 if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
-                        && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
+                     && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
                     
                     selectedBuilding = mm;
-                    mm.setSelectedBuilding(!mm.isSelectedBuilding());
-                    
-                }
+                     mm.setSelectedBuilding(!mm.isSelectedBuilding());
+                     
+                }       
             }
         }
         System.out.println((int) event.getX());
@@ -146,8 +146,8 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void MoveBuilding(MouseEvent event) {
-
-                for (Cell mlk : selectedBuilding.getCells()) {
+        
+             for (Cell mlk : selectedBuilding.getCells()) {
                     mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
                 }
             
@@ -161,5 +161,5 @@ public class GameViewController implements Initializable {
 //        }
         update();
     }
-
+    
 }

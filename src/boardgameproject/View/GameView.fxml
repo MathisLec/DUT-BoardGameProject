@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="882.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.GameViewController">
    <children>
-      <Canvas fx:id="GameBoard" height="601.0" layoutX="67.0" layoutY="58.0" onMouseMoved="#MoveBuilding" onMousePressed="#Testclick" width="788.0" />
+      <Canvas fx:id="GameBoard" height="601.0" layoutX="67.0" layoutY="58.0" onMouseDragged="#MoveBuilding" onMousePressed="#Testclick" onMouseReleased="#PlaceBuilding" width="788.0" />
       <Button layoutX="734.0" layoutY="611.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="28.0" prefWidth="77.0" text="End Turn" />
       <Button layoutX="772.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateRight" text="Rotate Right" />
       <Button layoutX="644.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateLeft" text="Rotate Left" />
