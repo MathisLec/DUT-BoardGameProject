@@ -9,6 +9,7 @@ import boardgameproject.Board;
 import boardgameproject.Buildings.Building;
 import boardgameproject.Buildings.*;
 import boardgameproject.Cell;
+import boardgameproject.Pile;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.net.URL;
@@ -30,76 +31,102 @@ import javafx.scene.paint.Color;
  */
 public class GameViewController implements Initializable {
 
-    private Player player = new Player();
-    private Round Round;
-    Board board = new Board(Round, player);
+    private Round round = new Round();
+    Player player = new Player();
+    Board board = new Board(round, player);
     ArrayList<Building> buildings = new ArrayList<>();
-    Building O = new OBlock();
-    Building J = new JBlock();
-    Building S = new SBlock();
-    Building T = new TBlock();
-    boolean valide1 = false;
-    boolean valide2 = false;
-    boolean valide3 = false;
-    boolean valide4 = false;
-    boolean valide5 = false;
-    boolean testDepl = false;
+
+    Building selectedBuilding;
 
     @FXML
     private Canvas GameBoard;
-    @FXML
-    private Canvas BuildingHand1;
-    @FXML
-    private Canvas BuildingHand3;
-    @FXML
-    private Canvas BuildingHand4;
-    @FXML
-    private Canvas BuildingHand5;
-
-    IBlock testI = new IBlock(board, 19, 4, GameBoard);
-    Cell c = new Cell(21, 4);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        selectedBuilding = new ZBlock();
+        buildings.add(selectedBuilding);
+        board.addBuilding(selectedBuilding, 1, 3);
+
+        Building bl = new IBlock(board, 17, 7, GameBoard);
+        buildings.add(bl);
+
         board.drawBoard(GameBoard);
 
-        nbEnergy.setText(Integer.toString(player.getNbEnergy()));
-        nbMaterials.setText(Integer.toString(player.getNbMaterials()));
-        nbWorkers.setText(Integer.toString(player.getNbWorkers()));
-        buildings.add(testI);
+        nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
+        nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
+        nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
 
+        update();
     }
 
     public void update() {
 
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
         gc.clearRect(0, 0, 1500, 1500);
+        Color color = Color.WHITE;
         for (Cell efg : board.boardToList()) {
-            efg.drawCell(GameBoard, efg.getY(), efg.getX(), Color.WHITE);
+            color = colorSelector(efg, color);
+            efg.drawCell(GameBoard, efg.getY(), efg.getX(), color);
         }
         for (Building ef : buildings) {
             ef.drawBuilding(GameBoard);
         }
+    }
 
+    private Color colorSelector(Cell cell, Color color) {
+        char role = cell.getBuildingType();
+        switch (role) {
+            case 'I':
+                color = Color.CYAN;
+                break;
+            case 'J':
+                color = Color.BLUE;
+                break;
+            case 'L':
+                color = Color.ORANGE;
+                break;
+            case 'O':
+                color = Color.YELLOW;
+                break;
+            case 'S':
+                color = Color.GREEN;
+                break;
+            case 'T':
+                color = Color.PURPLE;
+                break;
+            case 'Z':
+                color = Color.RED;
+                break;
+            default:
+                color = Color.WHITE;
+                break;
+        }
+        return color;
     }
 
     @FXML
-    private Label nbEnergy;
+    private Label nbEnergyLabel;
     @FXML
-    private Label nbMaterials;
+    private Label nbMaterialsLabel;
     @FXML
-    private Label nbWorkers;
+    private Label nbWorkersLabel;
 
     @FXML
     private void endTurn(ActionEvent event) {
+        round.endTurn();
+        board.endTurn();
     }
 
     @FXML
     private void RotateRight(ActionEvent event) {
+        selectedBuilding.rotateBuildingRight();
+        update();
     }
 
     @FXML
     private void RotateLeft(ActionEvent event) {
+        selectedBuilding.rotateBuildingLeft();
+        update();
     }
 
     @FXML
@@ -107,8 +134,6 @@ public class GameViewController implements Initializable {
         System.exit(0);
     }
 
-    Building selectedBuilding = new IBlock();
-    
     @FXML
     private void Testclick(MouseEvent event) {
 
@@ -128,14 +153,14 @@ public class GameViewController implements Initializable {
 //        }
         for (Building mm : buildings) {
             for (Cell mmm : mm.getCells()) {
-                
+
                 if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
-                     && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
-                    
+                        && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
+
                     selectedBuilding = mm;
-                     mm.setSelectedBuilding(!mm.isSelectedBuilding());
-                     
-                }       
+                    mm.setSelectedBuilding(true);
+
+                }
             }
         }
         System.out.println((int) event.getX());
@@ -146,12 +171,15 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void MoveBuilding(MouseEvent event) {
-        
-             for (Cell mlk : selectedBuilding.getCells()) {
+
+        for (Building b : buildings) {
+            if (b.isSelectedBuilding()) {
+                for (Cell mlk : b.getCells()) {
                     mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
                 }
-            
-        
+            }
+        }
+
 //        GraphicsContext gc = GameBoard.getGraphicsContext2D();
 //        
 //          if (testDepl && (int) event.getX() > c.getX()*30 && (int) event.getX() < 300
@@ -161,5 +189,22 @@ public class GameViewController implements Initializable {
 //        }
         update();
     }
-    
+
+    @FXML
+    private void ReleaseBuilding(MouseEvent event) {
+        
+        for (Building mm : buildings) {
+            for (Cell mmm : mm.getCells()) {
+
+                if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
+                        && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
+                    mm.setSelectedBuilding(false);
+                    
+
+                }
+            }
+        }
+    }
+
+
 }

@@ -5,7 +5,9 @@
  */
 package boardgameproject.Buildings;
 
+import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Player;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -21,7 +23,7 @@ public class LBlock extends Building {
         super.role = 'L';
         super.origineX = 0;
         super.origineY = 0;
-        
+
     }
 
     public LBlock(ArrayList<Cell> list) {
@@ -30,22 +32,22 @@ public class LBlock extends Building {
     }
 
     @Override
-    public void buildingShape(Canvas c,int x, int y) {
+    public void buildingShape(int x, int y) {
         for (int i = 0; i < 3; i++) {
             cells.add(new Cell(x, y + i));
         }
         cells.add(new Cell(x + 1, y + 2));
     }
-    
+
     @Override
-     public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(),Color.GREEN);
+            s.drawCell(c, s.getX(), s.getY(), Color.GREEN);
         }
     }
 
     @Override
-    protected void buildingRole() {
+    public void buildingRole(Player player, Board board) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -132,13 +134,40 @@ public class LBlock extends Building {
     }
 
     @Override
-    public ArrayList<Cell> getPreviewsShape(int x, int y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void deplaceBuilding(double x, double y) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
+        ArrayList<Cell> shape = new ArrayList<>();
+        try {
+            switch (state) {
+                case TOP:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x + i][y]);
+                    }
+                    shape.add(board.getBoard()[x + 2][y + 1]);
+                    break;
+                case BOTTOM:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x + i][y + 1]);
+                    }
+                    shape.add(board.getBoard()[x][y]);
+                    break;
+                case LEFT:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x + 1][y - i]);
+                    }
+                    shape.add(board.getBoard()[x][y]);
+                    break;
+                case RIGHT:
+                    for (int i = 0; i < 3; i++) {
+                        shape.add(board.getBoard()[x][y + i]);
+                    }
+                    shape.add(board.getBoard()[x + 1][y]);
+                    break;
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            shape = new ArrayList<>();
+            System.out.println("ça sort du cadre légal");
+        }
+        return shape;
     }
 
 }

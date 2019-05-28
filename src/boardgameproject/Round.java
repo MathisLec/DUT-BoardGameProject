@@ -19,14 +19,13 @@ import javafx.stage.Stage;
  */
 public class Round extends Application {
 
-    private int nbTurnMax;
+    private final int NB_TURN_MAX = 30;
     private int nbTurn;
     private int nbPlayer;
     public Scene scene;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Player player = new Player();
 
         Parent root = FXMLLoader.load(getClass().getResource("View/MenuView.fxml"));
 
@@ -43,10 +42,12 @@ public class Round extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        //Player player = new Player();
+        //Round round = new Round();
     }
 
     public int getNbTurnMax() {
-        return nbTurnMax;
+        return NB_TURN_MAX;
     }
 
     public int getNbTurn() {
@@ -59,6 +60,11 @@ public class Round extends Application {
 
     public Scene getScene() {
         return scene;
+    }
+    
+    public void endTurn(){
+        nbTurn++;
+        System.out.println("nbTurn:"+nbTurn);
     }
 
 }

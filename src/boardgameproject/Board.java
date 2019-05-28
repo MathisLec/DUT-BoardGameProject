@@ -16,36 +16,39 @@ import javafx.scene.paint.Color;
  */
 public final class Board {
 
-    private Player player;
-    private final Round Round;
-    private final Cell[][] Board;
+    private final Player player;
+    private final Round round;
+    public final Cell[][] board;
+    private final ArrayList<Building> buildings;
 
     public Board(Round round, Player player) {
-        this.Board = new Cell[20][10];
-        this.Round = round;
+        this.board = new Cell[20][10];
+        this.round = round;
         this.player = player;
+        this.buildings = new ArrayList<>();
         initializeBoard();
     }
 
     public void initializeBoard() {
-        for (int i = 0; i < Board.length; i++) {
-            for (int j = 0; j < Board[i].length; j++) {
-                Board[i][j] = new Cell(i, j);
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = new Cell(i, j);
             }
         }
     }
 
     public void drawBoard(Canvas c) {
-        for(Cell cell : boardToList()){
-            cell.drawCell(c, cell.getY(), cell.getX(),Color.WHITE);
+        for (Cell cell : boardToList()) {
+            cell.drawCell(c, cell.getY(), cell.getX(), Color.WHITE);
         }
     }
 
     public void addBuilding(Building building, int x, int y) {
         if (checkAddBuilding(building, x, y)) {
-            for (Cell c : building.getPreviewsShape(x, y)) {
+            for (Cell c : building.getPreviewsShape(this, x, y)) {
                 c.changeBuildingStatus(building);
             }
+            buildings.add(building);
         }
     }
 
@@ -57,7 +60,7 @@ public final class Board {
 
     private boolean checkAddBuilding(Building building, int x, int y) {
         boolean isValid = true;
-        for (Cell c : building.getPreviewsShape(x, y)) {
+        for (Cell c : building.getPreviewsShape(this, x, y)) {
             if (c.hasBuilding()) {
                 isValid = false;
             }
@@ -74,9 +77,9 @@ public final class Board {
     public void checkRemoveWorker() {
         for (Cell c : boardToList()) {
             if (c.hasWorker()) {
-                if (c.getBuildingType().getEnergyConsume() > player.getNbEnergy()) {
-                    removeWorker(c);
-                }
+//                if (c.getBuildingType().getEnergyConsume() > player.getNbEnergy()) {
+//                    removeWorker(c);
+//                }
             }
         }
     }
@@ -86,17 +89,27 @@ public final class Board {
     }
 
     public Cell[][] getBoard() {
-        return Board;
+        return board;
     }
 
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+    
     public ArrayList<Cell> boardToList() {
         ArrayList<Cell> cells = new ArrayList<>();
-        for (int i = 0; i < Board.length; i++) {
-            for (int j = 0; j < Board[i].length; j++) {
-                cells.add(Board[i][j]);
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                cells.add(board[i][j]);
             }
         }
         return cells;
     }
 
+    public void endTurn() {
+        for (Building b : buildings) {
+            b.buildingRole(player, this);
+        }
+    }
+    
 }

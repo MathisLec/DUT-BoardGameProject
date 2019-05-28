@@ -8,7 +8,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="882.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.GameViewController">
    <children>
-      <Canvas fx:id="GameBoard" height="601.0" layoutX="67.0" layoutY="58.0" onMouseDragged="#MoveBuilding" onMousePressed="#Testclick" onMouseReleased="#PlaceBuilding" width="788.0" />
+      <Canvas fx:id="GameBoard" height="601.0" layoutX="47.0" layoutY="58.0" onMouseDragged="#MoveBuilding" onMousePressed="#Testclick" onMouseReleased="#ReleaseBuilding" width="788.0" />
       <Button layoutX="734.0" layoutY="611.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="28.0" prefWidth="77.0" text="End Turn" />
       <Button layoutX="772.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateRight" text="Rotate Right" />
       <Button layoutX="644.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateLeft" text="Rotate Left" />
@@ -27,18 +27,14 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="nbEnergy" layoutX="551.0" layoutY="98.0" text="16" />
-      <Label fx:id="nbMaterials" layoutX="658.0" layoutY="98.0" text="8" />
+      <Label fx:id="nbEnergyLabel" layoutX="551.0" layoutY="98.0" text="16" />
+      <Label fx:id="nbMaterialsLabel" layoutX="658.0" layoutY="98.0" text="8" />
       <Label layoutX="778.0" layoutY="58.0" text="Workers">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label fx:id="nbWorkers" layoutX="807.0" layoutY="98.0" text="8" />
-      <Canvas fx:id="BuildingHand1" height="121.0" layoutX="455.0" layoutY="183.0" width="121.0" />
-      <Canvas fx:id="BuildingHand3" height="121.0" layoutX="753.0" layoutY="183.0" width="121.0" />
-      <Canvas fx:id="BuildingHand4" height="121.0" layoutX="534.0" layoutY="359.0" width="121.0" />
-      <Canvas fx:id="BuildingHand5" height="121.0" layoutX="679.0" layoutY="359.0" width="121.0" />
+      <Label fx:id="nbWorkersLabel" layoutX="807.0" layoutY="98.0" text="8" />
       <Button layoutX="822.0" layoutY="639.0" mnemonicParsing="false" onAction="#QuitGame" text="Quit" />
    </children>
 </AnchorPane>

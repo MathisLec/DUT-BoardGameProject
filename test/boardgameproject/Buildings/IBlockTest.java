@@ -26,7 +26,6 @@ public class IBlockTest {
         int x = 0;
         int y = 0;
         IBlock instance = new IBlock();
-        instance.buildingShape(x, y);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -38,7 +37,6 @@ public class IBlockTest {
     public void testBuildingRole() {
         System.out.println("buildingRole");
         IBlock instance = new IBlock();
-        instance.buildingRole();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

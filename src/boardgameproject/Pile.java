@@ -10,6 +10,7 @@ import boardgameproject.Buildings.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
+import javafx.scene.paint.Color;
 
 /**
  *
@@ -19,10 +20,12 @@ public final class Pile {
 
     private int nbBuildingsPile;
     private List<Building> pile;
+    private int firstIndex;
 
     public Pile() {
         this.pile = InitializePile();
         this.nbBuildingsPile = pile.size();
+        this.firstIndex = 0;
     }
 
     private void randomizePile(ArrayList<Building> list) {
@@ -78,5 +81,11 @@ public final class Pile {
 
     private void updateNbBuildingPile() {
         nbBuildingsPile = pile.size();
+    }
+    
+    public Building drawBuilding(){
+        Building building = pile.get(firstIndex);
+        firstIndex++;
+        return building;
     }
 }

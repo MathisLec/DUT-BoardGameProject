@@ -14,30 +14,36 @@ import java.util.List;
  * @author mlecoeuvre
  */
 public class Player {
-
+    private final int NB_BUILDINGS_START = 5;
     private int nbEnergy;
     private int nbWorkers;
     private int nbMaterials;
-    private int nbBuildings;
-    private List<Building> Buildings;
-    public static List<Building> Pile;
+    private static Pile pile = new Pile();
+    private List<Building> buildings;
 
     public Player() {
         this.nbEnergy = 100;
         this.nbWorkers = 100;
         this.nbMaterials = 100;
-        this.nbBuildings = 5;
-        this.Buildings = new ArrayList<>();
+        this.buildings = new ArrayList<>();
+        startingHand();
+    }
+    
+    private void startingHand(){
+        ArrayList<Building> startingHand = new ArrayList<>();
+        for(int i=0; i<NB_BUILDINGS_START;i++){
+            drawBuilding();
+        }
     }
 
     public void placeBuilding(Building building) {
-        Buildings.remove(building);
+        buildings.remove(building);
     }
 
     public void placeWorker(Cell cell) {
         nbWorkers--;
     }
-    
+
     public int getNbEnergy() {
         return nbEnergy;
     }
@@ -50,12 +56,12 @@ public class Player {
         return nbMaterials;
     }
 
-    public int getNbBuildings() {
-        return nbBuildings;
+    public List<Building> getBuildings() {
+        return buildings;
     }
 
-    public List<Building> getBuildings() {
-        return Buildings;
+    public void drawBuilding() {
+        buildings.add(pile.drawBuilding());
     }
 
 }
