@@ -45,8 +45,10 @@ public class Round extends Application {
         Player player = new Player();
         Round round = new Round();
         Board board = new Board(round, player);
-        board.addBuilding(player.getBuildings().get(0), 0, 0);
-        board.addWorker(0, 0);
+        Building b = new IBlock();
+        board.addBuilding(b, 5, 5);
+        board.addWorker(5, 5);
+        board.endTurn();
     }
     
     public int getNbTurnMax() {

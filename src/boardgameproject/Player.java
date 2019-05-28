@@ -40,7 +40,11 @@ public class Player {
         buildings.remove(building);
     }
 
-    public void placeWorker(Cell cell) {
+    public void addWorkerInHand(){
+        nbWorkers++;
+    }
+    
+    public void placeWorker() {
         nbWorkers--;
     }
 

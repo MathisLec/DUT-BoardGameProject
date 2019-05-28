@@ -101,7 +101,7 @@ public class CellTest {
         System.out.println("getBuildingType");
         Cell instance = new Cell();
         Building expResult = null;
-        Building result = instance.getBuildingType();
+        char result = instance.getBuildingType();
         assertEquals(expResult, result);
         
         Building building = new IBlock();
