@@ -49,10 +49,8 @@ public class IBlock extends Building {
 
     @Override
     public void drawBuilding(Canvas c) {
-        int i = 0;
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY()+ i, Color.RED);
-            i++;
+            s.drawCell(c, s.getX(), s.getY(), Color.RED);
         }
     }
 

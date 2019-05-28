@@ -156,7 +156,8 @@ public class GameViewController implements Initializable {
 
                 if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
                         && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
-
+                    gc.setFill(Color.PURPLE);
+                    gc.strokeRect(mmm.getX() * mmm.getCellShape(),mmm.getY() * mmm.getCellShape(), mmm.getCellShape(), mmm.getCellShape());
                     selectedBuilding = mm;
                     mm.setSelectedBuilding(true);
 
@@ -187,24 +188,22 @@ public class GameViewController implements Initializable {
 //            
 //            testI.deplace(event.getX(), event.getY());
 //        }
-        update();
+        //update();
     }
 
     @FXML
     private void ReleaseBuilding(MouseEvent event) {
-        
+
         for (Building mm : buildings) {
             for (Cell mmm : mm.getCells()) {
 
                 if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
                         && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
                     mm.setSelectedBuilding(false);
-                    
 
                 }
             }
         }
     }
-
 
 }
