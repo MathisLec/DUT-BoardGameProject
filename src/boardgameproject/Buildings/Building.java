@@ -19,7 +19,6 @@ import javafx.scene.paint.Color;
 public abstract class Building {
 
     protected char role;
-    protected int nbWorkers;
     protected int materialCost;
     protected int energyConsume;
     protected ArrayList<Cell> cells;
@@ -29,14 +28,12 @@ public abstract class Building {
     protected boolean selectedBuilding;
 
     public Building() {
-        this.nbWorkers = 0;
         this.cells = new ArrayList<>();
         this.state = State.TOP;
         this.selectedBuilding = false;
     }
 
     public Building(ArrayList<Cell> list) {
-        this.nbWorkers = 0;
         this.cells = list;
         this.state = State.TOP;
         this.selectedBuilding = false;
@@ -94,26 +91,30 @@ public abstract class Building {
         }
     }
 
-    public int getNbWorkerIn() {
-        return nbWorkers;
+    public int getMaterialCost() {
+        return materialCost;
     }
 
+    
+    
     public int getEnergyConsume() {
         return energyConsume;
     }
 
-    public void addWorker() {
-        nbWorkers++;
-    }
-
-    public void removeWorker() {
-        nbWorkers--;
+    public int getNbWorker() {
+        int nbWorkers = 0;
+        for(Cell c : getCells()){
+            if(c.hasWorker()){
+                nbWorkers++;
+            }
+        }
+        return nbWorkers;
     }
 
     public ArrayList<Cell> getCells() {
         return cells;
     }
-
+    
     public void setSelectedBuilding(boolean selectedBuilding) {
         this.selectedBuilding = selectedBuilding;
     }

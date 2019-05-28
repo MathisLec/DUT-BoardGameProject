@@ -19,13 +19,13 @@ public final class Board {
     private Player player;
     private final Round round;
     public final Cell[][] board;
-    private final ArrayList<Building> buildings;
+    private final ArrayList<Building> buildingsInBoard;
 
     public Board(Round round, Player player) {
         this.board = new Cell[20][10];
         this.round = round;
         this.player = player;
-        this.buildings = new ArrayList<>();
+        this.buildingsInBoard = new ArrayList<>();
         initializeBoard();
     }
 
@@ -48,7 +48,7 @@ public final class Board {
             for (Cell c : building.getPreviewsShape(this, x, y)) {
                 c.changeBuildingStatus(building);
             }
-            buildings.add(building);
+            buildingsInBoard.add(building);
         }
     }
 
@@ -100,7 +100,7 @@ public final class Board {
     }
 
     public ArrayList<Building> getBuildings() {
-        return buildings;
+        return buildingsInBoard;
     }
 
     public ArrayList<Cell> boardToList() {
@@ -114,9 +114,14 @@ public final class Board {
     }
 
     public void endTurn() {
-        for (Building b : buildings) {
-            //if()
-            b.buildingRole(player, this);
+        for (Building b : buildingsInBoard) {
+            if (b.getNbWorker() > 0
+                    && player.getNbEnergy() > b.getEnergyConsume()) {
+                b.buildingRole(player, this);
+            }
+            else{
+                System.out.println("Poil de cul");
+            }
         }
     }
 
