@@ -31,7 +31,6 @@ public class Player {
     }
 
     private void startingHand() {
-        ArrayList<Building> startingHand = new ArrayList<>();
         for (int i = 0; i < NB_BUILDINGS_START; i++) {
             drawBuilding();
         }

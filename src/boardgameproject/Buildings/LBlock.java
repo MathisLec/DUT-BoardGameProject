@@ -23,12 +23,16 @@ public class LBlock extends Building {
         super.role = 'L';
         super.origineX = 0;
         super.origineY = 0;
+        super.materialCost = 8;
+        super.energyConsume = 1;
 
     }
 
     public LBlock(ArrayList<Cell> list) {
         super(list);
         super.role = 'L';
+        super.materialCost = 8;
+        super.energyConsume = 1;
     }
 
     @Override

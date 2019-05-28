@@ -23,11 +23,15 @@ public class ZBlock extends Building {
         super.role = 'Z';
         super.origineX = 1;
         super.origineY = 0;
+        super.materialCost = 2;
+        super.energyConsume = 1;
     }
 
     public ZBlock(ArrayList<Cell> list) {
         super(list);
         super.role = 'Z';
+        super.materialCost = 2;
+        super.energyConsume = 1;
     }
 
     @Override

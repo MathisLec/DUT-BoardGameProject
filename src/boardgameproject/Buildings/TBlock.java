@@ -23,11 +23,15 @@ public class TBlock extends Building {
         super.role = 'T';
         super.origineX = 1;
         super.origineY = 0;
+        super.materialCost = 2;
+        super.energyConsume = 0;
     }
 
     public TBlock(ArrayList<Cell> list) {
         super(list);
         super.role = 'T';
+        super.materialCost = 2;
+        super.energyConsume = 0;
     }
 
     @Override

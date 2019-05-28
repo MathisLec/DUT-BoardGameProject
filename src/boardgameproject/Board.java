@@ -115,6 +115,7 @@ public final class Board {
 
     public void endTurn() {
         for (Building b : buildings) {
+            //if()
             b.buildingRole(player, this);
         }
     }

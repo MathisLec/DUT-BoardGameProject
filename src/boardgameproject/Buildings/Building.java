@@ -20,7 +20,7 @@ public abstract class Building {
 
     protected char role;
     protected int nbWorkers;
-    protected int energyCost;
+    protected int materialCost;
     protected int energyConsume;
     protected ArrayList<Cell> cells;
     // L'axe des abscisses est représenté par x et l'axe des ordonnées par y
@@ -32,12 +32,14 @@ public abstract class Building {
         this.nbWorkers = 0;
         this.cells = new ArrayList<>();
         this.state = State.TOP;
+        this.selectedBuilding = false;
     }
 
     public Building(ArrayList<Cell> list) {
         this.nbWorkers = 0;
         this.cells = list;
         this.state = State.TOP;
+        this.selectedBuilding = false;
     }
 
     public abstract void buildingShape(int x, int y);

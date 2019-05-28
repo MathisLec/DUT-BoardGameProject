@@ -23,11 +23,15 @@ public class SBlock extends Building {
         super.role = 'S';
         super.origineX = 0;
         super.origineY = 0;
+        super.materialCost = 2;
+        super.energyConsume = 0;
     }
 
     public SBlock(ArrayList<Cell> list) {
         super(list);
         super.role = 'S';
+        super.materialCost = 2;
+        super.energyConsume = 0;
     }
 
     @Override

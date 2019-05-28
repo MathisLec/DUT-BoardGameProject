@@ -23,15 +23,16 @@ public class IBlock extends Building {
         super.role = 'I';
         super.origineX = 0;
         super.origineY = 0;
-        super.selectedBuilding = false;
-
+        super.materialCost = 4;
+        super.energyConsume = 1;
     }
 
     public IBlock(Board board, int x, int y, Canvas c) {
         super.role = 'I';
         super.origineX = x;
         super.origineY = y;
-        super.selectedBuilding = false;
+        super.materialCost = 4;
+        super.energyConsume = 1;
         buildingShape(origineX, origineY);
     }
 

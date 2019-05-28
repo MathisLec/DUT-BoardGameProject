@@ -24,12 +24,16 @@ public class OBlock extends Building {
         super.role = 'O';
         super.origineX = 0;
         super.origineY = 0;
+        super.materialCost = 8;
+        super.energyConsume = 0;
 
     }
 
     public OBlock(ArrayList<Cell> list) {
         super(list);
         super.role = 'O';
+        super.materialCost = 8;
+        super.energyConsume = 0;
     }
 
     @Override

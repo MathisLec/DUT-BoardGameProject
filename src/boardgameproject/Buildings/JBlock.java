@@ -23,11 +23,15 @@ public class JBlock extends Building {
         super.role = 'J';
         super.origineX = 1;
         super.origineY = 0;
+        super.materialCost = 8;
+        super.energyConsume = 4;
     }
 
     public JBlock(ArrayList<Cell> list) {
         super(list);
         super.role = 'J';
+        super.materialCost = 8;
+        super.energyConsume = 4;
     }
 
     @Override
