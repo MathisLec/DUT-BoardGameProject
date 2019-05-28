@@ -16,7 +16,7 @@ import javafx.scene.paint.Color;
  */
 public final class Board {
 
-    private final Player player;
+    private Player player;
     private final Round round;
     public final Cell[][] board;
     private final ArrayList<Building> buildings;
@@ -52,9 +52,16 @@ public final class Board {
         }
     }
 
-    public void addWorker(Cell cell) {
-        if (checkAddWorker(cell)) {
-            cell.changeWorkerStatus();
+    public void addWorker(int x, int y) {
+        try {
+            Cell selectedCell = getCell(x, y);
+            if (checkAddWorker(selectedCell)) {
+                selectedCell.changeWorkerStatus();
+            } else {
+                System.out.println("Marche pas");
+            }
+        } catch (NullPointerException ex) {
+            System.out.println("Emplacement non valide");
         }
     }
 
@@ -95,7 +102,7 @@ public final class Board {
     public ArrayList<Building> getBuildings() {
         return buildings;
     }
-    
+
     public ArrayList<Cell> boardToList() {
         ArrayList<Cell> cells = new ArrayList<>();
         for (int i = 0; i < board.length; i++) {
@@ -111,5 +118,22 @@ public final class Board {
             b.buildingRole(player, this);
         }
     }
-    
+
+    public void changePlayer(Player player) {
+        this.player = player;
+    }
+
+    private Cell getCell(int x, int y) {
+        Cell cell = null;
+        for (Cell c : boardToList()) {
+            if (c.getX() == y && c.getY() == x) {
+                cell = c;
+            }
+        }
+        if (cell == null) {
+            throw new NullPointerException();
+        }
+        return cell;
+    }
+
 }

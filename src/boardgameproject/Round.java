@@ -41,9 +41,13 @@ public class Round extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
-        //Player player = new Player();
-        //Round round = new Round();
+        //launch(args);
+        Player player = new Player();
+        Round round = new Round();
+        Board board = new Board(round, player);
+        Building b = new IBlock();
+        board.addBuilding(b, 0, 0);
+        board.addWorker(0, 0);
     }
 
     public int getNbTurnMax() {
@@ -61,10 +65,10 @@ public class Round extends Application {
     public Scene getScene() {
         return scene;
     }
-    
-    public void endTurn(){
+
+    public void endTurn() {
         nbTurn++;
-        System.out.println("nbTurn:"+nbTurn);
+        System.out.println("nbTurn:" + nbTurn);
     }
 
 }

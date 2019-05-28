@@ -14,6 +14,7 @@ import java.util.List;
  * @author mlecoeuvre
  */
 public class Player {
+
     private final int NB_BUILDINGS_START = 5;
     private int nbEnergy;
     private int nbWorkers;
@@ -28,10 +29,10 @@ public class Player {
         this.buildings = new ArrayList<>();
         startingHand();
     }
-    
-    private void startingHand(){
+
+    private void startingHand() {
         ArrayList<Building> startingHand = new ArrayList<>();
-        for(int i=0; i<NB_BUILDINGS_START;i++){
+        for (int i = 0; i < NB_BUILDINGS_START; i++) {
             drawBuilding();
         }
     }
