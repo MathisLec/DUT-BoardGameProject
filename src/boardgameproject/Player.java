@@ -40,7 +40,11 @@ public class Player {
         buildings.remove(building);
     }
 
-    public void placeWorker(Cell cell) {
+    public void addWorkerInHand(int nb) {
+        nbWorkers += nb;
+    }
+
+    public void placeWorker() {
         nbWorkers--;
     }
 
@@ -54,6 +58,22 @@ public class Player {
 
     public int getNbMaterials() {
         return nbMaterials;
+    }
+
+    public void consummeEnergy(int nb) {
+        nbEnergy -= nb;
+    }
+
+    public void consummeMaterial(int nb) {
+        nbMaterials -= nb;
+    }
+
+    public void addEnergy(int nb) {
+        nbEnergy += nb;
+    }
+
+    public void addMaterial(int nb) {
+        nbMaterials += nb;
     }
 
     public List<Building> getBuildings() {

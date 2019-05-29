@@ -32,7 +32,7 @@ public final class Pile {
         Collections.shuffle(list);
     }
 
-    public ArrayList<Building> InitializePile() {
+    private ArrayList<Building> InitializePile() {
         ArrayList<Building> list = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
             Building buildI = new IBlock();
@@ -74,7 +74,7 @@ public final class Pile {
         return nbBuildingsPile;
     }
 
-    public void deleteBuilding(Building building) {
+    private void deleteBuilding(Building building) {
         pile.remove(building);
         updateNbBuildingPile();
     }
@@ -85,7 +85,7 @@ public final class Pile {
     
     public Building drawBuilding(){
         Building building = pile.get(firstIndex);
-        firstIndex++;
+        deleteBuilding(building);
         return building;
     }
 }

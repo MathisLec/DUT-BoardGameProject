@@ -57,7 +57,8 @@ public class IBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board) {
-        System.out.println("Coucou les amis, c'est le IBlock");
+        int energyToAdd = 2;
+        player.addEnergy(energyToAdd);
     }
 
     @Override

@@ -19,13 +19,13 @@ public final class Board {
     private Player player;
     private final Round round;
     public final Cell[][] board;
-    private final ArrayList<Building> buildingsInBoard;
+    private final ArrayList<Building> buildings;
 
     public Board(Round round, Player player) {
         this.board = new Cell[20][10];
         this.round = round;
         this.player = player;
-        this.buildingsInBoard = new ArrayList<>();
+        this.buildings = new ArrayList<>();
         initializeBoard();
     }
 
@@ -48,7 +48,9 @@ public final class Board {
             for (Cell c : building.getPreviewsShape(this, x, y)) {
                 c.changeBuildingStatus(building);
             }
-            buildingsInBoard.add(building);
+            building.putPreviewsCellsInList(this, x, y);
+            buildings.add(building);
+            player.placeBuilding(building);
         }
     }
 
@@ -57,6 +59,7 @@ public final class Board {
             Cell selectedCell = getCell(x, y);
             if (checkAddWorker(selectedCell)) {
                 selectedCell.changeWorkerStatus();
+                player.placeWorker();
             } else {
                 System.out.println("Marche pas");
             }
@@ -100,7 +103,7 @@ public final class Board {
     }
 
     public ArrayList<Building> getBuildings() {
-        return buildingsInBoard;
+        return buildings;
     }
 
     public ArrayList<Cell> boardToList() {
@@ -114,13 +117,12 @@ public final class Board {
     }
 
     public void endTurn() {
-        for (Building b : buildingsInBoard) {
-            if (b.getNbWorker() > 0
-                    && player.getNbEnergy() > b.getEnergyConsume()) {
+        for (Building b : buildings) {
+            if (player.getNbEnergy() > b.getEnergyConsume() && b.getNbWorker() > 0) {
                 b.buildingRole(player, this);
-            }
-            else{
-                System.out.println("Poil de cul");
+            } else {
+                player.addWorkerInHand(b.getNbWorker());
+                b.clearWorkers();
             }
         }
     }

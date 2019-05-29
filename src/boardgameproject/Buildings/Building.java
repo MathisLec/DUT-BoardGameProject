@@ -103,12 +103,20 @@ public abstract class Building {
 
     public int getNbWorker() {
         int nbWorkers = 0;
-        for(Cell c : getCells()){
-            if(c.hasWorker()){
+        for (Cell c : cells) {
+            if (c.hasWorker()) {
                 nbWorkers++;
             }
         }
         return nbWorkers;
+    }
+
+    public void clearWorkers() {
+        for (Cell c : cells) {
+            if (c.hasWorker()) {
+                c.changeWorkerStatus();
+            }
+        }
     }
 
     public ArrayList<Cell> getCells() {
@@ -126,5 +134,7 @@ public abstract class Building {
     // Faire attention ici car l'axe des abscisses et des ordonnées sont inversés dans board
     public abstract ArrayList<Cell> getPreviewsShape(Board board, int x, int y) throws ArrayIndexOutOfBoundsException;
 
-
+    public void putPreviewsCellsInList(Board board, int x, int y) {
+        cells.addAll(getPreviewsShape(board, x, y));
+    }
 }

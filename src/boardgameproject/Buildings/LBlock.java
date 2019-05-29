@@ -52,7 +52,11 @@ public class LBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int nbWorkerToAdd = 3;
+        if (getNbWorker() == 2) {
+            player.addWorkerInHand(nbWorkerToAdd);
+            clearWorkers();
+        }
     }
 
     @Override
@@ -171,7 +175,6 @@ public class LBlock extends Building {
             shape = new ArrayList<>();
             System.out.println("ça sort du cadre légal");
         }
-        cells.addAll(shape);
         return shape;
     }
 
