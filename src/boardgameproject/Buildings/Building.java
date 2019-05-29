@@ -26,10 +26,12 @@ public abstract class Building {
     protected int origineX, origineY;
     protected State state;
     protected boolean selectedBuilding;
+    protected Canvas canvas;
 
     public Building() {
         this.cells = new ArrayList<>();
         this.state = State.TOP;
+        this.canvas = null;
         this.selectedBuilding = false;
     }
 
@@ -125,6 +127,14 @@ public abstract class Building {
     
     public void setSelectedBuilding(boolean selectedBuilding) {
         this.selectedBuilding = selectedBuilding;
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(Canvas canvas) {
+        this.canvas = canvas;
     }
 
     public boolean isSelectedBuilding() {

@@ -37,15 +37,15 @@ public class TBlock extends Building {
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 3; i++) {
-            cells.add(new Cell(x + i - 1, y + 1));
+            cells.add(new Cell(x + i , y + 1));
         }
-        cells.add(new Cell(x, y));
+        cells.add(new Cell(x+1, y));
     }
 
     @Override
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.BROWN);
+            s.drawCell(c, s.getX(), s.getY(), Color.PURPLE);
         }
     }
 

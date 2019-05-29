@@ -37,8 +37,8 @@ public class ZBlock extends Building {
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 2; i++) {
-            Cell cell = new Cell(x, y + i);
-            Cell cell1 = new Cell(x - 1, y + 1 + i);
+            Cell cell = new Cell(x+1, y + i);
+            Cell cell1 = new Cell(x , y + 1 + i);
             cells.add(cell);
             cells.add(cell1);
         }
@@ -47,7 +47,7 @@ public class ZBlock extends Building {
     @Override
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.CYAN);
+            s.drawCell(c, s.getX(), s.getY(), Color.RED);
         }
     }
 

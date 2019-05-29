@@ -14,6 +14,7 @@ import boardgameproject.Player;
 import boardgameproject.Round;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -40,17 +41,20 @@ public class GameViewController implements Initializable {
 
     @FXML
     private Canvas GameBoard;
+    @FXML
+    private Canvas main1;
+    @FXML
+    private Canvas main2;
+    @FXML
+    private Canvas main3;
+    @FXML
+    private Canvas main4;
+    @FXML
+    private Canvas main5;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        selectedBuilding = new ZBlock();
-        buildings.add(selectedBuilding);
-        board.addBuilding(selectedBuilding, 1, 3);
-
-        Building bl = new IBlock(board, 17, 7, GameBoard);
-        buildings.add(bl);
-
-        board.drawBoard(GameBoard);
+        newGame();
 
         nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
         nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
@@ -64,6 +68,7 @@ public class GameViewController implements Initializable {
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
         gc.clearRect(0, 0, 1500, 1500);
         Color color = Color.WHITE;
+
         for (Cell efg : board.boardToList()) {
             color = colorSelector(efg, color);
             efg.drawCell(GameBoard, efg.getY(), efg.getX(), color);
@@ -97,6 +102,9 @@ public class GameViewController implements Initializable {
             case 'Z':
                 color = Color.RED;
                 break;
+            case 'P':
+                color = Color.GREY;
+                break;
             default:
                 color = Color.WHITE;
                 break;
@@ -119,13 +127,25 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void RotateRight(ActionEvent event) {
+        GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
         selectedBuilding.rotateBuildingRight();
+        gc.clearRect(0, 0, 121, 121);
+        gc.setFill(Color.BLACK);
+        gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+        selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
+
         update();
     }
 
     @FXML
     private void RotateLeft(ActionEvent event) {
+        GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
         selectedBuilding.rotateBuildingLeft();
+        gc.clearRect(0, 0, 121, 121);
+        gc.setFill(Color.BLACK);
+        gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+        selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
+
         update();
     }
 
@@ -139,69 +159,120 @@ public class GameViewController implements Initializable {
 
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
 
-//        if ((int) event.getX() > 0 && (int) event.getX() < 300
-//                && (int) event.getY() > 0 && (int) event.getY() < 600 && testDepl) {
-//            
-//        }
-//        
-//        for (Cell cc : testI.getCells()) {
-//            if ((int) event.getX() / 30 == cc.getX() &&
-//                    (int)event.getY() /30 == cc.getY()) {
-//                testDepl = !testDepl;
-//                
-//            }
-//        }
-        for (Building mm : buildings) {
-            for (Cell mmm : mm.getCells()) {
+        board.addBuilding(selectedBuilding, (int) event.getY() / 30, (int) event.getX() / 30);
 
-                if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
-                        && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
-                    gc.setFill(Color.PURPLE);
-                    gc.strokeRect(mmm.getX() * mmm.getCellShape(),mmm.getY() * mmm.getCellShape(), mmm.getCellShape(), mmm.getCellShape());
-                    selectedBuilding = mm;
-                    mm.setSelectedBuilding(true);
+        System.out.println((int) event.getX() / 30);
 
-                }
-            }
-        }
-        System.out.println((int) event.getX());
-
-        System.out.println((int) event.getY());
-
+        System.out.println((int) event.getY() / 30);
+        update();
     }
 
     @FXML
     private void MoveBuilding(MouseEvent event) {
-
-        for (Building b : buildings) {
-            if (b.isSelectedBuilding()) {
-                for (Cell mlk : b.getCells()) {
-                    mlk.deplaceCell(event.getX() / 30, event.getY() / 30);
-                }
-            }
+        
+        for (Cell c :selectedBuilding.getPreviewsShape(board, (int) event.getX() / 30, (int) event.getY() / 30)){
+            c.changeBuildingStatus(selectedBuilding);
         }
+        
+        
 
-//        GraphicsContext gc = GameBoard.getGraphicsContext2D();
-//        
-//          if (testDepl && (int) event.getX() > c.getX()*30 && (int) event.getX() < 300
-//                && (int) event.getY() > 0 && (int) event.getY() < 600) {
-//            
-//            testI.deplace(event.getX(), event.getY());
-//        }
-        //update();
+        board.addBuilding(selectedBuilding, (int) event.getY() / 30, (int) event.getX() / 30);
+        update();
     }
 
     @FXML
-    private void ReleaseBuilding(MouseEvent event) {
+    private void NewGame(ActionEvent event) {
+        newGame();
+    }
 
-        for (Building mm : buildings) {
-            for (Cell mmm : mm.getCells()) {
+    private void newGame() {
+        round = new Round();
+        player = new Player();
+        board = new Board(round,player);
 
-                if ((int) event.getX() > mmm.getX() * 30 && (int) event.getX() < mmm.getX() * 30 + mmm.getCellShape()
-                        && (int) event.getY() > mmm.getY() * 30 && (int) event.getY() < mmm.getY() * 30 + mmm.getCellShape()) {
-                    mm.setSelectedBuilding(false);
+        GraphicsContext gc1 = main1.getGraphicsContext2D();
+        gc1.clearRect(0, 0, 120, 120);
+        GraphicsContext gc2 = main2.getGraphicsContext2D();
+        gc2.clearRect(0, 0, 120, 120);
+        GraphicsContext gc3 = main3.getGraphicsContext2D();
+        gc3.clearRect(0, 0, 120, 120);
+        GraphicsContext gc4 = main4.getGraphicsContext2D();
+        gc4.clearRect(0, 0, 120, 120);
+        GraphicsContext gc5 = main5.getGraphicsContext2D();
+        gc5.clearRect(0, 0, 120, 120);
 
-                }
+        Canvas[] canvas = {main1, main2, main3, main4, main5};
+
+        gc1.setFill(Color.BLACK);
+        gc1.strokeRect(0, 0, main1.getWidth(), main1.getHeight());
+        gc2.setFill(Color.BLACK);
+        gc2.strokeRect(0, 0, main2.getWidth(), main2.getHeight());
+        gc3.setFill(Color.BLACK);
+        gc3.strokeRect(0, 0, main3.getWidth(), main3.getHeight());
+        gc4.setFill(Color.BLACK);
+        gc4.strokeRect(0, 0, main4.getWidth(), main4.getHeight());
+        gc5.setFill(Color.BLACK);
+        gc5.strokeRect(0, 0, main5.getWidth(), main5.getHeight());
+
+        int i = 0;
+        for (Building b : player.getBuildings()) {
+            b.buildingShape(0, 0);
+            b.drawBuilding(canvas[i]);
+            b.setCanvas(canvas[i]);
+            i++;
+        }
+
+        board.drawBoard(GameBoard);
+    }
+
+    @FXML
+    private void hand1(MouseEvent event) {
+
+        for (Building b : player.getBuildings()) {
+            if (b.getCanvas().equals(main1)) {
+                selectedBuilding = b;
+            }
+        }
+        GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
+        gc.clearRect(0, 0, 121, 121);
+
+        selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
+        gc.setFill(Color.YELLOW);
+        gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+    }
+
+    @FXML
+    private void hand2(MouseEvent event) {
+        for (Building b : player.getBuildings()) {
+            if (b.getCanvas().equals(main2)) {
+                selectedBuilding = b;
+            }
+        }
+    }
+
+    @FXML
+    private void hand3(MouseEvent event) {
+        for (Building b : player.getBuildings()) {
+            if (b.getCanvas().equals(main3)) {
+                selectedBuilding = b;
+            }
+        }
+    }
+
+    @FXML
+    private void hand4(MouseEvent event) {
+        for (Building b : player.getBuildings()) {
+            if (b.getCanvas().equals(main4)) {
+                selectedBuilding = b;
+            }
+        }
+    }
+
+    @FXML
+    private void hand5(MouseEvent event) {
+        for (Building b : player.getBuildings()) {
+            if (b.getCanvas().equals(main5)) {
+                selectedBuilding = b;
             }
         }
     }

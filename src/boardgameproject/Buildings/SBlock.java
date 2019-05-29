@@ -47,7 +47,7 @@ public class SBlock extends Building {
     @Override
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.YELLOW);
+            s.drawCell(c, s.getX(), s.getY(), Color.GREEN);
         }
     }
 
