@@ -168,7 +168,6 @@ public class TBlock extends Building {
             shape = new ArrayList<>();
             System.out.println("ça sort du cadre légal");
         }
-        cells.addAll(shape);
         return shape;
     }
 

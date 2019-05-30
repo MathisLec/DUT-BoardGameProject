@@ -84,16 +84,6 @@ public final class Board {
                 && cell.hasBuilding();
     }
 
-    public void checkRemoveWorker() {
-        for (Cell c : boardToList()) {
-            if (c.hasWorker()) {
-//                if (c.getBuildingType().getEnergyConsume() > player.getNbEnergy()) {
-//                    removeWorker(c);
-//                }
-            }
-        }
-    }
-
     private void removeWorker(Cell cell) {
         cell.changeWorkerStatus();
     }
@@ -118,11 +108,14 @@ public final class Board {
 
     public void endTurn() {
         for (Building b : buildings) {
-            if (player.getNbEnergy() > b.getEnergyConsume() && b.getNbWorker() > 0) {
-                b.buildingRole(player, this);
-            } else {
-                player.addWorkerInHand(b.getNbWorker());
-                b.clearWorkers();
+            for (int i = 0; i < b.getNbWorker(); i++) {
+                if (player.getNbEnergy() >= b.getEnergyConsume()) {
+                    b.buildingRole(player, this);
+                } else {
+                    //Remove a worker from the board and return it to the player's hand
+                    b.removeWorker();
+                    player.addWorkerInHand(1);
+                }
             }
         }
     }

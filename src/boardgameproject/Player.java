@@ -23,9 +23,9 @@ public class Player {
     private List<Building> buildings;
 
     public Player() {
-        this.nbEnergy = 100;
-        this.nbWorkers = 100;
-        this.nbMaterials = 100;
+        this.nbEnergy = 16;
+        this.nbWorkers = 8;
+        this.nbMaterials = 8;
         this.buildings = new ArrayList<>();
         startingHand();
     }

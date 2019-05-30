@@ -22,7 +22,7 @@ public abstract class Building {
     protected int materialCost;
     protected int energyConsume;
     protected ArrayList<Cell> cells;
-    // L'axe des abscisses est représenté par x et l'axe des ordonnées par y
+    // Horizontal axe is x, Vertical axe is Y
     protected int origineX, origineY;
     protected State state;
     protected boolean selectedBuilding;
@@ -97,8 +97,6 @@ public abstract class Building {
         return materialCost;
     }
 
-    
-    
     public int getEnergyConsume() {
         return energyConsume;
     }
@@ -113,6 +111,18 @@ public abstract class Building {
         return nbWorkers;
     }
 
+    public void removeWorker() {
+        int limit = 1;
+        int currentCounter = 0;
+        for (Cell c : cells) {
+            // Check if a worker has already been removed
+            if (c.hasWorker() && currentCounter < limit) {
+                c.changeWorkerStatus();
+                currentCounter++;
+            }
+        }
+    }
+
     public void clearWorkers() {
         for (Cell c : cells) {
             if (c.hasWorker()) {
@@ -124,7 +134,7 @@ public abstract class Building {
     public ArrayList<Cell> getCells() {
         return cells;
     }
-    
+
     public void setSelectedBuilding(boolean selectedBuilding) {
         this.selectedBuilding = selectedBuilding;
     }
@@ -141,7 +151,7 @@ public abstract class Building {
         return selectedBuilding;
     }
 
-    // Faire attention ici car l'axe des abscisses et des ordonnées sont inversés dans board
+    //Warning here, vertical and horizontal axis are reversed (x is vertical axe and y is horizontal axe)
     public abstract ArrayList<Cell> getPreviewsShape(Board board, int x, int y) throws ArrayIndexOutOfBoundsException;
 
     public void putPreviewsCellsInList(Board board, int x, int y) {

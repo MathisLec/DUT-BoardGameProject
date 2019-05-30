@@ -41,13 +41,14 @@ public class Round extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        launch(args);
+        //launch(args);
         Player player = new Player();
         Round round = new Round();
         Board board = new Board(round, player);
         Building b = new IBlock();
         board.addBuilding(b, 5, 5);
         board.addWorker(5, 5);
+        board.addWorker(5, 6);
         board.endTurn();
     }
 
