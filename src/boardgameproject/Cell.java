@@ -74,6 +74,11 @@ public class Cell {
         hasBuilding = !hasBuilding;
         buildingType = building.getRole();
     }
+    
+    public void changeBuildingStatus(char role) {
+        hasBuilding = !hasBuilding;
+        buildingType = role;
+    }
 
     public void changeBuildingStatus() {
         hasBuilding = false;

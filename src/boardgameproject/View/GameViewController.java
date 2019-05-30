@@ -169,15 +169,22 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void MoveBuilding(MouseEvent event) {
-        
-        for (Cell c :selectedBuilding.getPreviewsShape(board, (int) event.getX() / 30, (int) event.getY() / 30)){
-            c.changeBuildingStatus(selectedBuilding);
+        if (selectedBuilding != null) {
+            int MouseX = (int) event.getX() / 30;
+            int MouseY = (int) event.getY() / 30;
+            ArrayList<Cell> previewShape = selectedBuilding.getPreviewsShape(board, MouseY, MouseX);
+            for (Cell c : previewShape) {
+                if (c.getBuildingType() == 'B') {
+                    c.changeBuildingStatus('P');
+                }
+            }
+            update();
+            for (Cell c : previewShape) {
+                if (c.getBuildingType() == 'P') {
+                    c.changeBuildingStatus('B');
+                }
+            }
         }
-        
-        
-
-        board.addBuilding(selectedBuilding, (int) event.getY() / 30, (int) event.getX() / 30);
-        update();
     }
 
     @FXML
@@ -188,7 +195,7 @@ public class GameViewController implements Initializable {
     private void newGame() {
         round = new Round();
         player = new Player();
-        board = new Board(round,player);
+        board = new Board(round, player);
 
         GraphicsContext gc1 = main1.getGraphicsContext2D();
         gc1.clearRect(0, 0, 120, 120);
