@@ -38,9 +38,9 @@ public class TBlock extends Building {
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 3; i++) {
-            cells.add(new Cell(x + i , y + 1));
+            cells.add(new Cell(x + i, y + 1));
         }
-        cells.add(new Cell(x+1, y));
+        cells.add(new Cell(x + 1, y));
     }
 
     @Override
@@ -52,7 +52,10 @@ public class TBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board, Round round) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int nbEnergyToAdd = 2;
+        if (round.getNbTurn() % 2 == 0) {
+            player.addEnergy(nbEnergyToAdd);
+        }
     }
 
     @Override

@@ -116,7 +116,7 @@ public final class Board {
                     b.buildingRole(player, this, null);
                     //LBlock has a special process to consumme energy
                     //It is manage in the class LBlock
-                    if (b.getRole() != 'L') {
+                    if (b.getRole() != 'L' && b.getRole() != 'T') {
                         player.consummeEnergy(b.getEnergyConsume());
                     }
                 } else {
