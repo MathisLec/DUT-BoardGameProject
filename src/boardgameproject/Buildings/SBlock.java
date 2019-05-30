@@ -54,7 +54,8 @@ public class SBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board, Round round) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int nbMaterialToAdd = 1;
+        player.addMaterial(nbMaterialToAdd);
     }
 
     @Override

@@ -126,6 +126,7 @@ public final class Board {
                 }
             }
         }
+        //Draw a building if the deck is empty
         if (player.getBuildings().isEmpty()) {
             player.drawBuilding();
         }

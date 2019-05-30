@@ -55,7 +55,12 @@ public class OBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board, Round round) {
-        
+        //Re-initialize the number of placable workers
+        player.setNbWorkerToPlaceByDefault();
+        //TODO permit the player to move a worker from a building to another building
+        for (int i = 0; i < getNbWorker(); i++) {
+            player.increaseNbWorkerToPlace();
+        }
     }
 
     @Override

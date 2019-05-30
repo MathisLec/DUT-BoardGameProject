@@ -91,6 +91,10 @@ public class Player {
         nbWorkerToPlace--;
     }
 
+    public void setNbWorkerToPlaceByDefault() {
+        nbWorkerToPlace = DEFAULT_NB_WORKER_TO_PLACE;
+    }
+
     public List<Building> getBuildings() {
         return buildings;
     }
