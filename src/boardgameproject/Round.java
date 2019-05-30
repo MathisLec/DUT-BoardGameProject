@@ -22,6 +22,7 @@ public class Round extends Application {
     private final int NB_TURN_MAX = 30;
     private int nbTurn;
     private int nbPlayer;
+    private int nbWorkerToPlace;
     public Scene scene;
 
     @Override
@@ -62,6 +63,10 @@ public class Round extends Application {
 
     public int getNbPlayer() {
         return nbPlayer;
+    }
+
+    public int getNbWorkerToPlace() {
+        return nbWorkerToPlace;
     }
 
     public Scene getScene() {

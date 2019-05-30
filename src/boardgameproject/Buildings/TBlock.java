@@ -8,6 +8,7 @@ package boardgameproject.Buildings;
 import boardgameproject.Board;
 import boardgameproject.Cell;
 import boardgameproject.Player;
+import boardgameproject.Round;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -50,7 +51,7 @@ public class TBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board) {
+    public void buildingRole(Player player, Board board, Round round) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

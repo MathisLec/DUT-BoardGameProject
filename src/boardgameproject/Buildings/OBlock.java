@@ -8,6 +8,7 @@ package boardgameproject.Buildings;
 import boardgameproject.Board;
 import boardgameproject.Cell;
 import boardgameproject.Player;
+import boardgameproject.Round;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -53,8 +54,8 @@ public class OBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void buildingRole(Player player, Board board, Round round) {
+        
     }
 
     @Override

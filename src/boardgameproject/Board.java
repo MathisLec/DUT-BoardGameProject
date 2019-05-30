@@ -75,6 +75,9 @@ public final class Board {
                 isValid = false;
             }
         }
+        if (player.getNbMaterials() < building.getMaterialCost()) {
+            isValid = false;
+        }
         return isValid;
     }
 
@@ -110,13 +113,21 @@ public final class Board {
         for (Building b : buildings) {
             for (int i = 0; i < b.getNbWorker(); i++) {
                 if (player.getNbEnergy() >= b.getEnergyConsume()) {
-                    b.buildingRole(player, this);
+                    b.buildingRole(player, this, null);
+                    //LBlock has a special process to consumme energy
+                    //It is manage in the class LBlock
+                    if (b.getRole() != 'L') {
+                        player.consummeEnergy(b.getEnergyConsume());
+                    }
                 } else {
                     //Remove a worker from the board and return it to the player's hand
                     b.removeWorker();
                     player.addWorkerInHand(1);
                 }
             }
+        }
+        if (player.getBuildings().isEmpty()) {
+            player.drawBuilding();
         }
     }
 
