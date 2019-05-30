@@ -157,14 +157,11 @@ public class GameViewController implements Initializable {
     @FXML
     private void Testclick(MouseEvent event) {
 
-        GraphicsContext gc = GameBoard.getGraphicsContext2D();
-
-        board.addBuilding(selectedBuilding, (int) event.getY() / 30, (int) event.getX() / 30);
-
-        System.out.println((int) event.getX() / 30);
-
-        System.out.println((int) event.getY() / 30);
+        int mouseX = (int) event.getX() / 30;
+        int mouseY = (int) event.getY() / 30;
+        board.addBuilding(selectedBuilding, mouseY, mouseX);
         update();
+        
     }
 
     @FXML
@@ -234,7 +231,6 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void hand1(MouseEvent event) {
-
         for (Building b : player.getBuildings()) {
             if (b.getCanvas().equals(main1)) {
                 selectedBuilding = b;
