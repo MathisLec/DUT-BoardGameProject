@@ -28,6 +28,8 @@ public class Player {
     private static Pile pile = new Pile();
     private List<Building> buildings;
     private int nbWorkerToPlace;
+    private boolean isAllowToReturnBuilding;
+    private Building buildingToReturn;
 
     public Player() {
         this.nbEnergy = DEFAULT_NB_ENERGY;
@@ -35,6 +37,8 @@ public class Player {
         this.nbMaterials = DEFAULT_NB_MATERIALS;
         this.buildings = new ArrayList<>();
         this.nbWorkerToPlace = DEFAULT_NB_WORKER_TO_PLACE;
+        this.isAllowToReturnBuilding = false;
+        this.buildingToReturn = null;
         startingHand();
     }
 
@@ -106,6 +110,31 @@ public class Player {
         if (buildings.size() < LIMIT_NB_BUILDINGS_IN_HAND) {
             buildings.add(pile.drawBuilding());
         }
+    }
+
+    public void putBuildingFromHandToPile(Building building) {
+        pile.getPile().add(building);
+        buildings.remove(building);
+    }
+
+    public boolean isAllowToReturnCard() {
+        return isAllowToReturnBuilding;
+    }
+
+    public void allowToReturnCard() {
+        isAllowToReturnBuilding = true;
+    }
+
+    public void disallowToReturnCard() {
+        isAllowToReturnBuilding = false;
+    }
+
+    public void setBuildingToReturn(Building building) {
+        buildingToReturn = building;
+    }
+
+    public Building getBuildingToReturn() {
+        return buildingToReturn;
     }
 
 }

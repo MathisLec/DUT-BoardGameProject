@@ -127,32 +127,32 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void RotateRight(ActionEvent event) {
-        try{
-        GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
-        selectedBuilding.rotateBuildingRight();
-        gc.clearRect(0, 0, 121, 121);
-        gc.setFill(Color.BLACK);
-        gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
-        selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
+        try {
+            GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
+            selectedBuilding.rotateBuildingRight();
+            gc.clearRect(0, 0, 121, 121);
+            gc.setFill(Color.BLACK);
+            gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+            selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
 
-        update();
-        }catch(NullPointerException e){
+            update();
+        } catch (NullPointerException e) {
             System.out.println("Pas de Building selectionné");
         }
     }
 
     @FXML
     private void RotateLeft(ActionEvent event) {
-        try{
-        GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
-        selectedBuilding.rotateBuildingLeft();
-        gc.clearRect(0, 0, 121, 121);
-        gc.setFill(Color.BLACK);
-        gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
-        selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
+        try {
+            GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
+            selectedBuilding.rotateBuildingLeft();
+            gc.clearRect(0, 0, 121, 121);
+            gc.setFill(Color.BLACK);
+            gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+            selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
 
-        update();
-        }catch(NullPointerException e){
+            update();
+        } catch (NullPointerException e) {
             System.out.println("Pas de Building selectionné");
         }
     }
@@ -169,7 +169,7 @@ public class GameViewController implements Initializable {
         int mouseY = (int) event.getY() / 30;
         board.addBuilding(selectedBuilding, mouseY, mouseX);
         update();
-        
+
     }
 
     @FXML
@@ -244,12 +244,17 @@ public class GameViewController implements Initializable {
                 selectedBuilding = b;
             }
         }
-        GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
-        gc.clearRect(0, 0, 121, 121);
+        if (!player.isAllowToReturnCard()) {
+            GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
+            gc.clearRect(0, 0, 121, 121);
 
-        selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
-        gc.setFill(Color.YELLOW);
-        gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+            selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
+            gc.setFill(Color.YELLOW);
+            gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+        } else {
+            player.setBuildingToReturn(selectedBuilding);
+            player.disallowToReturnCard();
+        }
     }
 
     @FXML

@@ -26,20 +26,20 @@ public abstract class Building {
     // Horizontal axe is x, Vertical axe is Y
     protected int origineX, origineY;
     protected State state;
-    protected boolean selectedBuilding;
+    protected boolean isSelectedBuilding;
     protected Canvas canvas;
 
     public Building() {
         this.cells = new ArrayList<>();
         this.state = State.TOP;
         this.canvas = null;
-        this.selectedBuilding = false;
+        this.isSelectedBuilding = false;
     }
 
     public Building(ArrayList<Cell> list) {
         this.cells = list;
         this.state = State.TOP;
-        this.selectedBuilding = false;
+        this.isSelectedBuilding = false;
     }
 
     public abstract void buildingShape(int x, int y);
@@ -136,10 +136,6 @@ public abstract class Building {
         return cells;
     }
 
-    public void setSelectedBuilding(boolean selectedBuilding) {
-        this.selectedBuilding = selectedBuilding;
-    }
-
     public Canvas getCanvas() {
         return canvas;
     }
@@ -148,8 +144,16 @@ public abstract class Building {
         this.canvas = canvas;
     }
 
+    public void setToSelectedBuilding() {
+        isSelectedBuilding = true;
+    }
+
+    public void unsetToSelectedBuilding() {
+        isSelectedBuilding = false;
+    }
+
     public boolean isSelectedBuilding() {
-        return selectedBuilding;
+        return isSelectedBuilding;
     }
 
     //Warning here, vertical and horizontal axis are reversed (x is vertical axe and y is horizontal axe)

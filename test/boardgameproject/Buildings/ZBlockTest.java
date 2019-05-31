@@ -70,6 +70,8 @@ public class ZBlockTest {
         board.addWorker(1, 1);
         board.endTurn();
 
+        player.disallowToReturnCard();
+
         int nbEnergyAfter = 18; //16 + 2
         int nbMaterialAfter = 6; // 8 - 2
         int nbBuildingInHandAfter = 5; // The limit is 5

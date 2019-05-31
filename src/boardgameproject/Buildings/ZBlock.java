@@ -38,8 +38,8 @@ public class ZBlock extends Building {
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 2; i++) {
-            Cell cell = new Cell(x+1, y + i);
-            Cell cell1 = new Cell(x , y + 1 + i);
+            Cell cell = new Cell(x + 1, y + i);
+            Cell cell1 = new Cell(x, y + 1 + i);
             cells.add(cell);
             cells.add(cell1);
         }
@@ -54,7 +54,11 @@ public class ZBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board, Round round) {
-        
+        while (player.isAllowToReturnCard()) {
+            
+        }
+        Building chosenBuilding = player.getBuildingToReturn();
+        player.putBuildingFromHandToPile(chosenBuilding);
     }
 
     @Override
