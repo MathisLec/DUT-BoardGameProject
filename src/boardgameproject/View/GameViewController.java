@@ -298,4 +298,8 @@ public class GameViewController implements Initializable {
         }
     }
 
+    @FXML
+    private void MethodeWorker(ActionEvent event) {
+    }
+
 }
