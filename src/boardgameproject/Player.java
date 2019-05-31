@@ -28,6 +28,7 @@ public class Player {
     private static Pile pile = new Pile();
     private List<Building> buildings;
     private int nbWorkerToPlace;
+    private boolean isAllowToPlaceWorker;
     private boolean isAllowToReturnBuilding;
     private Building buildingToReturn;
 
@@ -37,6 +38,7 @@ public class Player {
         this.nbMaterials = DEFAULT_NB_MATERIALS;
         this.buildings = new ArrayList<>();
         this.nbWorkerToPlace = DEFAULT_NB_WORKER_TO_PLACE;
+        this.isAllowToPlaceWorker = false;
         this.isAllowToReturnBuilding = false;
         this.buildingToReturn = null;
         startingHand();
@@ -135,6 +137,18 @@ public class Player {
 
     public Building getBuildingToReturn() {
         return buildingToReturn;
+    }
+
+    public boolean isAllowToPlaceWorker() {
+        return isAllowToPlaceWorker;
+    }
+
+    public void allowToPlaceWorker() {
+        isAllowToPlaceWorker = true;
+    }
+
+    public void disallowToPlaceWorker() {
+        isAllowToPlaceWorker = false;
     }
 
 }

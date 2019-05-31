@@ -117,9 +117,12 @@ public final class Board {
                     // A building need to be chosen if ZBlock can perform his action
                     if (b.getRole() == 'Z') {
                         player.allowToReturnCard();
-                        
+                        while (player.isAllowToReturnCard()) {
+                        }
+                        b.buildingRole(player, this, round);
+
                     }
-                    b.buildingRole(player, this, round);
+                    ////b.buildingRole(player, this, round);
                     //LBlock  and TBlock have a special process to consumme energy
                     //It is manage in their class
                     if (b.getRole() != 'L' && b.getRole() != 'T') {

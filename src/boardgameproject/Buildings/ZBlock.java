@@ -54,9 +54,6 @@ public class ZBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board, Round round) {
-        while (player.isAllowToReturnCard()) {
-            
-        }
         Building chosenBuilding = player.getBuildingToReturn();
         player.putBuildingFromHandToPile(chosenBuilding);
     }

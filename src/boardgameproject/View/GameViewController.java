@@ -167,7 +167,12 @@ public class GameViewController implements Initializable {
 
         int mouseX = (int) event.getX() / 30;
         int mouseY = (int) event.getY() / 30;
-        board.addBuilding(selectedBuilding, mouseY, mouseX);
+        if (player.isAllowToPlaceWorker()) {
+            board.addWorker(mouseY, mouseX);
+            player.disallowToPlaceWorker();
+        } else {
+            board.addBuilding(selectedBuilding, mouseY, mouseX);
+        }
         update();
 
     }
