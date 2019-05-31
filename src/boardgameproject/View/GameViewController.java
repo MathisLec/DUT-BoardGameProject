@@ -127,6 +127,7 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void RotateRight(ActionEvent event) {
+        try{
         GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
         selectedBuilding.rotateBuildingRight();
         gc.clearRect(0, 0, 121, 121);
@@ -135,10 +136,14 @@ public class GameViewController implements Initializable {
         selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
 
         update();
+        }catch(NullPointerException e){
+            System.out.println("Pas de Building selectionné");
+        }
     }
 
     @FXML
     private void RotateLeft(ActionEvent event) {
+        try{
         GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
         selectedBuilding.rotateBuildingLeft();
         gc.clearRect(0, 0, 121, 121);
@@ -147,6 +152,9 @@ public class GameViewController implements Initializable {
         selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
 
         update();
+        }catch(NullPointerException e){
+            System.out.println("Pas de Building selectionné");
+        }
     }
 
     @FXML
