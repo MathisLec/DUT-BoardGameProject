@@ -41,7 +41,7 @@ public class Round extends Application {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         launch(args);
         Player player = new Player();
         Round round = new Round();

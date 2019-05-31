@@ -51,6 +51,12 @@ public class GameViewController implements Initializable {
     private Canvas main4;
     @FXML
     private Canvas main5;
+    @FXML
+    private Label nbEnergyLabel;
+    @FXML
+    private Label nbMaterialsLabel;
+    @FXML
+    private Label nbWorkersLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -111,13 +117,6 @@ public class GameViewController implements Initializable {
         }
         return color;
     }
-
-    @FXML
-    private Label nbEnergyLabel;
-    @FXML
-    private Label nbMaterialsLabel;
-    @FXML
-    private Label nbWorkersLabel;
 
     @FXML
     private void endTurn(ActionEvent event) {
@@ -257,8 +256,16 @@ public class GameViewController implements Initializable {
             gc.setFill(Color.YELLOW);
             gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
         } else {
+
+            Building zBlockWhichPermormed = null;
+            for (Building b : player.getBuildings()) {
+                if (b.getCanvas().equals(main1)) {
+                    selectedBuilding = b;
+                }
+            }
             player.setBuildingToReturn(selectedBuilding);
             player.disallowToReturnCard();
+            zBlockRole();
         }
     }
 
@@ -300,6 +307,12 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void MethodeWorker(ActionEvent event) {
+        player.allowToPlaceWorker();
+    }
+
+    private void zBlockRole() {
+        Building chosenBuilding = player.getBuildingToReturn();
+        player.putBuildingFromHandToPile(chosenBuilding);
     }
 
 }

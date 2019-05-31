@@ -57,7 +57,7 @@ public final class Pile {
             Building buildS = new SBlock();
             list.add(buildS);
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {//10
             Building buildZ = new ZBlock();
             list.add(buildZ);
         }

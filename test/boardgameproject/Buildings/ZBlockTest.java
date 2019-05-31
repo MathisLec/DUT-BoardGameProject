@@ -68,6 +68,7 @@ public class ZBlockTest {
 
         board.addBuilding(instance, 1, 1);
         board.addWorker(1, 1);
+        player.setBuildingToReturn(player.getBuildings().get(0));
         board.endTurn();
 
         player.disallowToReturnCard();

@@ -54,8 +54,8 @@ public class ZBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board, Round round) {
-        Building chosenBuilding = player.getBuildingToReturn();
-        player.putBuildingFromHandToPile(chosenBuilding);
+        player.allowToReturnCard();
+        // this role is manage in GameViewController Class in methods zBlockRole
     }
 
     @Override
