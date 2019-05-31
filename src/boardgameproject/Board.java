@@ -56,7 +56,8 @@ public final class Board {
 
     public void addWorker(int x, int y) {
         try {
-            Cell selectedCell = getCell(x, y);
+            // x is vertical axe and y is horizontal axe
+            Cell selectedCell = getCell(y, x);
             if (checkAddWorker(selectedCell)) {
                 selectedCell.changeWorkerStatus();
                 player.placeWorker();
@@ -113,7 +114,7 @@ public final class Board {
         for (Building b : buildings) {
             for (int i = 0; i < b.getNbWorker(); i++) {
                 if (player.getNbEnergy() >= b.getEnergyConsume()) {
-                    b.buildingRole(player, this, null);
+                    b.buildingRole(player, this, round);
                     //LBlock has a special process to consumme energy
                     //It is manage in the class LBlock
                     if (b.getRole() != 'L' && b.getRole() != 'T') {

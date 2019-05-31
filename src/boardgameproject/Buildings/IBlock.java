@@ -58,8 +58,8 @@ public class IBlock extends Building {
 
     @Override
     public void buildingRole(Player player, Board board, Round round) {
-        int energyToAdd = 2;
-        player.addEnergy(energyToAdd);
+        int nbMaterialToAdd = 2;
+        player.addMaterial(nbMaterialToAdd);
     }
 
     @Override

@@ -20,6 +20,7 @@ public class Player {
     private final int DEFAULT_NB_MATERIALS = 8;
     private final int NB_BUILDINGS_START = 5;
     private final int DEFAULT_NB_WORKER_TO_PLACE = 1;
+    private final int LIMIT_NB_BUILDINGS_IN_HAND = 5;
 
     private int nbEnergy;
     private int nbWorkers;
@@ -45,6 +46,7 @@ public class Player {
 
     public void placeBuilding(Building building) {
         buildings.remove(building);
+        nbMaterials -= building.getMaterialCost();
     }
 
     public void addWorkerInHand(int nb) {
@@ -100,7 +102,10 @@ public class Player {
     }
 
     public void drawBuilding() {
-        buildings.add(pile.drawBuilding());
+        //We fix the number of buildings in hand to 5 by lack of display
+        if (buildings.size() < LIMIT_NB_BUILDINGS_IN_HAND) {
+            buildings.add(pile.drawBuilding());
+        }
     }
 
 }
