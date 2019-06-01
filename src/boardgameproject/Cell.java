@@ -62,7 +62,7 @@ public class Cell {
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setFill(col);
         gc.fillRect(x*cellShape, y*cellShape, cellShape, cellShape);
-        gc.setFill(Color.BLACK);
+        gc.setStroke(Color.BLACK);
         gc.strokeRect(x*cellShape, y*cellShape, cellShape, cellShape);
     }
 

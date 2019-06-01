@@ -73,11 +73,11 @@ public class GameViewController implements Initializable {
         if (selectedBuilding != null) {
             GraphicsContext gc2 = selectedBuilding.getCanvas().getGraphicsContext2D();
             gc2.clearRect(-2, -2, 125, 125);
-            gc2.setLineWidth(4);
-            
+            selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
+            gc2.setStroke(Color.RED);
             gc2.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(),
                     selectedBuilding.getCanvas().getHeight());
-            selectedBuilding.drawBuilding(selectedBuilding.getCanvas());   
+
         }
 
         nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
@@ -87,8 +87,9 @@ public class GameViewController implements Initializable {
         for (Cell c : board.boardToList()) {
             color = colorSelector(c, color);
             c.drawCell(GameBoard, c.getY(), c.getX(), color);
-            if(c.hasWorker()){
-                gc.fillOval(c.getX()*c.getCellShape(), c.getY()*c.getCellShape(),c.getCellShape(),c.getCellShape());
+            if (c.hasWorker()) {
+                gc.setFill(Color.BLACK);
+                gc.fillOval(c.getY() * c.getCellShape(), c.getX() * c.getCellShape(), c.getCellShape(), c.getCellShape());
             }
         }
         for (Building b : buildings) {
@@ -142,7 +143,7 @@ public class GameViewController implements Initializable {
             GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
             selectedBuilding.rotateBuildingRight();
             gc.clearRect(0, 0, 121, 121);
-            gc.setFill(Color.BLACK);
+            gc.setStroke(Color.BLACK);
             gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
             selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
 
@@ -158,7 +159,7 @@ public class GameViewController implements Initializable {
             GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
             selectedBuilding.rotateBuildingLeft();
             gc.clearRect(0, 0, 121, 121);
-            gc.setFill(Color.BLACK);
+            gc.setStroke(Color.BLACK);
             gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
             selectedBuilding.drawBuilding(selectedBuilding.getCanvas());
 
@@ -183,6 +184,11 @@ public class GameViewController implements Initializable {
             player.disallowToPlaceWorker();
         } else {
             board.addBuilding(selectedBuilding, mouseY, mouseX);
+            GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
+            gc1.clearRect(0, 0, 121, 121);
+            gc1.setStroke(Color.BLACK);
+            gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+            selectedBuilding = null;
         }
         update();
 
@@ -279,6 +285,7 @@ public class GameViewController implements Initializable {
             player.disallowToReturnCard();
             zBlockRole();
         }
+        update();
     }
 
     @FXML
@@ -288,6 +295,7 @@ public class GameViewController implements Initializable {
                 selectedBuilding = b;
             }
         }
+        update();
     }
 
     @FXML
@@ -297,6 +305,7 @@ public class GameViewController implements Initializable {
                 selectedBuilding = b;
             }
         }
+        update();
     }
 
     @FXML
@@ -306,6 +315,7 @@ public class GameViewController implements Initializable {
                 selectedBuilding = b;
             }
         }
+        update();
     }
 
     @FXML
@@ -315,6 +325,7 @@ public class GameViewController implements Initializable {
                 selectedBuilding = b;
             }
         }
+        update();
     }
 
     @FXML
