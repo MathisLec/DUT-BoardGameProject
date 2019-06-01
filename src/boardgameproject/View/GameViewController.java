@@ -77,7 +77,6 @@ public class GameViewController implements Initializable {
             gc2.setStroke(Color.RED);
             gc2.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(),
                     selectedBuilding.getCanvas().getHeight());
-
         }
 
         nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
@@ -183,12 +182,14 @@ public class GameViewController implements Initializable {
             board.addWorker(mouseY, mouseX);
             player.disallowToPlaceWorker();
         } else {
-            board.addBuilding(selectedBuilding, mouseY, mouseX);
-            GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
-            gc1.clearRect(0, 0, 121, 121);
-            gc1.setStroke(Color.BLACK);
-            gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
-            selectedBuilding = null;
+            if (selectedBuilding != null) {
+                board.addBuilding(selectedBuilding, mouseY, mouseX);
+                GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
+                gc1.clearRect(0, 0, 121, 121);
+                gc1.setStroke(Color.BLACK);
+                gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+                selectedBuilding = null;
+            }
         }
         update();
 
