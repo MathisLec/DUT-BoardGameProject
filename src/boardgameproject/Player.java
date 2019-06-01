@@ -31,7 +31,6 @@ public class Player {
     private boolean isAllowToPlaceWorker;
     private boolean isAllowToReturnBuilding;
     private boolean isAllowToMoveWorker;
-    private Building buildingToReturn;
 
     public Player() {
         this.nbEnergy = DEFAULT_NB_ENERGY;
@@ -42,7 +41,6 @@ public class Player {
         this.isAllowToPlaceWorker = false;
         this.isAllowToReturnBuilding = false;
         this.isAllowToMoveWorker = false;
-        this.buildingToReturn = null;
         startingHand();
     }
 
@@ -121,24 +119,16 @@ public class Player {
         buildings.remove(building);
     }
 
-    public boolean isAllowToReturnCard() {
+    public boolean isAllowToReturnBuilding() {
         return isAllowToReturnBuilding;
     }
 
-    public void allowToReturnCard() {
+    public void allowToReturnBuilding() {
         isAllowToReturnBuilding = true;
     }
 
-    public void disallowToReturnCard() {
+    public void disallowToReturnBuilding() {
         isAllowToReturnBuilding = false;
-    }
-
-    public void setBuildingToReturn(Building building) {
-        buildingToReturn = building;
-    }
-
-    public Building getBuildingToReturn() {
-        return buildingToReturn;
     }
 
     public boolean isAllowToPlaceWorker() {

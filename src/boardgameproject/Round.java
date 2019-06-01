@@ -22,7 +22,6 @@ public class Round extends Application {
     private final int NB_TURN_MAX = 30;
     private int nbTurn = 1;
     private int nbPlayer;
-    private int nbWorkerToPlace;
     private boolean putBuilding = true;
     public Scene scene;
 
@@ -66,19 +65,15 @@ public class Round extends Application {
         return nbPlayer;
     }
 
-    public int getNbWorkerToPlace() {
-        return nbWorkerToPlace;
-    }
-
     public Scene getScene() {
         return scene;
     }
-    
-    public boolean getPutBuilding(){
+
+    public boolean getPutBuilding() {
         return putBuilding;
     }
-    
-    public boolean setPutBuilding(){
+
+    public boolean setPutBuilding() {
         return putBuilding;
     }
 
@@ -86,5 +81,5 @@ public class Round extends Application {
         nbTurn++;
         System.out.println("nbTurn:" + nbTurn);
     }
-    
+
 }

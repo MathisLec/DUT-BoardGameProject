@@ -127,7 +127,7 @@ public final class Board {
                 }
             }
         }
-        //Draw a building if the deck is empty
+        //Draw a building if the hand is empty
         if (player.getBuildings().isEmpty()) {
             player.drawBuilding();
         }
@@ -137,7 +137,7 @@ public final class Board {
         this.player = player;
     }
 
-    private Cell getCell(int x, int y) {
+    public Cell getCell(int x, int y) {
         Cell cell = null;
         for (Cell c : boardToList()) {
             if (c.getX() == y && c.getY() == x) {

@@ -34,9 +34,10 @@ public class GameViewController implements Initializable {
     private Round round = new Round();
     Player player = new Player();
     Board board = new Board(round, player);
-    ArrayList<Building> buildings = new ArrayList<>();
 
     Building selectedBuilding;
+
+    Cell selectedWorker;
 
     @FXML
     private Canvas GameBoard;
@@ -96,9 +97,6 @@ public class GameViewController implements Initializable {
                 gc.setFill(Color.BLACK);
                 gc.fillOval(c.getY() * c.getCellShape(), c.getX() * c.getCellShape(), c.getCellShape(), c.getCellShape());
             }
-        }
-        for (Building b : buildings) {
-            b.drawBuilding(GameBoard);
         }
     }
 
@@ -189,6 +187,11 @@ public class GameViewController implements Initializable {
             board.addWorker(mouseY, mouseX);
             player.disallowToPlaceWorker();
         } else {
+            if (selectedWorker == null && board.getCell(mouseY, mouseX).hasWorker()) {
+                selectedWorker = board.getCell(mouseY, mouseX);
+            }
+            if (selectedWorker != null && selectedWorker.hasWorker()) {
+            }
             if (selectedBuilding != null) {
                 board.addBuilding(selectedBuilding, mouseY, mouseX);
                 GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
@@ -197,7 +200,9 @@ public class GameViewController implements Initializable {
                 gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
                 selectedBuilding = null;
             }
+
         }
+
         update();
 
     }
@@ -274,7 +279,7 @@ public class GameViewController implements Initializable {
                 selectedBuilding = b;
             }
         }
-        if (!player.isAllowToReturnCard()) {
+        if (!player.isAllowToReturnBuilding() && selectedBuilding != null) {
             GraphicsContext gc = selectedBuilding.getCanvas().getGraphicsContext2D();
             gc.clearRect(0, 0, 121, 121);
 
@@ -282,16 +287,13 @@ public class GameViewController implements Initializable {
             gc.setFill(Color.YELLOW);
             gc.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
         } else {
-
-            Building zBlockWhichPermormed = null;
             for (Building b : player.getBuildings()) {
                 if (b.getCanvas().equals(main1)) {
                     selectedBuilding = b;
                 }
             }
-            player.setBuildingToReturn(selectedBuilding);
-            player.disallowToReturnCard();
-            zBlockRole();
+            player.disallowToReturnBuilding();
+            zBlockRole(selectedBuilding);
         }
         update();
     }
@@ -341,9 +343,8 @@ public class GameViewController implements Initializable {
         player.allowToPlaceWorker();
     }
 
-    private void zBlockRole() {
-        Building chosenBuilding = player.getBuildingToReturn();
-        player.putBuildingFromHandToPile(chosenBuilding);
+    private void zBlockRole(Building building) {
+        player.putBuildingFromHandToPile(building);
     }
 
     private void resumeGame() {
@@ -352,11 +353,14 @@ public class GameViewController implements Initializable {
         try {
             fis = new FileInputStream("test.ser");
             ois = new ObjectInputStream(fis);
+
             round = (Round) ois.readObject();
             player = (Player) ois.readObject();
             board = (Board) ois.readObject();
+            ois.close();
 
         } catch (IOException ex) {
+            System.out.println("Fichier non trouvé");
         } catch (ClassNotFoundException ex) {
             System.out.println("Fichier erroné");
         }
