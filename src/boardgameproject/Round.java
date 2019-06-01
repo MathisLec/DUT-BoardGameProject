@@ -73,8 +73,8 @@ public class Round extends Application {
         return putBuilding;
     }
 
-    public boolean setPutBuilding() {
-        return putBuilding;
+    public void setPutBuilding(boolean b) {
+        putBuilding = b;
     }
 
     public void endTurn() {

@@ -18,6 +18,8 @@ public class MenuViewController implements Initializable {
 
     @FXML
     private Button PlayButton;
+    @FXML
+    private Button ResumeButton;
 
     @FXML
     void onPlayClick(ActionEvent event) throws IOException {
@@ -37,7 +39,7 @@ public class MenuViewController implements Initializable {
     @FXML
     void onResumeClick(ActionEvent event) throws IOException {
         mustResume = true;
-        Stage stage = (Stage) PlayButton.getScene().getWindow();
+        Stage stage = (Stage) ResumeButton.getScene().getWindow();
         stage.close();
 
         Stage stage2 = new Stage();

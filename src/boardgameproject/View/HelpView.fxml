@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<fx:root id="AnchorPane" prefHeight="350.0" prefWidth="550.0" style="-fx-background-color: #2F3640;" type="AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="boardgameproject.View.HelpViewController">
+   <children>
+      <Label fx:id="IBlock" layoutX="81.0" layoutY="54.0" text="I-Block : " textFill="WHITE" />
+   </children>
+</fx:root>
