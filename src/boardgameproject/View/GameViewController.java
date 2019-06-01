@@ -61,11 +61,6 @@ public class GameViewController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         newGame();
-
-        nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
-        nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
-        nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
-
         update();
     }
 
@@ -75,12 +70,29 @@ public class GameViewController implements Initializable {
         gc.clearRect(0, 0, 1500, 1500);
         Color color = Color.WHITE;
 
-        for (Cell efg : board.boardToList()) {
-            color = colorSelector(efg, color);
-            efg.drawCell(GameBoard, efg.getY(), efg.getX(), color);
+        if (selectedBuilding != null) {
+            GraphicsContext gc2 = selectedBuilding.getCanvas().getGraphicsContext2D();
+            gc2.clearRect(-2, -2, 125, 125);
+            gc2.setLineWidth(4);
+            
+            gc2.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(),
+                    selectedBuilding.getCanvas().getHeight());
+            selectedBuilding.drawBuilding(selectedBuilding.getCanvas());   
         }
-        for (Building ef : buildings) {
-            ef.drawBuilding(GameBoard);
+
+        nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
+        nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
+        nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
+
+        for (Cell c : board.boardToList()) {
+            color = colorSelector(c, color);
+            c.drawCell(GameBoard, c.getY(), c.getX(), color);
+            if(c.hasWorker()){
+                gc.fillOval(c.getX()*c.getCellShape(), c.getY()*c.getCellShape(),c.getCellShape(),c.getCellShape());
+            }
+        }
+        for (Building b : buildings) {
+            b.drawBuilding(GameBoard);
         }
     }
 
