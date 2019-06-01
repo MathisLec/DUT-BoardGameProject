@@ -195,30 +195,30 @@ public class GameViewController implements Initializable {
 
         int mouseX = (int) event.getX() / 30;
         int mouseY = (int) event.getY() / 30;
-        try{
-        if (player.isAllowToPlaceWorker()) {
-            board.addWorker(mouseY, mouseX);
-            nbWorkerToPlace--;
-            player.disallowToPlaceWorker();
-        } else {
-            if (selectedWorker == null && board.getCell(mouseY, mouseX).hasWorker()) {
-                selectedWorker = board.getCell(mouseY, mouseX);
-                
-            }
-            if (selectedWorker != null && selectedWorker.hasWorker()) {
-            }
-            if (selectedBuilding != null) {
-                board.addBuilding(selectedBuilding, mouseY, mouseX);
-                GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
-                gc1.clearRect(0, 0, 121, 121);
-                gc1.setStroke(Color.BLACK);
-                gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
-                selectedBuilding = null;
-                round.setPutBuilding(false);
-            }
+        try {
+            if (player.isAllowToPlaceWorker()) {
+                board.addWorker(mouseY, mouseX);
+                nbWorkerToPlace--;
+                player.disallowToPlaceWorker();
+            } else {
+                if (selectedWorker == null && board.getCell(mouseY, mouseX).hasWorker()) {
+                    selectedWorker = board.getCell(mouseY, mouseX);
 
-        }
-        }catch(NullPointerException ex){
+                }
+                if (selectedWorker != null && selectedWorker.hasWorker()) {
+                }
+                if (selectedBuilding != null) {
+                    board.addBuilding(selectedBuilding, mouseY, mouseX);
+                    GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
+                    gc1.clearRect(0, 0, 121, 121);
+                    gc1.setStroke(Color.BLACK);
+                    gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+                    selectedBuilding = null;
+                    round.setPutBuilding(false);
+                }
+
+            }
+        } catch (NullPointerException ex) {
             System.out.println("oué");
         }
 
@@ -394,13 +394,14 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void openHelp(ActionEvent event) throws IOException {
-        Stage stage3 = new Stage();
-        Parent root2 = FXMLLoader.load(getClass().getResource("HelpView.fxml"));
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("HelpView.fxml"));
 
-        Scene scene1 = new Scene(root2);
+        Scene scene = new Scene(root);
+        scene.setRoot(root);
 
-        stage3.setScene(scene1);
-        stage3.show();
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

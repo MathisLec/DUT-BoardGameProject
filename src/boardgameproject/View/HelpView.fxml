@@ -9,9 +9,14 @@ and open the template in the editor.
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<fx:root id="AnchorPane" prefHeight="350.0" prefWidth="550.0" style="-fx-background-color: #2F3640;" type="AnchorPane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="boardgameproject.View.HelpViewController">
+<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="550.0" style="-fx-background-color: #2F3640;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.HelpViewController">
    <children>
-      <Label fx:id="IBlock" layoutX="81.0" layoutY="54.0" text="I-Block : " textFill="WHITE" />
+      <Label fx:id="IBlock" layoutY="24.0" text="I-Block : " textFill="WHITE" />
+      <Label fx:id="OBlock" layoutY="91.0" text="O-Block :" textFill="WHITE" />
+      <Label fx:id="TBlock" layoutY="167.0" text="T-Block" textFill="WHITE" />
+      <Label fx:id="LBlock" layoutY="246.0" text="L-Block" textFill="WHITE" />
+      <Label fx:id="JBlock" layoutX="333.0" layoutY="59.0" text="J-Block" textFill="WHITE" />
+      <Label fx:id="SBlock" layoutX="332.0" layoutY="131.0" text="S-Block" textFill="WHITE" />
+      <Label fx:id="ZBlock" layoutX="332.0" layoutY="208.0" text="Z-Block" textFill="WHITE" />
    </children>
-</fx:root>
+</AnchorPane>
