@@ -11,11 +11,16 @@ import boardgameproject.Cell;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -195,30 +200,30 @@ public class GameViewController implements Initializable {
 
         int mouseX = (int) event.getX() / 30;
         int mouseY = (int) event.getY() / 30;
-        try{
-        if (player.isAllowToPlaceWorker()) {
-            board.addWorker(mouseY, mouseX);
-            nbWorkerToPlace--;
-            player.disallowToPlaceWorker();
-        } else {
-            if (selectedWorker == null && board.getCell(mouseY, mouseX).hasWorker()) {
-                selectedWorker = board.getCell(mouseY, mouseX);
-                
-            }
-            if (selectedWorker != null && selectedWorker.hasWorker()) {
-            }
-            if (selectedBuilding != null) {
-                board.addBuilding(selectedBuilding, mouseY, mouseX);
-                GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
-                gc1.clearRect(0, 0, 121, 121);
-                gc1.setStroke(Color.BLACK);
-                gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
-                selectedBuilding = null;
-                round.setPutBuilding(false);
-            }
+        try {
+            if (player.isAllowToPlaceWorker()) {
+                board.addWorker(mouseY, mouseX);
+                nbWorkerToPlace--;
+                player.disallowToPlaceWorker();
+            } else {
+                if (selectedWorker == null && board.getCell(mouseY, mouseX).hasWorker()) {
+                    selectedWorker = board.getCell(mouseY, mouseX);
 
-        }
-        }catch(NullPointerException ex){
+                }
+                if (selectedWorker != null && selectedWorker.hasWorker()) {
+                }
+                if (selectedBuilding != null) {
+                    board.addBuilding(selectedBuilding, mouseY, mouseX);
+                    GraphicsContext gc1 = selectedBuilding.getCanvas().getGraphicsContext2D();
+                    gc1.clearRect(0, 0, 121, 121);
+                    gc1.setStroke(Color.BLACK);
+                    gc1.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(), selectedBuilding.getCanvas().getHeight());
+                    selectedBuilding = null;
+                    round.setPutBuilding(false);
+                }
+
+            }
+        } catch (NullPointerException ex) {
             System.out.println("oué");
         }
 
@@ -377,7 +382,7 @@ public class GameViewController implements Initializable {
         FileInputStream fis;
         ObjectInputStream ois;
         try {
-            fis = new FileInputStream("test.ser");
+            fis = new FileInputStream("save.ser");
             ois = new ObjectInputStream(fis);
 
             round = (Round) ois.readObject();
@@ -390,6 +395,23 @@ public class GameViewController implements Initializable {
         } catch (ClassNotFoundException ex) {
             System.out.println("Fichier erroné");
         }
+    }
+
+    private void saveGame() {
+        FileOutputStream fos;
+        ObjectOutputStream oos;
+        try {
+            fos = new FileOutputStream("save.ser");
+            oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(round);
+            oos.writeObject(player);
+            oos.writeObject(board);
+
+            oos.close();
+        } catch (IOException ex) {
+        }
+
     }
 
     @FXML
