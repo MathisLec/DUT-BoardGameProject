@@ -30,6 +30,7 @@ public class Player {
     private int nbWorkerToPlace;
     private boolean isAllowToPlaceWorker;
     private boolean isAllowToReturnBuilding;
+    private boolean isAllowToMoveWorker;
     private Building buildingToReturn;
 
     public Player() {
@@ -40,6 +41,7 @@ public class Player {
         this.nbWorkerToPlace = DEFAULT_NB_WORKER_TO_PLACE;
         this.isAllowToPlaceWorker = false;
         this.isAllowToReturnBuilding = false;
+        this.isAllowToMoveWorker = false;
         this.buildingToReturn = null;
         startingHand();
     }
@@ -149,6 +151,14 @@ public class Player {
 
     public void disallowToPlaceWorker() {
         isAllowToPlaceWorker = false;
+    }
+
+    public void allowToMoveWorker() {
+        isAllowToMoveWorker = true;
+    }
+
+    public void disallowToMoveWorker() {
+        isAllowToMoveWorker = false;
     }
 
 }

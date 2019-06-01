@@ -150,4 +150,29 @@ public final class Board {
         return cell;
     }
 
+    public int getScore() {
+        int score = 0;
+        final int nbPointsWorkerInHand = 2;
+        final int nbPointWorkerOnBoard = 4;
+        final int nbPointBuildingOnBoard = 8;
+
+        // Material and Energy = 1 Point
+        score += player.getNbMaterials() + player.getNbEnergy();
+        // Worker in hand = 2 Points
+        for (int i = 0; i < player.getNbWorkers(); i++) {
+            score += nbPointsWorkerInHand;
+        }
+        // Worker on Board = 4 Points
+        for (Building b : buildings) {
+            for (int i = 0; i < b.getNbWorker(); i++) {
+                score += nbPointWorkerOnBoard;
+            }
+        }
+        // Building on Board = 8 Points
+        for (Building b : buildings) {
+            score += nbPointBuildingOnBoard;
+        }
+        return score;
+    }
+
 }
