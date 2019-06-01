@@ -36,6 +36,7 @@ public class GameViewController implements Initializable {
     Player player = new Player();
     Board board = new Board(round, player);
     ArrayList<Building> buildings = new ArrayList<>();
+    
 
     Building selectedBuilding;
 
@@ -57,6 +58,8 @@ public class GameViewController implements Initializable {
     private Label nbMaterialsLabel;
     @FXML
     private Label nbWorkersLabel;
+    @FXML
+    private Label nbTurn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,7 +81,8 @@ public class GameViewController implements Initializable {
             gc2.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(),
                     selectedBuilding.getCanvas().getHeight());
         }
-
+        
+        nbTurn.setText("Tour : "+Integer.toString(round.getNbTurn()));
         nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
         nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
         nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
@@ -134,6 +138,7 @@ public class GameViewController implements Initializable {
     private void endTurn(ActionEvent event) {
         round.endTurn();
         board.endTurn();
+        update();
     }
 
     @FXML

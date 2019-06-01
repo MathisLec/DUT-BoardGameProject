@@ -14,27 +14,36 @@
       <Button layoutX="644.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateLeft" text="Rotate Left" />
       <Label layoutX="613.0" layoutY="14.0" prefHeight="35.0" prefWidth="120.0" text="Ressources" textFill="WHITE">
          <font>
-            <Font size="19.0" />
+            <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <Label layoutX="531.0" layoutY="58.0" text="Energy" textFill="WHITE">
+      <Label layoutX="545.0" layoutY="56.0" text="Energy" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="625.0" layoutY="58.0" text="Materials" textFill="WHITE">
+      <Label layoutX="633.0" layoutY="58.0" text="Materials" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="nbEnergyLabel" layoutX="551.0" layoutY="98.0" text="16" textFill="WHITE" />
-      <Label fx:id="nbMaterialsLabel" layoutX="658.0" layoutY="98.0" text="8" textFill="WHITE" />
-      <Label layoutX="747.0" layoutY="58.0" text="Workers" textFill="WHITE">
+      <Label fx:id="nbEnergyLabel" layoutX="560.0" layoutY="95.0" text="16" textFill="WHITE">
          <font>
-            <Font size="16.0" />
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Label fx:id="nbMaterialsLabel" layoutX="658.0" layoutY="95.0" text="8" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
+      <Label layoutX="724.0" layoutY="58.0" text="Workers" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="nbWorkersLabel" layoutX="776.0" layoutY="98.0" text="8" textFill="WHITE" />
+      <Label fx:id="nbWorkersLabel" layoutX="750.0" layoutY="95.0" text="8" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font></Label>
       <Button layoutX="822.0" layoutY="639.0" mnemonicParsing="false" onAction="#QuitGame" text="Quit" />
       <Canvas fx:id="main1" height="121.0" layoutX="484.0" layoutY="144.0" onMousePressed="#hand1" width="121.0" />
       <Canvas fx:id="main2" height="121.0" layoutX="613.0" layoutY="144.0" onMousePressed="#hand2" width="121.0" />
@@ -43,5 +52,10 @@
       <Canvas fx:id="main5" height="121.0" layoutX="687.0" layoutY="298.0" onMousePressed="#hand5" width="121.0" />
       <Button layoutX="557.0" layoutY="626.0" mnemonicParsing="false" onAction="#NewGame" text="New Game" />
       <Button layoutX="525.0" layoutY="566.0" mnemonicParsing="false" onAction="#MethodeWorker" text="Le Boutton" />
+      <Label fx:id="nbTurn" layoutX="781.0" layoutY="-1.0" text="TOUR" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
