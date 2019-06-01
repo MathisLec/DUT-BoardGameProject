@@ -7,21 +7,20 @@ package boardgameproject.View;
 
 import boardgameproject.Board;
 import boardgameproject.Buildings.Building;
-import boardgameproject.Buildings.*;
 import boardgameproject.Cell;
-import boardgameproject.Pile;
 import boardgameproject.Player;
 import boardgameproject.Round;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -36,7 +35,6 @@ public class GameViewController implements Initializable {
     Player player = new Player();
     Board board = new Board(round, player);
     ArrayList<Building> buildings = new ArrayList<>();
-    
 
     Building selectedBuilding;
 
@@ -63,7 +61,11 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        newGame();
+        if (!MenuViewController.mustResume) {
+            newGame();
+        } else {
+            resumeGame();
+        }
         update();
     }
 
@@ -81,8 +83,8 @@ public class GameViewController implements Initializable {
             gc2.strokeRect(0, 0, selectedBuilding.getCanvas().getWidth(),
                     selectedBuilding.getCanvas().getHeight());
         }
-        
-        nbTurn.setText("Tour : "+Integer.toString(round.getNbTurn()));
+
+        nbTurn.setText("Tour : " + Integer.toString(round.getNbTurn()));
         nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
         nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
         nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
@@ -342,6 +344,22 @@ public class GameViewController implements Initializable {
     private void zBlockRole() {
         Building chosenBuilding = player.getBuildingToReturn();
         player.putBuildingFromHandToPile(chosenBuilding);
+    }
+
+    private void resumeGame() {
+        FileInputStream fis;
+        ObjectInputStream ois;
+        try {
+            fis = new FileInputStream("test.ser");
+            ois = new ObjectInputStream(fis);
+            round = (Round) ois.readObject();
+            player = (Player) ois.readObject();
+            board = (Board) ois.readObject();
+
+        } catch (IOException ex) {
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Fichier erroné");
+        }
     }
 
 }
