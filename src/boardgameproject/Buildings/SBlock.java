@@ -28,12 +28,6 @@ public class SBlock extends Building {
         super.energyConsume = 0;
     }
 
-    public SBlock(ArrayList<Cell> list) {
-        super(list);
-        super.role = 'S';
-        super.materialCost = 2;
-        super.energyConsume = 0;
-    }
 
     @Override
     public void buildingShape(int x, int y) {

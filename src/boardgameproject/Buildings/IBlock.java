@@ -28,19 +28,14 @@ public class IBlock extends Building {
         super.energyConsume = 1;
     }
 
-    public IBlock(Board board, int x, int y, Canvas c) {
+    public IBlock(Board board, int x, int y) {
         super.role = 'I';
         super.origineX = x;
         super.origineY = y;
         super.materialCost = 4;
         super.energyConsume = 1;
-        buildingShape(origineX, origineY);
     }
 
-    public IBlock(ArrayList<Cell> list) {
-        super(list);
-        super.role = 'I';
-    }
 
     @Override
     public void buildingShape(int x, int y) {

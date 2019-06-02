@@ -29,12 +29,7 @@ public class OBlock extends Building {
 
     }
 
-    public OBlock(ArrayList<Cell> list) {
-        super(list);
-        super.role = 'O';
-        super.materialCost = 8;
-        super.energyConsume = 0;
-    }
+
 
     @Override
     public void buildingShape(int x, int y) {

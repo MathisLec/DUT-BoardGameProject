@@ -28,13 +28,6 @@ public class ZBlock extends Building {
         super.energyConsume = 1;
     }
 
-    public ZBlock(ArrayList<Cell> list) {
-        super(list);
-        super.role = 'Z';
-        super.materialCost = 2;
-        super.energyConsume = 1;
-    }
-
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 2; i++) {

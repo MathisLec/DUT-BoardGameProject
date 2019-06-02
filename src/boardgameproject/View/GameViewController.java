@@ -11,7 +11,6 @@ import boardgameproject.Cell;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,11 +18,7 @@ import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.TreeMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,35 +75,22 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        clearHandCanvas();
         if (!MenuViewController.mustResume) {
             newGame();
         } else {
             resumeGame();
         }
+        drawPlayerBuildingsInHandCanvas();
         update();
     }
 
     public void update() {
-
+        // Clear the board
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
         gc.clearRect(0, 0, 1500, 1500);
+        // Draw the board
         Color color = Color.WHITE;
-
-        if (selectedBuilding != null) {
-            GraphicsContext gc2 = getAssociatedCanvas(selectedBuilding).getGraphicsContext2D();
-            gc2.clearRect(-2, -2, 125, 125);
-            selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding));
-            gc2.setLineWidth(1);
-            gc2.setStroke(Color.RED);
-            gc2.strokeRect(0, 0, getAssociatedCanvas(selectedBuilding).getWidth(),
-                    getAssociatedCanvas(selectedBuilding).getHeight());
-        }
-
-        nbTurn.setText("Tour : " + Integer.toString(round.getNbTurn()));
-        nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
-        nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
-        nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
-
         for (Cell c : board.boardToList()) {
             color = colorSelector(c, color);
             c.drawCell(GameBoard, c.getY(), c.getX(), color);
@@ -117,6 +99,17 @@ public class GameViewController implements Initializable {
                 gc.fillOval(c.getY() * c.getCellShape(), c.getX() * c.getCellShape(), c.getCellShape(), c.getCellShape());
             }
         }
+        // Clear Canvas and draw strokes
+        clearHandCanvas();
+        // Draw Buildings
+        drawPlayerBuildingsInHandCanvas();
+        // Draw Strokes when a building is selected
+        drawSelectedStroke();
+        //Set Labels
+        nbTurn.setText("Tour : " + Integer.toString(round.getNbTurn()));
+        nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
+        nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
+        nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
 
     }
 
@@ -154,6 +147,53 @@ public class GameViewController implements Initializable {
         return color;
     }
 
+    private void clearHandCanvas() {
+        GraphicsContext gc1 = main1.getGraphicsContext2D();
+        gc1.clearRect(0, 0, 120, 120);
+        GraphicsContext gc2 = main2.getGraphicsContext2D();
+        gc2.clearRect(0, 0, 120, 120);
+        GraphicsContext gc3 = main3.getGraphicsContext2D();
+        gc3.clearRect(0, 0, 120, 120);
+        GraphicsContext gc4 = main4.getGraphicsContext2D();
+        gc4.clearRect(0, 0, 120, 120);
+        GraphicsContext gc5 = main5.getGraphicsContext2D();
+        gc5.clearRect(0, 0, 120, 120);
+
+        gc1.strokeRect(0, 0, main1.getWidth(), main1.getHeight());
+        gc2.strokeRect(0, 0, main2.getWidth(), main2.getHeight());
+        gc3.strokeRect(0, 0, main3.getWidth(), main3.getHeight());
+        gc4.strokeRect(0, 0, main4.getWidth(), main4.getHeight());
+        gc5.strokeRect(0, 0, main5.getWidth(), main5.getHeight());
+    }
+
+    private void drawPlayerBuildingsInHandCanvas() {
+        Canvas[] canvas = {main1, main2, main3, main4, main5};
+        int i = 0;
+        for (Building b : player.getBuildings()) {
+            b.drawBuilding(canvas[i]);
+            buildingsInHand.put(canvas[i], b);
+            i++;
+        }
+    }
+
+    private void drawSelectedStroke() {
+        if (selectedBuilding != null) {
+            for (Building b : buildingsInHand.values()) {
+                GraphicsContext gc2 = getAssociatedCanvas(b).getGraphicsContext2D();
+                gc2.clearRect(-2, -2, 125, 125);
+                gc2.setLineWidth(1);
+                if (b == selectedBuilding) {
+                    gc2.setStroke(Color.RED);
+                } else {
+                    gc2.setLineWidth(1);
+                    gc2.setStroke(Color.BLACK);
+                }
+                gc2.strokeRect(0, 0, getAssociatedCanvas(b).getWidth(),
+                        getAssociatedCanvas(b).getHeight());
+            }
+        }
+    }
+
     @FXML
     private void endTurn(ActionEvent event) {
         round.endTurn();
@@ -167,8 +207,8 @@ public class GameViewController implements Initializable {
     private void RotateRight(ActionEvent event) {
         try {
             GraphicsContext gc = getAssociatedCanvas(selectedBuilding).getGraphicsContext2D();
-            selectedBuilding.rotateBuildingRight();
             gc.clearRect(0, 0, 121, 121);
+            selectedBuilding.rotateBuildingRight();
             gc.setStroke(Color.BLACK);
             gc.strokeRect(0, 0, getAssociatedCanvas(selectedBuilding).getWidth(), getAssociatedCanvas(selectedBuilding).getHeight());
             selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding));
@@ -183,8 +223,8 @@ public class GameViewController implements Initializable {
     private void RotateLeft(ActionEvent event) {
         try {
             GraphicsContext gc = getAssociatedCanvas(selectedBuilding).getGraphicsContext2D();
+            gc.clearRect(0, 0, 120, 120);
             selectedBuilding.rotateBuildingLeft();
-            gc.clearRect(0, 0, 121, 121);
             gc.setStroke(Color.BLACK);
             gc.strokeRect(0, 0, getAssociatedCanvas(selectedBuilding).getWidth(), getAssociatedCanvas(selectedBuilding).getHeight());
             selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding));
@@ -219,10 +259,6 @@ public class GameViewController implements Initializable {
                 }
                 if (selectedBuilding != null) {
                     board.addBuilding(selectedBuilding, mouseY, mouseX);
-                    GraphicsContext gc1 = getAssociatedCanvas(selectedBuilding).getGraphicsContext2D();
-                    gc1.clearRect(0, 0, 121, 121);
-                    gc1.setStroke(Color.BLACK);
-                    gc1.strokeRect(0, 0, getAssociatedCanvas(selectedBuilding).getWidth(), getAssociatedCanvas(selectedBuilding).getHeight());
                     selectedBuilding = null;
                     round.setPutBuilding(false);
                 }
@@ -266,33 +302,6 @@ public class GameViewController implements Initializable {
         player = new Player();
         board = new Board(round, player);
 
-        GraphicsContext gc1 = main1.getGraphicsContext2D();
-        gc1.clearRect(0, 0, 120, 120);
-        GraphicsContext gc2 = main2.getGraphicsContext2D();
-        gc2.clearRect(0, 0, 120, 120);
-        GraphicsContext gc3 = main3.getGraphicsContext2D();
-        gc3.clearRect(0, 0, 120, 120);
-        GraphicsContext gc4 = main4.getGraphicsContext2D();
-        gc4.clearRect(0, 0, 120, 120);
-        GraphicsContext gc5 = main5.getGraphicsContext2D();
-        gc5.clearRect(0, 0, 120, 120);
-
-        Canvas[] canvas = {main1, main2, main3, main4, main5};
-
-        gc1.strokeRect(0, 0, main1.getWidth(), main1.getHeight());
-        gc2.strokeRect(0, 0, main2.getWidth(), main2.getHeight());
-        gc3.strokeRect(0, 0, main3.getWidth(), main3.getHeight());
-        gc4.strokeRect(0, 0, main4.getWidth(), main4.getHeight());
-        gc5.strokeRect(0, 0, main5.getWidth(), main5.getHeight());
-
-        int i = 0;
-        for (Building b : player.getBuildings()) {
-            b.buildingShape(0, 0);
-            b.drawBuilding(canvas[i]);
-            buildingsInHand.put(canvas[i], b);
-            i++;
-        }
-
         board.drawBoard(GameBoard);
     }
 
@@ -300,15 +309,7 @@ public class GameViewController implements Initializable {
     private void hand1(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(main1);
-
-            if (!player.isAllowToReturnBuilding() && selectedBuilding != null) {
-                GraphicsContext gc = getAssociatedCanvas(selectedBuilding).getGraphicsContext2D();
-                gc.clearRect(0, 0, 121, 121);
-
-                selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding));
-                gc.setFill(Color.YELLOW);
-                gc.strokeRect(0, 0, getAssociatedCanvas(selectedBuilding).getWidth(), getAssociatedCanvas(selectedBuilding).getHeight());
-            } else {
+            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
         }

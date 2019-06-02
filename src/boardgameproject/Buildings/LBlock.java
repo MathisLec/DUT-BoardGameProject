@@ -29,12 +29,6 @@ public class LBlock extends Building {
 
     }
 
-    public LBlock(ArrayList<Cell> list) {
-        super(list);
-        super.role = 'L';
-        super.materialCost = 8;
-        super.energyConsume = 1;
-    }
 
     @Override
     public void buildingShape(int x, int y) {

@@ -28,12 +28,6 @@ public class TBlock extends Building {
         super.energyConsume = 0;
     }
 
-    public TBlock(ArrayList<Cell> list) {
-        super(list);
-        super.role = 'T';
-        super.materialCost = 2;
-        super.energyConsume = 0;
-    }
 
     @Override
     public void buildingShape(int x, int y) {
