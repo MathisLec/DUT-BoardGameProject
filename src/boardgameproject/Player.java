@@ -105,6 +105,10 @@ public class Player implements Serializable {
         return LIMIT_NB_RESEARCH;
     }
 
+    public int getNbTurnSpacePort() {
+        return nbTurnSpacePort;
+    }
+
     public void consummeEnergy(int nb) throws InsufficientRessourcesException {
         if (nbEnergy > nb) {
             nbEnergy -= nb;

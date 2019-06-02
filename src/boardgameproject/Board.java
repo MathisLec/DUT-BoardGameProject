@@ -152,6 +152,8 @@ public final class Board implements Serializable {
         final int nbPointsWorkerInHand = 2;
         final int nbPointWorkerOnBoard = 4;
         final int nbPointBuildingOnBoard = 8;
+        final int nbPointResearch = 4;
+        final int nbPointTurnSpacePort = 2;
 
         // Material and Energy = 1 Point
         score += player.getNbMaterials() + player.getNbEnergy();
@@ -168,6 +170,16 @@ public final class Board implements Serializable {
         // Building on Board = 8 Points
         for (Building b : buildings) {
             score += nbPointBuildingOnBoard;
+        }
+        // Money = 1 Point
+        score += player.getNbMoney();
+        // Research = 4 Points
+        for (int i = 0; i < player.getNbResearch(); i++) {
+            score += nbPointResearch;
+        }
+        // SpacePort = 2 Points
+        for (int i = 0; i < player.getNbTurnSpacePort(); i++) {
+            score += nbPointTurnSpacePort;
         }
         return score;
     }
