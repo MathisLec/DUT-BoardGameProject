@@ -9,6 +9,7 @@ import boardgameproject.Board;
 import boardgameproject.Cell;
 import boardgameproject.Player;
 import boardgameproject.Round;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -17,7 +18,7 @@ import javafx.scene.paint.Color;
  *
  * @author mlecoeuvre
  */
-public abstract class Building {
+public abstract class Building implements Serializable {
 
     protected char role;
     protected int materialCost;
@@ -27,12 +28,10 @@ public abstract class Building {
     protected int origineX, origineY;
     protected State state;
     protected boolean isSelectedBuilding;
-    protected Canvas canvas;
 
     public Building() {
         this.cells = new ArrayList<>();
         this.state = State.TOP;
-        this.canvas = null;
         this.isSelectedBuilding = false;
     }
 
@@ -134,14 +133,6 @@ public abstract class Building {
 
     public ArrayList<Cell> getCells() {
         return cells;
-    }
-
-    public Canvas getCanvas() {
-        return canvas;
-    }
-
-    public void setCanvas(Canvas canvas) {
-        this.canvas = canvas;
     }
 
     public void setToSelectedBuilding() {

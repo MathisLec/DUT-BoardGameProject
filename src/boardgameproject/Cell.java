@@ -6,6 +6,7 @@
 package boardgameproject;
 
 import boardgameproject.Buildings.Building;
+import java.io.Serializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -14,7 +15,7 @@ import javafx.scene.paint.Color;
  *
  * @author mlecoeuvre
  */
-public class Cell {
+public class Cell implements Serializable {
 
     private boolean hasWorker;
     private boolean hasBuilding;
@@ -48,22 +49,22 @@ public class Cell {
     public boolean isSelectedCell() {
         return selectedCell;
     }
-    
-    public void deplaceCell(double x, double y){
-        this.x = (int)x;
-        this.y = (int)y;
+
+    public void deplaceCell(double x, double y) {
+        this.x = (int) x;
+        this.y = (int) y;
     }
 
     public int getCellShape() {
         return cellShape;
     }
-    
-    public void drawCell(Canvas c,int x, int y, Color col){
+
+    public void drawCell(Canvas c, int x, int y, Color col) {
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setFill(col);
-        gc.fillRect(x*cellShape, y*cellShape, cellShape, cellShape);
+        gc.fillRect(x * cellShape, y * cellShape, cellShape, cellShape);
         gc.setStroke(Color.BLACK);
-        gc.strokeRect(x*cellShape, y*cellShape, cellShape, cellShape);
+        gc.strokeRect(x * cellShape, y * cellShape, cellShape, cellShape);
     }
 
     public void changeWorkerStatus() {
@@ -74,7 +75,7 @@ public class Cell {
         hasBuilding = !hasBuilding;
         buildingType = building.getRole();
     }
-    
+
     public void changeBuildingStatus(char role) {
         hasBuilding = !hasBuilding;
         buildingType = role;

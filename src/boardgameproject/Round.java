@@ -7,6 +7,7 @@ package boardgameproject;
 
 import boardgameproject.Buildings.Building;
 import boardgameproject.Buildings.*;
+import java.io.Serializable;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
  *
  * @author mlecoeuvre
  */
-public class Round extends Application {
+public class Round extends Application implements Serializable {
 
     private final int NB_TURN_MAX = 30;
     private int nbTurn = 1;

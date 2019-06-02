@@ -6,6 +6,7 @@
 package boardgameproject;
 
 import boardgameproject.Buildings.Building;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
@@ -14,7 +15,7 @@ import javafx.scene.paint.Color;
  *
  * @author mlecoeuvre
  */
-public final class Board {
+public final class Board implements Serializable {
 
     private Player player;
     private final Round round;

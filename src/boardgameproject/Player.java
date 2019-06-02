@@ -6,6 +6,7 @@
 package boardgameproject;
 
 import boardgameproject.Buildings.Building;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  *
  * @author mlecoeuvre
  */
-public class Player {
+public class Player implements Serializable{
 
     private final int DEFAULT_NB_ENERGY = 16;
     private final int DEFAULT_NB_WORKERS = 8;

@@ -5,11 +5,13 @@
  */
 package boardgameproject.Buildings;
 
+import java.io.Serializable;
+
 /**
  *
  * @author TheThisma
  */
-public enum State {
+public enum State implements Serializable {
     TOP,
     BOTTOM,
     LEFT,

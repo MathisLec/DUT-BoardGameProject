@@ -7,6 +7,7 @@ package boardgameproject;
 
 import boardgameproject.Buildings.Building;
 import boardgameproject.Buildings.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
@@ -15,7 +16,7 @@ import java.util.*;
  *
  * @author mlecoeuvre
  */
-public final class Pile {
+public final class Pile implements Serializable {
 
     private int nbBuildingsPile;
     private List<Building> pile;
@@ -81,8 +82,8 @@ public final class Pile {
     private void updateNbBuildingPile() {
         nbBuildingsPile = pile.size();
     }
-    
-    public Building drawBuilding(){
+
+    public Building drawBuilding() {
         Building building = pile.get(firstIndex);
         deleteBuilding(building);
         return building;

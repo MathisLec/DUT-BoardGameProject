@@ -45,6 +45,7 @@
             <Font name="System Bold" size="20.0" />
          </font></Label>
       <Button layoutX="822.0" layoutY="639.0" mnemonicParsing="false" onAction="#QuitGame" text="Quit" />
+      <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#saveGame" text="Save" />
       <Canvas fx:id="main1" height="121.0" layoutX="484.0" layoutY="144.0" onMousePressed="#hand1" width="121.0" />
       <Canvas fx:id="main2" height="121.0" layoutX="613.0" layoutY="144.0" onMousePressed="#hand2" width="121.0" />
       <Canvas fx:id="main3" height="121.0" layoutX="747.0" layoutY="144.0" onMousePressed="#hand3" width="121.0" />
