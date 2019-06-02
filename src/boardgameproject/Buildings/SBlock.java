@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -18,17 +19,15 @@ import javafx.scene.paint.Color;
  * @author mlecoeuvre
  */
 public class SBlock extends Building {
-
+    
     public SBlock() {
         super();
         super.role = 'S';
         super.origineX = 0;
         super.origineY = 0;
         super.materialCost = 2;
-        super.energyConsume = 0;
     }
-
-
+    
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 2; i++) {
@@ -38,20 +37,38 @@ public class SBlock extends Building {
             cells.add(cell1);
         }
     }
-
+    
     @Override
     public void drawBuilding(Canvas c) {
         for (Cell s : cells) {
             s.drawCell(c, s.getX(), s.getY(), Color.GREEN);
         }
     }
-
+    
     @Override
-    public void buildingRole(Player player, Board board, Round round) {
-        int nbMaterialToAdd = 1;
-        player.addMaterial(nbMaterialToAdd);
+    public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
+        switch (state) {
+            case TOP:
+            case BOTTOM:
+                int nbMaterialToAdd = player.getNbResearch();
+                int nbEnergyToConsume = 2;
+                int nbMoneyToConsume = 1;
+                int nbStellariumToAdd = 1;
+                player.consummeEnergy(nbEnergyToConsume);
+                player.consummeMoney(nbMoneyToConsume);
+                player.addMaterial(nbMaterialToAdd);
+                if (player.getNbResearch() == player.getLimitNbResearch()) {
+                    player.addStellarium(nbStellariumToAdd);
+                }
+                break;
+            case LEFT:
+            case RIGHT:
+                nbMaterialToAdd = 1;
+                player.addMaterial(nbMaterialToAdd);
+                break;
+        }
     }
-
+    
     @Override
     public void rotateBuildingLeft() {
         cells.clear();
@@ -77,7 +94,7 @@ public class SBlock extends Building {
         }
         changeStateRotateLeft();
     }
-
+    
     @Override
     public void rotateBuildingRight() {
         cells.clear();
@@ -103,7 +120,7 @@ public class SBlock extends Building {
         }
         changeStateRotateRight();
     }
-
+    
     @Override
     public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
         ArrayList<Cell> shape = new ArrayList<>();
@@ -130,5 +147,5 @@ public class SBlock extends Building {
         }
         return shape;
     }
-
+    
 }

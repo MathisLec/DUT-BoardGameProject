@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ public class ZBlock extends Building {
         super.origineX = 1;
         super.origineY = 0;
         super.materialCost = 2;
-        super.energyConsume = 1;
     }
 
     @Override
@@ -46,9 +46,22 @@ public class ZBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board, Round round) {
-        player.allowToReturnBuilding();
-        // this role is manage in GameViewController Class in methods zBlockRole
+    public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
+        switch (state) {
+            case TOP:
+            case BOTTOM:
+                int nbMoneyToConsume = 1;
+                player.consummeMoney(nbMoneyToConsume);
+                player.addTurnSpacePort();
+                break;
+            case LEFT:
+            case RIGHT:
+                int nbEnergyToConsumme = 1;
+                player.consummeEnergy(nbEnergyToConsumme);
+                player.allowToReturnBuilding();
+                // this role is manage in GameViewController Class in methods zBlockRole
+                break;
+        }
     }
 
     @Override

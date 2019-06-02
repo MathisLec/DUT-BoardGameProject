@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -25,10 +26,8 @@ public class LBlock extends Building {
         super.origineX = 0;
         super.origineY = 0;
         super.materialCost = 8;
-        super.energyConsume = 1;
 
     }
-
 
     @Override
     public void buildingShape(int x, int y) {
@@ -46,13 +45,35 @@ public class LBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board, Round round) {
-        int nbWorkerToAdd = 3;
-        if (getNbWorker() == 2) {
-            player.consummeEnergy(energyConsume);
-            player.addWorkerInHand(nbWorkerToAdd);
-            clearWorkers();
+    public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
+        switch (state) {
+            case TOP:
+                int nbWorkerToAdd = 3;
+                int nbEnergyToConsume = 1;
+                if (getNbWorker() == 2) {
+                    player.consummeEnergy(nbEnergyToConsume);
+                    player.addWorkerInHand(nbWorkerToAdd);
+                    clearWorkers();
+                }
+                break;
+            case BOTTOM:
+                int nbMoneyToConsumme = 4;
+                nbWorkerToAdd = 1;
+                player.consummeMoney(nbMoneyToConsumme);
+                player.addWorkerInHand(nbWorkerToAdd);
+                break;
+            case LEFT:
+                int nbMoneyToAdd = 2;
+                player.addMoney(nbMoneyToAdd);
+                break;
+            case RIGHT:
+                nbEnergyToConsume = 1;
+                nbMoneyToAdd = 4;
+                player.consummeEnergy(nbEnergyToConsume);
+                player.addMoney(nbMoneyToAdd);
+                break;
         }
+
     }
 
     @Override

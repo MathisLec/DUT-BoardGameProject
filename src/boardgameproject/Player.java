@@ -6,6 +6,7 @@
 package boardgameproject;
 
 import boardgameproject.Buildings.Building;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +15,15 @@ import java.util.List;
  *
  * @author mlecoeuvre
  */
-public class Player implements Serializable{
+public class Player implements Serializable {
 
     private final int DEFAULT_NB_ENERGY = 16;
     private final int DEFAULT_NB_WORKERS = 8;
     private final int DEFAULT_NB_MATERIALS = 8;
+    private final int DEFAULT_NB_MONEY = 5;
+    private final int DEFAULT_NB_RESEARCH = 0;
+    private final int LIMIT_NB_RESEARCH = 8;
+    private final int DEFAULT_NB_STELLARIUM = 8;
     private final int NB_BUILDINGS_START = 5;
     private final int DEFAULT_NB_WORKER_TO_PLACE = 1;
     private final int LIMIT_NB_BUILDINGS_IN_HAND = 5;
@@ -26,6 +31,10 @@ public class Player implements Serializable{
     private int nbEnergy;
     private int nbWorkers;
     private int nbMaterials;
+    private int nbMoney;
+    private int nbResearch;
+    private int nbStellarium;
+    private int nbTurnSpacePort;
     private static Pile pile = new Pile();
     private List<Building> buildings;
     private int nbWorkerToPlace;
@@ -37,8 +46,12 @@ public class Player implements Serializable{
         this.nbEnergy = DEFAULT_NB_ENERGY;
         this.nbWorkers = DEFAULT_NB_WORKERS;
         this.nbMaterials = DEFAULT_NB_MATERIALS;
+        this.nbMoney = DEFAULT_NB_MONEY;
+        this.nbResearch = DEFAULT_NB_RESEARCH;
+        this.nbStellarium = DEFAULT_NB_STELLARIUM;
         this.buildings = new ArrayList<>();
         this.nbWorkerToPlace = DEFAULT_NB_WORKER_TO_PLACE;
+        this.nbTurnSpacePort = 0;
         this.isAllowToPlaceWorker = false;
         this.isAllowToReturnBuilding = false;
         this.isAllowToMoveWorker = false;
@@ -76,12 +89,60 @@ public class Player implements Serializable{
         return nbMaterials;
     }
 
-    public void consummeEnergy(int nb) {
-        nbEnergy -= nb;
+    public int getNbMoney() {
+        return nbMoney;
     }
 
-    public void consummeMaterial(int nb) {
-        nbMaterials -= nb;
+    public int getNbResearch() {
+        return nbResearch;
+    }
+
+    public int getNbStellarium() {
+        return nbStellarium;
+    }
+
+    public int getLimitNbResearch() {
+        return LIMIT_NB_RESEARCH;
+    }
+
+    public void consummeEnergy(int nb) throws InsufficientRessourcesException {
+        if (nbEnergy > nb) {
+            nbEnergy -= nb;
+        } else {
+            throw new InsufficientRessourcesException();
+        }
+    }
+
+    public void consummeMaterial(int nb) throws InsufficientRessourcesException {
+        if (nbMaterials > nb) {
+            nbMaterials -= nb;
+        } else {
+            throw new InsufficientRessourcesException();
+        }
+    }
+
+    public void consummeMoney(int nb) throws InsufficientRessourcesException {
+        if (nbMoney > nb) {
+            nbMoney -= nb;
+        } else {
+            throw new InsufficientRessourcesException();
+        }
+    }
+
+    public void consummeResearch(int nb) throws InsufficientRessourcesException {
+        if (nbResearch > nb) {
+            nbResearch -= nb;
+        } else {
+            throw new InsufficientRessourcesException();
+        }
+    }
+
+    public void consummeStellarium(int nb) throws InsufficientRessourcesException {
+        if (nbStellarium > nb) {
+            nbStellarium -= nb;
+        } else {
+            throw new InsufficientRessourcesException();
+        }
     }
 
     public void addEnergy(int nb) {
@@ -90,6 +151,24 @@ public class Player implements Serializable{
 
     public void addMaterial(int nb) {
         nbMaterials += nb;
+    }
+
+    public void addMoney(int nb) {
+        nbMoney += nb;
+    }
+
+    public void addResearch(int nb) {
+        if (nbResearch + nb <= LIMIT_NB_RESEARCH) {
+            nbResearch += nb;
+        }
+    }
+
+    public void addStellarium(int nb) {
+        nbStellarium += nb;
+    }
+
+    public void addTurnSpacePort() {
+        nbTurnSpacePort += 1;
     }
 
     public void increaseNbWorkerToPlace() {

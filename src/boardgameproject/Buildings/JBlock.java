@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -25,15 +26,12 @@ public class JBlock extends Building {
         super.origineX = 1;
         super.origineY = 0;
         super.materialCost = 8;
-        super.energyConsume = 4;
     }
-
-
 
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 3; i++) {
-            cells.add(new Cell(x+1, y + i));
+            cells.add(new Cell(x + 1, y + i));
         }
         cells.add(new Cell(x, y + 2));
     }
@@ -46,8 +44,37 @@ public class JBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board, Round round) {
-        player.drawBuilding();
+    public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
+        switch (state) {
+            case TOP:
+                int nbEnergyToConsume = 4;
+                player.consummeEnergy(nbEnergyToConsume);
+                player.drawBuilding();
+                break;
+            case BOTTOM:
+                nbEnergyToConsume = player.getNbResearch();
+                int nbMoneyToConsume = player.getNbResearch();
+                int nbWorkerToAdd = (int) player.getNbResearch() / 2;
+                player.consummeEnergy(nbEnergyToConsume);
+                player.consummeMoney(nbMoneyToConsume);
+                player.addWorkerInHand(nbWorkerToAdd);
+                break;
+            case LEFT:
+                nbEnergyToConsume = 2;
+                nbMoneyToConsume = 2;
+                int nbResearchToAdd = 1;
+                player.consummeEnergy(nbEnergyToConsume);
+                player.consummeMoney(nbMoneyToConsume);
+                player.addResearch(nbResearchToAdd);
+                break;
+            case RIGHT:
+                int nbEnergyToAdd = 4;
+                int nbMoneyToAdd = 4;
+                this.clearWorkers();
+                player.addEnergy(nbEnergyToAdd);
+                player.addMoney(nbMoneyToAdd);
+                break;
+        }
     }
 
     @Override

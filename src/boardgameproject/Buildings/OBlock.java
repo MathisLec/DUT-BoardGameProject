@@ -25,11 +25,8 @@ public class OBlock extends Building {
         super.origineX = 0;
         super.origineY = 0;
         super.materialCost = 8;
-        super.energyConsume = 0;
 
     }
-
-
 
     @Override
     public void buildingShape(int x, int y) {
@@ -51,7 +48,6 @@ public class OBlock extends Building {
     public void buildingRole(Player player, Board board, Round round) {
         //Re-initialize the number of placable workers
         player.setNbWorkerToPlaceByDefault();
-        //TODO permit the player to move a worker from a building to another building
         for (int i = 0; i < getNbWorker(); i++) {
             player.increaseNbWorkerToPlace();
         }

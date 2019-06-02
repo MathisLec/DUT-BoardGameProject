@@ -6,6 +6,7 @@
 package boardgameproject;
 
 import boardgameproject.Buildings.Building;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
@@ -114,14 +115,9 @@ public final class Board implements Serializable {
     public void endTurn() {
         for (Building b : buildings) {
             for (int i = 0; i < b.getNbWorker(); i++) {
-                if (player.getNbEnergy() >= b.getEnergyConsume()) {
+                try {
                     b.buildingRole(player, this, round);
-                    //LBlock  and TBlock have a special process to consumme energy
-                    //It is manage in their class
-                    if (b.getRole() != 'L' && b.getRole() != 'T') {
-                        player.consummeEnergy(b.getEnergyConsume());
-                    }
-                } else {
+                } catch (InsufficientRessourcesException ex) {
                     //Remove a worker from the board and return it to the player's hand
                     b.removeWorker();
                     player.addWorkerInHand(1);

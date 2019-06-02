@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -25,17 +26,7 @@ public class IBlock extends Building {
         super.origineX = 0;
         super.origineY = 0;
         super.materialCost = 4;
-        super.energyConsume = 1;
     }
-
-    public IBlock(Board board, int x, int y) {
-        super.role = 'I';
-        super.origineX = x;
-        super.origineY = y;
-        super.materialCost = 4;
-        super.energyConsume = 1;
-    }
-
 
     @Override
     public void buildingShape(int x, int y) {
@@ -52,9 +43,24 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board, Round round) {
-        int nbMaterialToAdd = 2;
-        player.addMaterial(nbMaterialToAdd);
+    public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
+        switch (state) {
+            case TOP:
+            case BOTTOM:
+                int nbEnergyToConsume = player.getNbResearch();
+                player.consummeEnergy(nbEnergyToConsume);
+                player.addResearch(player.getNbResearch());
+                player.addResearch(player.getNbResearch());
+                break;
+            case LEFT:
+            case RIGHT:
+                int nbMaterialToAdd = 2;
+                nbEnergyToConsume = 1;
+                player.consummeEnergy(nbEnergyToConsume);
+                player.addMaterial(nbMaterialToAdd);
+                break;
+        }
+
     }
 
     @Override

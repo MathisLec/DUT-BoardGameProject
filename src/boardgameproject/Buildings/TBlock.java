@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -25,9 +26,7 @@ public class TBlock extends Building {
         super.origineX = 1;
         super.origineY = 0;
         super.materialCost = 2;
-        super.energyConsume = 0;
     }
-
 
     @Override
     public void buildingShape(int x, int y) {
@@ -45,10 +44,30 @@ public class TBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board, Round round) {
-        int nbEnergyToAdd = 2;
-        if (round.getNbTurn() % 2 == 0) {
-            player.addEnergy(nbEnergyToAdd);
+    public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
+        switch (state) {
+            case TOP:
+                int nbEnergyToAdd = 2;
+                if (round.getNbTurn() % 2 == 0) {
+                    player.addEnergy(nbEnergyToAdd);
+                }
+                break;
+            case BOTTOM:
+                nbEnergyToAdd = 2;
+                if (round.getNbTurn() % 2 == 1) {
+                    player.addEnergy(nbEnergyToAdd);
+                }
+                break;
+            case LEFT:
+                int nbMaterialToConsume = 1;
+                nbEnergyToAdd = 2;
+                player.consummeMaterial(nbMaterialToConsume);
+                player.addEnergy(nbEnergyToAdd);
+                break;
+            case RIGHT:
+                nbEnergyToAdd = 1;
+                player.addEnergy(nbEnergyToAdd);
+                break;
         }
     }
 
