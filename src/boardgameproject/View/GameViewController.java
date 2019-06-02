@@ -75,13 +75,11 @@ public class GameViewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        clearHandCanvas();
         if (!MenuViewController.mustResume) {
             newGame();
         } else {
             resumeGame();
         }
-        drawPlayerBuildingsInHandCanvas();
         update();
     }
 
@@ -147,6 +145,20 @@ public class GameViewController implements Initializable {
         return color;
     }
 
+    private void drawBlackStrokes() {
+        GraphicsContext gc1 = main1.getGraphicsContext2D();
+        GraphicsContext gc2 = main2.getGraphicsContext2D();
+        GraphicsContext gc3 = main3.getGraphicsContext2D();
+        GraphicsContext gc4 = main4.getGraphicsContext2D();
+        GraphicsContext gc5 = main5.getGraphicsContext2D();
+
+        gc1.strokeRect(0, 0, main1.getWidth(), main1.getHeight());
+        gc2.strokeRect(0, 0, main2.getWidth(), main2.getHeight());
+        gc3.strokeRect(0, 0, main3.getWidth(), main3.getHeight());
+        gc4.strokeRect(0, 0, main4.getWidth(), main4.getHeight());
+        gc5.strokeRect(0, 0, main5.getWidth(), main5.getHeight());
+    }
+
     private void clearHandCanvas() {
         GraphicsContext gc1 = main1.getGraphicsContext2D();
         gc1.clearRect(0, 0, 120, 120);
@@ -159,11 +171,6 @@ public class GameViewController implements Initializable {
         GraphicsContext gc5 = main5.getGraphicsContext2D();
         gc5.clearRect(0, 0, 120, 120);
 
-        gc1.strokeRect(0, 0, main1.getWidth(), main1.getHeight());
-        gc2.strokeRect(0, 0, main2.getWidth(), main2.getHeight());
-        gc3.strokeRect(0, 0, main3.getWidth(), main3.getHeight());
-        gc4.strokeRect(0, 0, main4.getWidth(), main4.getHeight());
-        gc5.strokeRect(0, 0, main5.getWidth(), main5.getHeight());
     }
 
     private void drawPlayerBuildingsInHandCanvas() {
@@ -320,6 +327,9 @@ public class GameViewController implements Initializable {
     private void hand2(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(main2);
+            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+                zBlockRole(selectedBuilding);
+            }
         }
         update();
     }
@@ -328,6 +338,9 @@ public class GameViewController implements Initializable {
     private void hand3(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(main3);
+            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+                zBlockRole(selectedBuilding);
+            }
         }
         update();
     }
@@ -336,6 +349,9 @@ public class GameViewController implements Initializable {
     private void hand4(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(main4);
+            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+                zBlockRole(selectedBuilding);
+            }
         }
         update();
     }
@@ -344,6 +360,9 @@ public class GameViewController implements Initializable {
     private void hand5(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(main5);
+            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+                zBlockRole(selectedBuilding);
+            }
         }
         update();
     }
