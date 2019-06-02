@@ -44,14 +44,6 @@ public class Round extends Application implements Serializable {
      */
     public static void main(String[] args) throws InterruptedException {
         launch(args);
-//        Player player = new Player();
-//        Round round = new Round();
-//        Board board = new Board(round, player);
-//        Building b = new IBlock();
-//        board.addBuilding(b, 5, 5);
-//        board.addWorker(5, 5);
-//        board.addWorker(5, 6);
-//        board.endTurn();
     }
 
     public int getNbTurnMax() {
