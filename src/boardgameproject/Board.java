@@ -60,7 +60,7 @@ public final class Board implements Serializable {
 
     }
 
-    public void addWorker(int x, int y) {
+    public void addWorker(int x, int y) throws NotValidLocationException {
         try {
             // x is vertical axe and y is horizontal axe
             Cell selectedCell = getCell(y, x);
@@ -68,7 +68,7 @@ public final class Board implements Serializable {
                 selectedCell.changeWorkerStatus();
                 player.placeWorker();
             } else {
-                System.out.println("Marche pas");
+                throw new NotValidLocationException();
             }
         } catch (NullPointerException ex) {
             System.out.println("Emplacement non valide");
