@@ -8,6 +8,7 @@ package boardgameproject.View;
 import boardgameproject.Board;
 import boardgameproject.Buildings.Building;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.NotValidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.io.FileInputStream;
@@ -19,6 +20,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -97,13 +100,11 @@ public class GameViewController implements Initializable {
                 gc.fillOval(c.getY() * c.getCellShape(), c.getX() * c.getCellShape(), c.getCellShape(), c.getCellShape());
             }
         }
-        // Clear Canvas and draw strokes
-        clearHandCanvas();
+        // Clear and redraw Strokes
+        drawStrokes();
         // Draw Buildings
         drawPlayerBuildingsInHandCanvas();
-        // Draw Strokes when a building is selected
-        drawSelectedStroke();
-        //Set Labels
+        // Set Labels
         nbTurn.setText("Tour : " + Integer.toString(round.getNbTurn()));
         nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
         nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
@@ -145,32 +146,17 @@ public class GameViewController implements Initializable {
         return color;
     }
 
-    private void drawBlackStrokes() {
-        GraphicsContext gc1 = main1.getGraphicsContext2D();
-        GraphicsContext gc2 = main2.getGraphicsContext2D();
-        GraphicsContext gc3 = main3.getGraphicsContext2D();
-        GraphicsContext gc4 = main4.getGraphicsContext2D();
-        GraphicsContext gc5 = main5.getGraphicsContext2D();
-
-        gc1.strokeRect(0, 0, main1.getWidth(), main1.getHeight());
-        gc2.strokeRect(0, 0, main2.getWidth(), main2.getHeight());
-        gc3.strokeRect(0, 0, main3.getWidth(), main3.getHeight());
-        gc4.strokeRect(0, 0, main4.getWidth(), main4.getHeight());
-        gc5.strokeRect(0, 0, main5.getWidth(), main5.getHeight());
-    }
-
-    private void clearHandCanvas() {
-        GraphicsContext gc1 = main1.getGraphicsContext2D();
-        gc1.clearRect(0, 0, 120, 120);
-        GraphicsContext gc2 = main2.getGraphicsContext2D();
-        gc2.clearRect(0, 0, 120, 120);
-        GraphicsContext gc3 = main3.getGraphicsContext2D();
-        gc3.clearRect(0, 0, 120, 120);
-        GraphicsContext gc4 = main4.getGraphicsContext2D();
-        gc4.clearRect(0, 0, 120, 120);
-        GraphicsContext gc5 = main5.getGraphicsContext2D();
-        gc5.clearRect(0, 0, 120, 120);
-
+    private void drawStrokes() {
+        for (Building b : buildingsInHand.values()) {
+            GraphicsContext gc1 = getAssociatedCanvas(b).getGraphicsContext2D();
+            gc1.clearRect(-2, -2, 125, 125);
+            gc1.setLineWidth(1);
+            if (b == selectedBuilding) {
+                gc1.setStroke(Color.RED);
+                gc1.strokeRect(0, 0, getAssociatedCanvas(b).getWidth(),
+                        getAssociatedCanvas(b).getHeight());
+            }
+        }
     }
 
     private void drawPlayerBuildingsInHandCanvas() {
@@ -180,24 +166,6 @@ public class GameViewController implements Initializable {
             b.drawBuilding(canvas[i]);
             buildingsInHand.put(canvas[i], b);
             i++;
-        }
-    }
-
-    private void drawSelectedStroke() {
-        if (selectedBuilding != null) {
-            for (Building b : buildingsInHand.values()) {
-                GraphicsContext gc2 = getAssociatedCanvas(b).getGraphicsContext2D();
-                gc2.clearRect(-2, -2, 125, 125);
-                gc2.setLineWidth(1);
-                if (b == selectedBuilding) {
-                    gc2.setStroke(Color.RED);
-                } else {
-                    gc2.setLineWidth(1);
-                    gc2.setStroke(Color.BLACK);
-                }
-                gc2.strokeRect(0, 0, getAssociatedCanvas(b).getWidth(),
-                        getAssociatedCanvas(b).getHeight());
-            }
         }
     }
 
@@ -222,7 +190,7 @@ public class GameViewController implements Initializable {
 
             update();
         } catch (NullPointerException e) {
-            System.out.println("Pas de Building selectionné");
+            System.err.println("Pas de Building selectionné");
         }
     }
 
@@ -238,7 +206,7 @@ public class GameViewController implements Initializable {
 
             update();
         } catch (NullPointerException e) {
-            System.out.println("Pas de Building selectionné");
+            System.err.println("Pas de Building selectionné");
         }
     }
 
@@ -264,17 +232,15 @@ public class GameViewController implements Initializable {
                 }
                 if (selectedWorker != null && selectedWorker.hasWorker()) {
                 }
-                if (selectedBuilding != null) {
+                if (selectedBuilding != null && !selectedBuilding.getPreviewsShape(board, mouseY, mouseX).isEmpty()) {
                     board.addBuilding(selectedBuilding, mouseY, mouseX);
                     selectedBuilding = null;
                     round.setPutBuilding(false);
                 }
-
             }
-        } catch (NullPointerException ex) {
-            System.out.println("oué");
+        } catch (NullPointerException | NotValidLocationException ex) {
+            System.err.println("Emplacement invalide");
         }
-
         update();
 
     }
@@ -284,16 +250,18 @@ public class GameViewController implements Initializable {
         if (selectedBuilding != null) {
             int MouseX = (int) event.getX() / 30;
             int MouseY = (int) event.getY() / 30;
-            ArrayList<Cell> previewShape = selectedBuilding.getPreviewsShape(board, MouseY, MouseX);
-            for (Cell c : previewShape) {
-                if (c.getBuildingType() == 'B') {
-                    c.changeBuildingStatus('P');
+            if (!player.isAllowToPlaceWorker()) {
+                ArrayList<Cell> previewShape = selectedBuilding.getPreviewsShape(board, MouseY, MouseX);
+                for (Cell c : previewShape) {
+                    if (c.getBuildingType() == 'B') {
+                        c.changeBuildingStatus('P');
+                    }
                 }
-            }
-            update();
-            for (Cell c : previewShape) {
-                if (c.getBuildingType() == 'P') {
-                    c.changeBuildingStatus('B');
+                update();
+                for (Cell c : previewShape) {
+                    if (c.getBuildingType() == 'P') {
+                        c.changeBuildingStatus('B');
+                    }
                 }
             }
         }

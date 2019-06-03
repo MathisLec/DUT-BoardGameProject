@@ -190,7 +190,6 @@ public class JBlock extends Building {
             }
         } catch (ArrayIndexOutOfBoundsException ex) {
             shape = new ArrayList<>();
-            System.out.println("ça sort du cadre légal");
         }
         return shape;
     }
