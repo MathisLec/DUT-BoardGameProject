@@ -7,7 +7,7 @@ package boardgameproject;
 
 import boardgameproject.Buildings.Building;
 import boardgameproject.Exceptions.InsufficientRessourcesException;
-import boardgameproject.Exceptions.NotValidLocationException;
+import boardgameproject.Exceptions.InvalidLocationException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javafx.scene.canvas.Canvas;
@@ -46,7 +46,7 @@ public final class Board implements Serializable {
         }
     }
 
-    public void addBuilding(Building building, int x, int y) throws NotValidLocationException {
+    public void addBuilding(Building building, int x, int y) throws InvalidLocationException {
         if (checkAddBuilding(building, x, y)) {
             for (Cell c : building.getPreviewsShape(this, x, y)) {
                 c.changeBuildingStatus(building);
@@ -55,12 +55,12 @@ public final class Board implements Serializable {
             buildings.add(building);
             player.placeBuilding(building);
         } else {
-            throw new NotValidLocationException();
+            throw new InvalidLocationException();
         }
 
     }
 
-    public void addWorker(int x, int y) throws NotValidLocationException {
+    public void addWorker(int x, int y) throws InvalidLocationException {
         try {
             // x is vertical axe and y is horizontal axe
             Cell selectedCell = getCell(y, x);
@@ -68,7 +68,7 @@ public final class Board implements Serializable {
                 selectedCell.changeWorkerStatus();
                 player.placeWorker();
             } else {
-                throw new NotValidLocationException();
+                throw new InvalidLocationException();
             }
         } catch (NullPointerException ex) {
             System.out.println("Emplacement non valide");

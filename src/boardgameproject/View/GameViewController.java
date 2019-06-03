@@ -8,7 +8,7 @@ package boardgameproject.View;
 import boardgameproject.Board;
 import boardgameproject.Buildings.Building;
 import boardgameproject.Cell;
-import boardgameproject.Exceptions.NotValidLocationException;
+import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.io.FileInputStream;
@@ -238,7 +238,7 @@ public class GameViewController implements Initializable {
                     round.setPutBuilding(false);
                 }
             }
-        } catch (NullPointerException | NotValidLocationException ex) {
+        } catch (NullPointerException | InvalidLocationException ex) {
             System.err.println("Emplacement invalide");
         }
         update();
