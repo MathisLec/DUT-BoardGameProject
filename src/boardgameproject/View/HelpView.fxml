@@ -9,14 +9,26 @@ and open the template in the editor.
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="350.0" prefWidth="550.0" style="-fx-background-color: #2F3640;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.HelpViewController">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1046.0" style="-fx-background-color: #2F3640;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.HelpViewController">
    <children>
-      <Label fx:id="IBlock" layoutY="24.0" text="I-Block : " textFill="WHITE" />
-      <Label fx:id="OBlock" layoutY="91.0" text="O-Block :" textFill="WHITE" />
-      <Label fx:id="TBlock" layoutY="167.0" text="T-Block" textFill="WHITE" />
-      <Label fx:id="LBlock" layoutY="246.0" text="L-Block" textFill="WHITE" />
-      <Label fx:id="JBlock" layoutX="333.0" layoutY="59.0" text="J-Block" textFill="WHITE" />
-      <Label fx:id="SBlock" layoutX="332.0" layoutY="131.0" text="S-Block" textFill="WHITE" />
-      <Label fx:id="ZBlock" layoutX="332.0" layoutY="208.0" text="Z-Block" textFill="WHITE" />
+      <Label fx:id="IBlockH" layoutY="50.0" text="I-Block : " textFill="WHITE" />
+      <Label fx:id="OBlock" layoutY="250.0" text="O-Block :" textFill="WHITE" />
+      <Label fx:id="TBlockT" layoutY="350.0" text="T-Block" textFill="WHITE" />
+      <Label fx:id="LBlockT" layoutX="350.0" layoutY="150.0" text="L-Block" textFill="WHITE" />
+      <Label fx:id="JBlockT" layoutX="350.0" layoutY="550.0" text="J-Block" textFill="WHITE" />
+      <Label fx:id="SBlockH" layoutX="650.0" layoutY="350.0" text="S-Block" textFill="WHITE" />
+      <Label fx:id="ZBlockH" layoutX="650.0" layoutY="550.0" text="Z-Block" textFill="WHITE" />
+      <Label fx:id="IBlockT" layoutY="150.0" text="I-Block : " textFill="WHITE" />
+      <Label fx:id="TBlockD" layoutX="350.0" layoutY="50.0" text="T-Block" textFill="WHITE" />
+      <Label fx:id="TBlockR" layoutY="550.0" text="T-Block" textFill="WHITE" />
+      <Label fx:id="TBlockL" layoutY="450.0" text="T-Block" textFill="WHITE" />
+      <Label fx:id="LBlockD" layoutX="350.0" layoutY="450.0" text="L-Block" textFill="WHITE" />
+      <Label fx:id="LBlockR" layoutX="350.0" layoutY="350.0" text="L-Block" textFill="WHITE" />
+      <Label fx:id="LBlockL" layoutX="350.0" layoutY="250.0" text="L-Block" textFill="WHITE" />
+      <Label fx:id="JBlockD" layoutX="650.0" layoutY="250.0" text="J-Block" textFill="WHITE" />
+      <Label fx:id="JBlockR" layoutX="650.0" layoutY="150.0" text="J-Block" textFill="WHITE" />
+      <Label fx:id="JBlockL" layoutX="650.0" layoutY="50.0" text="J-Block" textFill="WHITE" />
+      <Label fx:id="SBlockT" layoutX="650.0" layoutY="450.0" text="S-Block" textFill="WHITE" />
+      <Label fx:id="ZBlockT" layoutX="940.0" layoutY="266.0" text="Z-Block" textFill="WHITE" />
    </children>
 </AnchorPane>
