@@ -21,7 +21,7 @@ public class Player implements Serializable {
     private final int DEFAULT_NB_WORKERS = 8;
     private final int DEFAULT_NB_MATERIALS = 8;
     private final int DEFAULT_NB_MONEY = 5;
-    private final int DEFAULT_NB_RESEARCH = 0;
+    private final int DEFAULT_NB_RESEARCH = 1;
     private final int LIMIT_NB_RESEARCH = 8;
     private final int DEFAULT_NB_STELLARIUM = 8;
     private final int NB_BUILDINGS_START = 5;

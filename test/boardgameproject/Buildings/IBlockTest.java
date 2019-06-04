@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -44,17 +45,34 @@ public class IBlockTest {
     }
 
     /**
-     * Test of buildingRole method, of class IBlock.
+     * Test of buildingRole method, of class IBlock with horizontal orientation.
      */
     @Test
-    public void testBuildingRole() {
-        System.out.println("buildingRole");
+    public void testBuildingRoleHori() throws InvalidLocationException {
+        System.out.println("buildingRoleHori");
+        IBlock instance = new IBlock();
+        instance.rotateBuildingLeft();
+        board.addBuilding(instance, 0, 0);
+        board.addWorker(0, 0);
+        board.endTurn();
+        int expectedResultMaterial = 6; // 8 - 4 + 2
+        assertEquals(player.getNbMaterials(), expectedResultMaterial);
+    }
+
+    /**
+     * Test of buildingRole method, of class IBlock with vertical orientation.
+     */
+    @Test
+    public void testBuildingRoleVert() throws InvalidLocationException {
+        System.out.println("buildingRoleVert");
         IBlock instance = new IBlock();
         board.addBuilding(instance, 0, 0);
         board.addWorker(0, 0);
         board.endTurn();
-        int expectedResultEnergy = 10; // 8 + 2
-        assertEquals(player.getNbMaterials(), expectedResultEnergy);
+        int expectedResultMaterial = 6; // 8-4 +1+1
+        int expectedResultEnergy = 15; // 16 - 1
+        assertEquals(player.getNbMaterials(), expectedResultMaterial);
+        assertEquals(player.getNbEnergy(), expectedResultEnergy);
     }
 
     /**
