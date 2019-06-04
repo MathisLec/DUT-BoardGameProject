@@ -226,11 +226,12 @@ public class GameViewController implements Initializable {
                 nbWorkerToPlace--;
                 player.disallowToPlaceWorker();
             } else {
-                if (selectedWorker == null && board.getCell(mouseY, mouseX).hasWorker()) {
+                if (board.getCell(mouseY, mouseX).hasWorker()) {
                     selectedWorker = board.getCell(mouseY, mouseX);
-
                 }
-                if (selectedWorker != null && selectedWorker.hasWorker()) {
+                if (selectedWorker != null && selectedWorker.hasWorker() && !board.getCell(mouseY, mouseX).hasWorker()) {
+                    board.removeWorker(selectedWorker.getY(), selectedWorker.getX());
+                    board.addWorker(mouseY, mouseX);
                 }
                 if (selectedBuilding != null && !selectedBuilding.getPreviewsShape(board, mouseY, mouseX).isEmpty()) {
                     board.addBuilding(selectedBuilding, mouseY, mouseX);
