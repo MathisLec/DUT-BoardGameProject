@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -58,10 +59,29 @@ public class SBlockTest {
     }
 
     /**
-     * Test of buildingRole method, of class SBlock.
+     * Test of buildingRole method, of class SBlock with horizontal orientation.
      */
     @Test
-    public void testBuildingRole() {
+    public void testBuildingRoleHori() throws InvalidLocationException {
+        System.out.println("buildingRole");
+        SBlock instance = new SBlock();
+        player.getBuildings().add(instance);
+        instance.rotateBuildingLeft();
+
+        board.addBuilding(instance, 1, 1);
+        board.addWorker(1, 1);
+        board.endTurn();
+
+        int nbMaterialAfter = 7; // 8 - 2 + 1
+        assertEquals(nbMaterialAfter, player.getNbMaterials());
+    }
+
+    /**
+     * Test of buildingRole method, of class SBlock with vertical orientation.
+     */
+    @Test
+    public void testBuildingRoleVert() throws InvalidLocationException {
+        // this test has been done with a research points fixed to 1
         System.out.println("buildingRole");
         SBlock instance = new SBlock();
         player.getBuildings().add(instance);
@@ -70,12 +90,9 @@ public class SBlockTest {
         board.addWorker(1, 1);
         board.endTurn();
 
-        int nbEnergyAfter = 16;
-        int nbMaterialAfter = 7; // 8 - 2 + 1
-        int nbBuildingInHandAfter = 5; // The limit is 5
-        assertEquals(nbEnergyAfter, player.getNbEnergy());
-        assertEquals(nbBuildingInHandAfter, player.getBuildings().size());
-        assertEquals(nbMaterialAfter, player.getNbMaterials());
+        assertEquals(player.getNbEnergy(), 14); // 16 - 2
+        assertEquals(player.getNbMoney(), 4); // 5 - 1
+        assertEquals(player.getNbMaterials(), 7); // 8 - 2 + 1
     }
 
     /**

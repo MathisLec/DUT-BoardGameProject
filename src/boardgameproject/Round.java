@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 public class Round extends Application implements Serializable {
 
     private final int NB_TURN_MAX = 30;
-    private int nbTurn = 1;
+    private int nbTurn;
     private int nbPlayer;
     private boolean putBuilding = true;
     public Scene scene;

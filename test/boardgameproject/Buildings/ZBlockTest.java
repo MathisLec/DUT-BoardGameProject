@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
 import java.util.ArrayList;
@@ -58,13 +59,14 @@ public class ZBlockTest {
     }
 
     /**
-     * Test of buildingRole method, of class ZBlock.
+     * Test of buildingRole method, of class ZBlock with horizontal orientation.
      */
     @Test
-    public void testBuildingRole() {
+    public void testBuildingRoleHori() throws InvalidLocationException {
         System.out.println("buildingRole");
         ZBlock instance = new ZBlock();
         player.getBuildings().add(instance);
+        instance.rotateBuildingLeft();
 
         board.addBuilding(instance, 1, 1);
         board.addWorker(1, 1);
@@ -78,6 +80,23 @@ public class ZBlockTest {
         assertEquals(nbEnergyAfter, player.getNbEnergy());
         assertEquals(nbBuildingInHandAfter, player.getBuildings().size());
         assertEquals(nbMaterialAfter, player.getNbMaterials());
+    }
+
+    /**
+     * Test of buildingRole method, of class ZBlock with horizontal orientation.
+     */
+    @Test
+    public void testBuildingRoleVert() throws InvalidLocationException {
+        System.out.println("buildingRole");
+        ZBlock instance = new ZBlock();
+        player.getBuildings().add(instance);
+
+        board.addBuilding(instance, 1, 1);
+        board.addWorker(1, 1);
+        board.endTurn();
+
+        assertEquals(player.getNbMoney(), 4); // 5 - 1
+        assertEquals(player.getNbTurnSpacePort(), 1);
     }
 
     /**
