@@ -227,12 +227,4 @@ public class Player implements Serializable {
         isAllowToPlaceWorker = false;
     }
 
-    public void allowToMoveWorker() {
-        isAllowToMoveWorker = true;
-    }
-
-    public void disallowToMoveWorker() {
-        isAllowToMoveWorker = false;
-    }
-
 }

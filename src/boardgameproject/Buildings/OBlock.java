@@ -51,7 +51,6 @@ public class OBlock extends Building {
         for (int i = 0; i < getNbWorker(); i++) {
             player.increaseNbWorkerToPlace();
         }
-        player.allowToMoveWorker();
     }
 
     @Override

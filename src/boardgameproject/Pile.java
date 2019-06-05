@@ -58,7 +58,7 @@ public final class Pile implements Serializable {
             Building buildS = new SBlock();
             list.add(buildS);
         }
-        for (int i = 0; i < 50; i++) {//10
+        for (int i = 0; i < 10; i++) {
             Building buildZ = new ZBlock();
             list.add(buildZ);
         }

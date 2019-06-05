@@ -65,7 +65,7 @@ public final class Board implements Serializable {
             // x is vertical axe and y is horizontal axe
             Cell selectedCell = getCell(x, y);
             if (checkAddWorker(selectedCell)) {
-                selectedCell.changeWorkerStatus();
+                selectedCell.setHasWorkerStatus();
                 player.placeWorker();
             } else {
                 throw new InvalidLocationException();
@@ -77,7 +77,11 @@ public final class Board implements Serializable {
 
     public void removeWorker(int x, int y) {
         // x is vertical axe and y is horizontal axe
-        getCell(x, y).changeWorkerStatus();
+        getCell(x, y).setHasNotWorkerStatus();
+    }
+
+    public void moveWorker(Cell cell, int x, int y) {
+
     }
 
     private boolean checkAddBuilding(Building building, int x, int y) {
@@ -92,6 +96,10 @@ public final class Board implements Serializable {
         }
         return isValid;
     }
+    
+    private boolean checkRemoveWorker(Cell cell){
+        return cell.hasWorker();
+    }
 
     private boolean checkAddWorker(Cell cell) {
         return !cell.hasWorker()
@@ -100,7 +108,7 @@ public final class Board implements Serializable {
     }
 
     private void removeWorker(Cell cell) {
-        cell.changeWorkerStatus();
+        cell.setHasNotWorkerStatus();
     }
 
     public Cell[][] getBoard() {

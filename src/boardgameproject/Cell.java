@@ -67,8 +67,12 @@ public class Cell implements Serializable {
         gc.strokeRect(x * cellShape, y * cellShape, cellShape, cellShape);
     }
 
-    public void changeWorkerStatus() {
-        hasWorker = !hasWorker;
+    public void setHasWorkerStatus() {
+        hasWorker = true;
+    }
+    
+    public void setHasNotWorkerStatus(){
+        hasWorker = false;
     }
 
     public void changeBuildingStatus(Building building) {

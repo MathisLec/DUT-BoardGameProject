@@ -15,23 +15,22 @@ import static org.junit.Assert.*;
  * @author TheThisma
  */
 public class CellTest {
-    
+
     public CellTest() {
     }
 
-    
     /**
      * Test of changeWorkerStatus method, of class Cell.
      */
     @Test
     public void testChangeWorkerStatus() {
         System.out.println("changeWorkerStatus");
-        Cell instance = new Cell(0,0);
-        instance.changeWorkerStatus();
-        assertEquals(instance.hasWorker(),true);
-        
-        instance.changeWorkerStatus();
-        assertEquals(instance.hasWorker(),false);
+        Cell instance = new Cell(0, 0);
+        instance.setHasWorkerStatus();
+        assertEquals(instance.hasWorker(), true);
+
+        instance.setHasNotWorkerStatus();
+        assertEquals(instance.hasWorker(), false);
     }
 
     /**
@@ -43,8 +42,8 @@ public class CellTest {
         Building building = new IBlock();
         Cell instance = new Cell();
         instance.changeBuildingStatus(building);
-        assertEquals(instance.hasBuilding(),true);
-        assertEquals(instance.getBuildingType(),building);
+        assertEquals(instance.hasBuilding(), true);
+        assertEquals(instance.getBuildingType(), building);
     }
 
     /**
@@ -55,8 +54,8 @@ public class CellTest {
         System.out.println("changeBuildingStatus");
         Cell instance = new Cell();
         instance.changeBuildingStatus();
-        assertEquals(instance.hasBuilding(),false);
-        assertEquals(instance.getBuildingType(),null);
+        assertEquals(instance.hasBuilding(), false);
+        assertEquals(instance.getBuildingType(), null);
     }
 
     /**
@@ -69,10 +68,10 @@ public class CellTest {
         boolean expResult = false;
         boolean result = instance.hasWorker();
         assertEquals(expResult, result);
-        
-        instance.changeWorkerStatus();
+
+        instance.setHasWorkerStatus();
         expResult = true;
-        assertEquals(instance.hasWorker(),expResult);
+        assertEquals(instance.hasWorker(), expResult);
     }
 
     /**
@@ -85,7 +84,7 @@ public class CellTest {
         boolean expResult = false;
         boolean result = instance.hasBuilding();
         assertEquals(expResult, result);
-        
+
         Building building = new IBlock();
         instance.changeBuildingStatus(building);
         result = instance.hasBuilding();
@@ -103,7 +102,7 @@ public class CellTest {
         Building expResult = null;
         char result = instance.getBuildingType();
         assertEquals(expResult, result);
-        
+
         Building building = new IBlock();
         instance.changeBuildingStatus(building);
         expResult = building;
@@ -117,7 +116,7 @@ public class CellTest {
     @Test
     public void testGetX() {
         System.out.println("getX");
-        Cell instance = new Cell(1,2);
+        Cell instance = new Cell(1, 2);
         int expResult = 1;
         int result = instance.getX();
         assertEquals(expResult, result);
@@ -129,12 +128,10 @@ public class CellTest {
     @Test
     public void testGetY() {
         System.out.println("getY");
-        Cell instance = new Cell(5,4);
+        Cell instance = new Cell(5, 4);
         int expResult = 4;
         int result = instance.getY();
         assertEquals(expResult, result);
     }
-    
-    
-    
+
 }

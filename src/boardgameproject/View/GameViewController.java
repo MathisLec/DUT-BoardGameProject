@@ -45,7 +45,6 @@ public class GameViewController implements Initializable {
     private Round round = new Round();
     Player player = new Player();
     Board board = new Board(round, player);
-    int nbWorkerToPlace = 1;
 
     Building selectedBuilding;
 
@@ -223,7 +222,7 @@ public class GameViewController implements Initializable {
         try {
             if (player.isAllowToPlaceWorker()) {
                 board.addWorker(mouseY, mouseX);
-                nbWorkerToPlace--;
+                player.decreaseNbWorkerToPlace();
                 player.disallowToPlaceWorker();
             } else {
                 if (board.getCell(mouseY, mouseX).hasWorker()) {

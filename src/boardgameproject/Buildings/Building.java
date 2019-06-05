@@ -108,7 +108,7 @@ public abstract class Building implements Serializable {
         for (Cell c : cells) {
             // Check if a worker has already been removed
             if (c.hasWorker() && currentCounter < limit) {
-                c.changeWorkerStatus();
+                c.setHasNotWorkerStatus();
                 currentCounter++;
             }
         }
@@ -117,7 +117,7 @@ public abstract class Building implements Serializable {
     public void clearWorkers() {
         for (Cell c : cells) {
             if (c.hasWorker()) {
-                c.changeWorkerStatus();
+                c.setHasNotWorkerStatus();
             }
         }
     }
