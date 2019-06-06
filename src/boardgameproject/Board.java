@@ -10,8 +10,6 @@ import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
@@ -42,9 +40,9 @@ public final class Board implements Serializable {
         }
     }
 
-    public void drawBoard(Canvas c) {
+    public void drawBoard(Canvas c, int cellSize) {
         for (Cell cell : boardToList()) {
-            cell.drawCell(c, cell.getY(), cell.getX(), Color.WHITE);
+            cell.drawCell(c, cell.getY(), cell.getX(), Color.WHITE, cellSize);
         }
     }
 

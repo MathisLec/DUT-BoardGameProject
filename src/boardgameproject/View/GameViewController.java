@@ -21,8 +21,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,6 +50,8 @@ public class GameViewController implements Initializable {
     Cell selectedWorker;
 
     HashMap<Canvas, Building> buildingsInHand = new HashMap<>();
+
+    public int cellSize = 30;
 
     @FXML
     private Canvas GameBoard, main1, main2, main3, main4, main5;
@@ -84,10 +84,10 @@ public class GameViewController implements Initializable {
         Color color = Color.WHITE;
         for (Cell c : board.boardToList()) {
             color = colorSelector(c, color);
-            c.drawCell(GameBoard, c.getY(), c.getX(), color);
+            c.drawCell(GameBoard, c.getY(), c.getX(), color, cellSize);
             if (c.hasWorker()) {
                 gc.setFill(Color.BLACK);
-                gc.fillOval(c.getY() * c.getCellShape(), c.getX() * c.getCellShape(), c.getCellShape(), c.getCellShape());
+                gc.fillOval(c.getY() * cellSize, c.getX() * cellSize, cellSize, cellSize);
             }
         }
         // Clear and redraw Strokes
@@ -155,7 +155,7 @@ public class GameViewController implements Initializable {
             Building b;
             try {
                 b = player.getBuildings().get(i);
-                b.drawBuilding(canvas[i]);
+                b.drawBuilding(canvas[i], cellSize);
             } catch (IndexOutOfBoundsException ex) {
                 b = null;
             }
@@ -179,7 +179,7 @@ public class GameViewController implements Initializable {
             selectedBuilding.rotateBuildingRight();
             gc.setStroke(Color.BLACK);
             gc.strokeRect(0, 0, getAssociatedCanvas(selectedBuilding).getWidth(), getAssociatedCanvas(selectedBuilding).getHeight());
-            selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding));
+            selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding), cellSize);
 
             update();
         } catch (NullPointerException e) {
@@ -195,7 +195,7 @@ public class GameViewController implements Initializable {
             selectedBuilding.rotateBuildingLeft();
             gc.setStroke(Color.BLACK);
             gc.strokeRect(0, 0, getAssociatedCanvas(selectedBuilding).getWidth(), getAssociatedCanvas(selectedBuilding).getHeight());
-            selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding));
+            selectedBuilding.drawBuilding(getAssociatedCanvas(selectedBuilding), cellSize);
 
             update();
         } catch (NullPointerException e) {
@@ -280,7 +280,7 @@ public class GameViewController implements Initializable {
         player = new Player();
         board = new Board(round, player);
 
-        board.drawBoard(GameBoard);
+        board.drawBoard(GameBoard, cellSize);
     }
 
     @FXML
@@ -408,7 +408,9 @@ public class GameViewController implements Initializable {
 
         Scene scene = new Scene(root);
         scene.setRoot(root);
-
+        
+        stage.setTitle("Help Menu");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

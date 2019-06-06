@@ -33,6 +33,7 @@ public class MenuViewController implements Initializable {
         Scene scene = new Scene(root);
 
         stage2.setScene(scene);
+        stage2.setResizable(false);
         stage2.show();
     }
 

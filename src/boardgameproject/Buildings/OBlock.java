@@ -38,9 +38,9 @@ public class OBlock extends Building {
     }
 
     @Override
-    public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c,int cellSize) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.YELLOW);
+            s.drawCell(c, s.getX(), s.getY(), Color.YELLOW,cellSize);
         }
     }
 

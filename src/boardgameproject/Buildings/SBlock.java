@@ -19,7 +19,7 @@ import javafx.scene.paint.Color;
  * @author mlecoeuvre
  */
 public class SBlock extends Building {
-    
+
     public SBlock() {
         super();
         super.role = 'S';
@@ -27,7 +27,7 @@ public class SBlock extends Building {
         super.origineY = 0;
         super.materialCost = 2;
     }
-    
+
     @Override
     public void buildingShape(int x, int y) {
         for (int i = 0; i < 2; i++) {
@@ -37,14 +37,14 @@ public class SBlock extends Building {
             cells.add(cell1);
         }
     }
-    
+
     @Override
-    public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c, int cellSize) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.GREEN);
+            s.drawCell(c, s.getX(), s.getY(), Color.GREEN, cellSize);
         }
     }
-    
+
     @Override
     public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
         switch (state) {
@@ -68,7 +68,7 @@ public class SBlock extends Building {
                 break;
         }
     }
-    
+
     @Override
     public void rotateBuildingLeft() {
         cells.clear();
@@ -94,7 +94,7 @@ public class SBlock extends Building {
         }
         changeStateRotateLeft();
     }
-    
+
     @Override
     public void rotateBuildingRight() {
         cells.clear();
@@ -120,7 +120,7 @@ public class SBlock extends Building {
         }
         changeStateRotateRight();
     }
-    
+
     @Override
     public ArrayList<Cell> getPreviewsShape(Board board, int x, int y) {
         ArrayList<Cell> shape = new ArrayList<>();
@@ -146,5 +146,5 @@ public class SBlock extends Building {
         }
         return shape;
     }
-    
+
 }

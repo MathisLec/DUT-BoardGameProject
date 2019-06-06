@@ -38,9 +38,9 @@ public class LBlock extends Building {
     }
 
     @Override
-    public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c, int cellSize) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.ORANGE);
+            s.drawCell(c, s.getX(), s.getY(), Color.ORANGE, cellSize);
         }
     }
 

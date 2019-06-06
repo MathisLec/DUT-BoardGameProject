@@ -82,9 +82,9 @@ public abstract class Building implements Serializable {
         }
     }
 
-    public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c,int cellSize) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.WHITE);
+            s.drawCell(c, s.getX(), s.getY(), Color.WHITE,cellSize);
         }
     }
 

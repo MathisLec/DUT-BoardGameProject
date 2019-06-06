@@ -39,9 +39,9 @@ public class ZBlock extends Building {
     }
 
     @Override
-    public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c, int cellSize) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.RED);
+            s.drawCell(c, s.getX(), s.getY(), Color.RED, cellSize);
         }
     }
 

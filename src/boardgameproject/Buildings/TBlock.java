@@ -37,9 +37,9 @@ public class TBlock extends Building {
     }
 
     @Override
-    public void drawBuilding(Canvas c) {
+    public void drawBuilding(Canvas c, int cellSize) {
         for (Cell s : cells) {
-            s.drawCell(c, s.getX(), s.getY(), Color.PURPLE);
+            s.drawCell(c, s.getX(), s.getY(), Color.PURPLE, cellSize);
         }
     }
 

@@ -22,8 +22,7 @@ public class Cell implements Serializable {
     private char buildingType;
     private boolean selectedCell;
     private int x, y;
-    private final int cellShape = 30;
-
+    
     public Cell() {
         this.hasWorker = false;
         this.hasBuilding = false;
@@ -55,16 +54,12 @@ public class Cell implements Serializable {
         this.y = (int) y;
     }
 
-    public int getCellShape() {
-        return cellShape;
-    }
-
-    public void drawCell(Canvas c, int x, int y, Color col) {
+    public void drawCell(Canvas c, int x, int y, Color col,int cellSize) {
         GraphicsContext gc = c.getGraphicsContext2D();
         gc.setFill(col);
-        gc.fillRect(x * cellShape, y * cellShape, cellShape, cellShape);
+        gc.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
         gc.setStroke(Color.BLACK);
-        gc.strokeRect(x * cellShape, y * cellShape, cellShape, cellShape);
+        gc.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
 
     public void setHasWorkerStatus() {
@@ -117,5 +112,4 @@ public class Cell implements Serializable {
     public void setY(int y) {
         this.y = y;
     }
-
 }
