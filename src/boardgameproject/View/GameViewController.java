@@ -141,7 +141,7 @@ public class GameViewController implements Initializable {
             GraphicsContext gc1 = getAssociatedCanvas(b).getGraphicsContext2D();
             gc1.clearRect(-2, -2, 125, 125);
             gc1.setLineWidth(1);
-            if (b == selectedBuilding) {
+            if (b == selectedBuilding && b != null) {
                 gc1.setStroke(Color.RED);
                 gc1.strokeRect(0, 0, getAssociatedCanvas(b).getWidth(),
                         getAssociatedCanvas(b).getHeight());
@@ -158,8 +158,8 @@ public class GameViewController implements Initializable {
                 b.drawBuilding(canvas[i]);
             } catch (IndexOutOfBoundsException ex) {
                 b = null;
-                buildingsInHand.put(canvas[i], b);
             }
+            buildingsInHand.put(canvas[i], b);
         }
     }
 
@@ -168,7 +168,6 @@ public class GameViewController implements Initializable {
         round.endTurn();
         board.endTurn();
         round.setPutBuilding(true);
-        nbWorkerToPlace = 1;
         update();
     }
 
@@ -347,7 +346,7 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void MethodeWorker(ActionEvent event) {
-        if (nbWorkerToPlace > 0) {
+        if (player.getNbEnergy() > 0) {
             player.allowToPlaceWorker();
         }
     }
