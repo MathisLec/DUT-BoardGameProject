@@ -8,6 +8,7 @@ package boardgameproject.View;
 import boardgameproject.Board;
 import boardgameproject.Buildings.Building;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
@@ -54,17 +55,7 @@ public class GameViewController implements Initializable {
     HashMap<Canvas, Building> buildingsInHand = new HashMap<>();
 
     @FXML
-    private Canvas GameBoard;
-    @FXML
-    private Canvas main1;
-    @FXML
-    private Canvas main2;
-    @FXML
-    private Canvas main3;
-    @FXML
-    private Canvas main4;
-    @FXML
-    private Canvas main5;
+    private Canvas GameBoard, main1, main2, main3, main4, main5;
     @FXML
     private Label nbEnergyLabel;
     @FXML
@@ -161,11 +152,15 @@ public class GameViewController implements Initializable {
 
     private void drawPlayerBuildingsInHandCanvas() {
         Canvas[] canvas = {main1, main2, main3, main4, main5};
-        int i = 0;
-        for (Building b : player.getBuildings()) {
-            b.drawBuilding(canvas[i]);
-            buildingsInHand.put(canvas[i], b);
-            i++;
+        for (int i = 0; i < canvas.length; i++) {
+            Building b;
+            try {
+                b = player.getBuildings().get(i);
+                b.drawBuilding(canvas[i]);
+            } catch (IndexOutOfBoundsException ex) {
+                b = null;
+                buildingsInHand.put(canvas[i], b);
+            }
         }
     }
 
@@ -234,9 +229,12 @@ public class GameViewController implements Initializable {
                     board.addWorker(mouseY, mouseX);
                 }
                 if (selectedBuilding != null && !selectedBuilding.getPreviewsShape(board, mouseY, mouseX).isEmpty()) {
-                    board.addBuilding(selectedBuilding, mouseY, mouseX);
-                    selectedBuilding = null;
-                    round.setPutBuilding(false);
+                    try {
+                        board.addBuilding(selectedBuilding, mouseY, mouseX);
+                        selectedBuilding = null;
+                        round.setPutBuilding(false);
+                    } catch (InsufficientRessourcesException | InvalidLocationException ex) {
+                    }
                 }
             }
         } catch (NullPointerException | InvalidLocationException ex) {
@@ -328,7 +326,9 @@ public class GameViewController implements Initializable {
     @FXML
     private void hand5(MouseEvent event) {
         if (round.getPutBuilding()) {
-            selectedBuilding = buildingsInHand.get(main5);
+            if (buildingsInHand.get(main5) != null) {
+                selectedBuilding = buildingsInHand.get(main5);
+            }
             if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }

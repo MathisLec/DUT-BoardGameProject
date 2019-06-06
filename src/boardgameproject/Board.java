@@ -10,6 +10,8 @@ import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
@@ -46,18 +48,23 @@ public final class Board implements Serializable {
         }
     }
 
-    public void addBuilding(Building building, int x, int y) throws InvalidLocationException {
-        if (checkAddBuilding(building, x, y)) {
-            for (Cell c : building.getPreviewsShape(this, x, y)) {
-                c.changeBuildingStatus(building);
+    public void addBuilding(Building building, int x, int y) throws InsufficientRessourcesException, InvalidLocationException {
+        try {
+            if (checkAddBuilding(building, x, y)) {
+                for (Cell c : building.getPreviewsShape(this, x, y)) {
+                    c.changeBuildingStatus(building);
+                }
+                building.putPreviewsCellsInList(this, x, y);
+                buildings.add(building);
+                player.placeBuilding(building);
             }
-            building.putPreviewsCellsInList(this, x, y);
-            buildings.add(building);
-            player.placeBuilding(building);
-        } else {
+        } catch (InsufficientRessourcesException ex) {
+            System.err.println("Ressources insuffisantes");
+            throw new InsufficientRessourcesException();
+        } catch (InvalidLocationException ex) {
+            System.err.println("Emplacement non valide");
             throw new InvalidLocationException();
         }
-
     }
 
     public void addWorker(int x, int y) throws InvalidLocationException {
@@ -80,15 +87,17 @@ public final class Board implements Serializable {
         getCell(x, y).changeWorkerStatus();
     }
 
-    private boolean checkAddBuilding(Building building, int x, int y) {
+    private boolean checkAddBuilding(Building building, int x, int y) throws InvalidLocationException, InsufficientRessourcesException {
         boolean isValid = true;
         for (Cell c : building.getPreviewsShape(this, x, y)) {
             if (c.hasBuilding()) {
                 isValid = false;
+                throw new InvalidLocationException();
             }
         }
         if (player.getNbMaterials() < building.getMaterialCost()) {
             isValid = false;
+            throw new InsufficientRessourcesException();
         }
         return isValid;
     }
