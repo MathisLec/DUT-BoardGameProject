@@ -89,7 +89,7 @@ public class GameViewController implements Initializable {
             c.drawCell(GameBoard, c.getY(), c.getX(), color, cellSize);
             if (c.hasWorker()) {
                 gc.setFill(Color.BLACK);
-                gc.fillOval(c.getY() * cellSize, c.getX() * cellSize, cellSize, cellSize);
+                gc.fillOval(c.getY() * cellSize + 5, c.getX() * cellSize + 5, 20, 20);
             }
         }
         // Clear and redraw Strokes
@@ -135,7 +135,7 @@ public class GameViewController implements Initializable {
                 color = Color.GREY;
                 break;
             default:
-                color = Color.WHITE;
+                color = Color.DEEPSKYBLUE;
                 break;
         }
         return color;
@@ -171,7 +171,7 @@ public class GameViewController implements Initializable {
     private void zBlockRole(Building building) {
         player.putBuildingFromHandToPile(building);
         player.drawBuilding();
-        player.disallowToReturnBuilding();
+        player.decreaseNbBuildingToReturn();
         selectedBuilding = null;
     }
 
@@ -273,7 +273,7 @@ public class GameViewController implements Initializable {
     private void Hand1(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(hand1);
-            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+            if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
         }
@@ -284,7 +284,7 @@ public class GameViewController implements Initializable {
     private void Hand2(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(hand2);
-            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+            if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
         }
@@ -295,7 +295,7 @@ public class GameViewController implements Initializable {
     private void Hand3(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(hand3);
-            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+            if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
         }
@@ -306,7 +306,7 @@ public class GameViewController implements Initializable {
     private void Hand4(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(hand4);
-            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+            if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
         }
@@ -317,7 +317,7 @@ public class GameViewController implements Initializable {
     private void Hand5(MouseEvent event) {
         if (round.getPutBuilding()) {
             selectedBuilding = buildingsInHand.get(hand5);
-            if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
+            if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
         }
@@ -413,7 +413,7 @@ public class GameViewController implements Initializable {
         if (round.getNbTurn() > 29) {
             Stage stage2 = (Stage) EndTurn.getScene().getWindow();
             stage2.close();
-            
+
             Stage stage = new Stage();
             Parent root = FXMLLoader.load(getClass().getResource("ScoreView.fxml"));
 

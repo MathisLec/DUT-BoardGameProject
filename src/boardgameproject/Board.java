@@ -145,8 +145,8 @@ public final class Board implements Serializable {
                     b.buildingRole(player, this, round);
                 } catch (InsufficientRessourcesException ex) {
                     //Remove a worker from the board and return it to the player's hand
-                    b.removeWorker();
-                    player.addWorkerInHand(1);
+                    player.addWorkerInHand(b.getNbWorker());
+                    b.clearWorkers();
                 }
             }
         }

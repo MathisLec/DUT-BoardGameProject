@@ -56,9 +56,12 @@ public class ZBlock extends Building {
                 break;
             case LEFT:
             case RIGHT:
-                int nbEnergyToConsumme = 1;
+                int nbEnergyToConsumme = getNbWorker();
+                player.setNbBuildingToReturnByDefault();
                 player.consummeEnergy(nbEnergyToConsumme);
-                player.allowToReturnBuilding();
+                for (int i = 0; i < getNbWorker(); i++) {
+                    player.increaseNbBuildingToReturn();
+                }
                 // this role is manage in GameViewController Class in methods zBlockRole
                 break;
         }

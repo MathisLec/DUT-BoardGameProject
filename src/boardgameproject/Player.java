@@ -23,9 +23,10 @@ public class Player implements Serializable {
     private final int DEFAULT_NB_MONEY = 5;
     private final int DEFAULT_NB_RESEARCH = 0;
     private final int LIMIT_NB_RESEARCH = 8;
-    private final int DEFAULT_NB_STELLARIUM = 8;
+    private final int DEFAULT_NB_STELLARIUM = 0;
     private final int NB_BUILDINGS_START = 5;
     private final int DEFAULT_NB_WORKER_TO_PLACE = 1;
+    private final int DEFAULT_NB_BUILDING_TO_RETURN = 0;
     private final int LIMIT_NB_BUILDINGS_IN_HAND = 5;
 
     private int nbEnergy;
@@ -38,9 +39,8 @@ public class Player implements Serializable {
     private static Pile pile = new Pile();
     private List<Building> buildings;
     private int nbWorkerToPlace;
+    private int nbBuildingToReturn;
     private boolean isAllowToPlaceWorker;
-    private boolean isAllowToReturnBuilding;
-    private boolean isAllowToMoveWorker;
 
     public Player() {
         this.nbEnergy = DEFAULT_NB_ENERGY;
@@ -51,10 +51,9 @@ public class Player implements Serializable {
         this.nbStellarium = DEFAULT_NB_STELLARIUM;
         this.buildings = new ArrayList<>();
         this.nbWorkerToPlace = DEFAULT_NB_WORKER_TO_PLACE;
+        this.nbBuildingToReturn = DEFAULT_NB_BUILDING_TO_RETURN;
         this.nbTurnSpacePort = 0;
         this.isAllowToPlaceWorker = false;
-        this.isAllowToReturnBuilding = false;
-        this.isAllowToMoveWorker = false;
         startingHand();
     }
 
@@ -207,16 +206,20 @@ public class Player implements Serializable {
         buildings.remove(building);
     }
 
-    public boolean isAllowToReturnBuilding() {
-        return isAllowToReturnBuilding;
+    public void increaseNbBuildingToReturn() {
+        nbBuildingToReturn++;
     }
 
-    public void allowToReturnBuilding() {
-        isAllowToReturnBuilding = true;
+    public void decreaseNbBuildingToReturn() {
+        nbBuildingToReturn--;
     }
 
-    public void disallowToReturnBuilding() {
-        isAllowToReturnBuilding = false;
+    public int getNbBuildingToReturn() {
+        return nbBuildingToReturn;
+    }
+
+    public void setNbBuildingToReturnByDefault() {
+        nbBuildingToReturn = DEFAULT_NB_BUILDING_TO_RETURN;
     }
 
     public boolean isAllowToPlaceWorker() {
