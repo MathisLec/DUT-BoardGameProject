@@ -74,6 +74,7 @@ public final class Board implements Serializable {
             if (checkAddWorker(selectedCell)) {
                 selectedCell.setHasWorkerStatus();
                 player.placeWorker();
+                player.decreaseNbWorkerToPlace();
             } else {
                 throw new InvalidLocationException();
             }
@@ -105,8 +106,8 @@ public final class Board implements Serializable {
         }
         return isValid;
     }
-    
-    private boolean checkRemoveWorker(Cell cell){
+
+    private boolean checkRemoveWorker(Cell cell) {
         return cell.hasWorker();
     }
 
@@ -154,6 +155,7 @@ public final class Board implements Serializable {
         if (player.getBuildings().isEmpty()) {
             player.drawBuilding();
         }
+        player.setNbWorkerToPlaceByDefault();
     }
 
     public void changePlayer(Player player) {
@@ -166,9 +168,6 @@ public final class Board implements Serializable {
             if (c.getX() == x && c.getY() == y) {
                 cell = c;
             }
-        }
-        if (cell == null) {
-            throw new NullPointerException();
         }
         return cell;
     }

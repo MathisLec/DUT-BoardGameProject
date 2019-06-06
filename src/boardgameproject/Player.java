@@ -89,6 +89,10 @@ public class Player implements Serializable {
         return nbMaterials;
     }
 
+    public int getNbWorkerToPlace() {
+        return nbWorkerToPlace;
+    }
+
     public int getNbMoney() {
         return nbMoney;
     }

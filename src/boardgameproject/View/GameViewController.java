@@ -216,15 +216,21 @@ public class GameViewController implements Initializable {
         try {
             if (player.isAllowToPlaceWorker()) {
                 board.addWorker(mouseY, mouseX);
-                player.decreaseNbWorkerToPlace();
                 player.disallowToPlaceWorker();
             } else {
                 if (board.getCell(mouseY, mouseX).hasWorker()) {
                     selectedWorker = board.getCell(mouseY, mouseX);
                 }
-                if (selectedWorker != null && selectedWorker.hasWorker() && !board.getCell(mouseY, mouseX).hasWorker()) {
-                    board.removeWorker(selectedWorker.getY(), selectedWorker.getX());
+                if (selectedWorker != null
+                        && selectedWorker.hasWorker()
+                        && !board.getCell(mouseY, mouseX).hasWorker()
+                        && player.getNbWorkerToPlace() > 0
+                        && selectedBuilding == null) {
+                    // Here x is vertical axe and y is horizontal axe
+                    board.removeWorker(selectedWorker.getX(), selectedWorker.getY());
+                    // Here x is horizontal axe and y is vertical axe
                     board.addWorker(mouseY, mouseX);
+                    selectedWorker = null;
                 }
                 if (selectedBuilding != null && !selectedBuilding.getPreviewsShape(board, mouseY, mouseX).isEmpty()) {
                     try {
@@ -346,7 +352,7 @@ public class GameViewController implements Initializable {
 
     @FXML
     private void MethodeWorker(ActionEvent event) {
-        if (player.getNbEnergy() > 0) {
+        if (player.getNbWorkerToPlace() > 0) {
             player.allowToPlaceWorker();
         }
     }
