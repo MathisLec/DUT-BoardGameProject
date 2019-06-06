@@ -140,6 +140,7 @@ public final class Board implements Serializable {
     }
 
     public void endTurn() {
+        player.setNbWorkerToPlaceByDefault();
         for (Building b : buildings) {
             for (int i = 0; i < b.getNbWorker(); i++) {
                 try {
@@ -155,7 +156,6 @@ public final class Board implements Serializable {
         if (player.getBuildings().isEmpty()) {
             player.drawBuilding();
         }
-        player.setNbWorkerToPlaceByDefault();
     }
 
     public void changePlayer(Player player) {
