@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="882.0" style="-fx-background-color: #2F3640;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.GameViewController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="882.0" style="-fx-background-color: #2F3640;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.GameViewController">
    <children>
       <Canvas fx:id="GameBoard" height="601.0" layoutX="47.0" layoutY="58.0" onMouseMoved="#MoveBuilding" onMousePressed="#Testclick" width="301.0" />
       <Button layoutX="709.0" layoutY="611.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="28.0" prefWidth="77.0" text="End Turn" />
       <Button layoutX="772.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateRight" text="Rotate Right" />
       <Button layoutX="644.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateLeft" text="Rotate Left" />
-      <Label layoutX="613.0" layoutY="14.0" prefHeight="35.0" prefWidth="120.0" text="Ressources" textFill="WHITE">
+      <Label layoutX="613.0" layoutY="14.0" prefHeight="35.0" prefWidth="148.0" text="Ressources" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -59,5 +59,6 @@
          </font>
       </Label>
       <Button fx:id="HelpButton" layoutX="441.0" layoutY="566.0" mnemonicParsing="false" onAction="#openHelp" text="Help" />
+      <Button layoutX="453.0" layoutY="626.0" mnemonicParsing="false" onAction="#DisplayScore" text="Score" />
    </children>
 </AnchorPane>

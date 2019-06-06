@@ -359,6 +359,7 @@ public class GameViewController implements Initializable {
 
     private void zBlockRole(Building building) {
         player.putBuildingFromHandToPile(building);
+        player.drawBuilding();
         player.disallowToReturnBuilding();
     }
 
@@ -410,6 +411,20 @@ public class GameViewController implements Initializable {
         scene.setRoot(root);
         
         stage.setTitle("Help Menu");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void DisplayScore(ActionEvent event) throws IOException {
+        Stage stage = new Stage();
+        Parent root = FXMLLoader.load(getClass().getResource("ScoreView.fxml"));
+
+        Scene scene = new Scene(root);
+        scene.setRoot(root);
+        
+        stage.setTitle("Score Menu");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

@@ -142,7 +142,7 @@ public class HelpViewController implements Initializable {
         Z.rotateBuildingRight();
         Z.drawBuilding(ZBlockTCanvas, cellSize);
         ZBlockT.setText("Z-Block, Top : \n\t Cost : 2 Materials \n\t Action : Spaceport \n\t"
-                + " Consumes 1 Money.");
+                + " Consumes 1 Money and add 2 additional points per turn \n\t that a worker has spent on the Spaceport.");
         
         L.drawBuilding(LBlockTCanvas, cellSize);
         LBlockT.setText("L-Block, Top : \n\t Cost : 8 Materials \n\t Action : Apartement \n\t"
