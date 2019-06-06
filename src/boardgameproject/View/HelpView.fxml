@@ -12,7 +12,7 @@ and open the template in the editor.
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1163.0" style="-fx-background-color: #2F3640;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.HelpViewController">
    <children>
-      <Label fx:id="IBlockH" layoutX="60.0" layoutY="250.0" text="I-BlockH " textFill="WHITE" />
+      <Label fx:id="IBlockH" layoutX="62.0" layoutY="250.0" text="I-BlockH " textFill="WHITE" />
       <Label fx:id="OBlock" layoutX="60.0" layoutY="50.0" text="O-Block :" textFill="WHITE" />
       <Label fx:id="TBlockT" layoutX="900.0" layoutY="150.0" text="T-BlockT" textFill="WHITE" />
       <Label fx:id="LBlockT" layoutX="500.0" layoutY="50.0" text="L-BlockT" textFill="WHITE" />
@@ -31,13 +31,13 @@ and open the template in the editor.
       <Label fx:id="JBlockL" layoutX="900.0" layoutY="50.0" text="J-BlockL" textFill="WHITE" />
       <Label fx:id="SBlockT" layoutX="60.0" layoutY="350.0" text="S-BlockT" textFill="WHITE" />
       <Label fx:id="ZBlockT" layoutX="60.0" layoutY="550.0" text="Z-BlockT" textFill="WHITE" />
-      <Canvas fx:id="OBlockCanvas" height="60.0" layoutY="50.0" width="60.0" />
-      <Canvas fx:id="IBlockTCanvas" height="60.0" layoutY="150.0" width="60.0" />
-      <Canvas fx:id="IBlockHCanvas" height="60.0" layoutY="250.0" width="60.0" />
-      <Canvas fx:id="SBlockTCanvas" height="60.0" layoutY="350.0" width="60.0" />
-      <Canvas fx:id="SBlockHCanvas" height="60.0" layoutY="450.0" width="60.0" />
-      <Canvas fx:id="ZBlockTCanvas" height="60.0" layoutY="550.0" width="60.0" />
-      <Canvas fx:id="ZBlockHCanvas" height="60.0" layoutY="650.0" width="60.0" />
+      <Canvas fx:id="OBlockCanvas" height="60.0" layoutX="2.0" layoutY="50.0" width="60.0" />
+      <Canvas fx:id="IBlockTCanvas" height="60.0" layoutX="2.0" layoutY="150.0" width="60.0" />
+      <Canvas fx:id="IBlockHCanvas" height="60.0" layoutX="2.0" layoutY="250.0" width="60.0" />
+      <Canvas fx:id="SBlockTCanvas" height="60.0" layoutX="2.0" layoutY="350.0" width="60.0" />
+      <Canvas fx:id="SBlockHCanvas" height="60.0" layoutX="2.0" layoutY="450.0" width="60.0" />
+      <Canvas fx:id="ZBlockTCanvas" height="60.0" layoutX="2.0" layoutY="550.0" width="60.0" />
+      <Canvas fx:id="ZBlockHCanvas" height="60.0" layoutX="2.0" layoutY="650.0" width="60.0" />
       <Canvas fx:id="LBlockTCanvas" height="60.0" layoutX="440.0" layoutY="50.0" width="60.0" />
       <Canvas fx:id="LBlockRCanvas" height="60.0" layoutX="440.0" layoutY="170.0" width="60.0" />
       <Canvas fx:id="LBlockLCanvas" height="60.0" layoutX="440.0" layoutY="250.0" width="60.0" />

@@ -8,11 +8,11 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="882.0" style="-fx-background-color: #2F3640;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="boardgameproject.View.GameViewController">
    <children>
-      <Canvas fx:id="GameBoard" height="601.0" layoutX="47.0" layoutY="58.0" onMouseMoved="#MoveBuilding" onMousePressed="#Testclick" width="301.0" />
-      <Button layoutX="709.0" layoutY="611.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="28.0" prefWidth="77.0" text="End Turn" />
-      <Button layoutX="772.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateRight" text="Rotate Right" />
-      <Button layoutX="644.0" layoutY="578.0" mnemonicParsing="false" onAction="#RotateLeft" text="Rotate Left" />
-      <Label layoutX="613.0" layoutY="14.0" prefHeight="35.0" prefWidth="148.0" text="Ressources" textFill="WHITE">
+      <Canvas fx:id="GameBoard" height="601.0" layoutX="47.0" layoutY="58.0" onMouseMoved="#mouseHoverBoard" onMousePressed="#clickOnBoard" width="301.0" />
+      <Button fx:id="EndTurn" layoutX="717.0" layoutY="611.0" mnemonicParsing="false" onAction="#endTurn" prefHeight="28.0" prefWidth="77.0" text="End Turn" />
+      <Button layoutX="772.0" layoutY="578.0" mnemonicParsing="false" onAction="#rotateRight" text="Rotate Right" />
+      <Button layoutX="644.0" layoutY="578.0" mnemonicParsing="false" onAction="#rotateLeft" text="Rotate Left" />
+      <Label layoutX="584.0" layoutY="14.0" prefHeight="35.0" prefWidth="148.0" text="Ressources" textFill="WHITE">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
@@ -22,7 +22,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="633.0" layoutY="58.0" text="Materials" textFill="WHITE">
+      <Label layoutX="616.0" layoutY="56.0" text="Materials" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -31,34 +31,63 @@
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <Label fx:id="nbMaterialsLabel" layoutX="658.0" layoutY="95.0" text="8" textFill="WHITE">
+      <Label fx:id="nbMaterialsLabel" layoutX="652.0" layoutY="95.0" text="8" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <Label layoutX="724.0" layoutY="58.0" text="Workers" textFill="WHITE">
+      <Label layoutX="709.0" layoutY="56.0" text="Workers" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="nbWorkersLabel" layoutX="750.0" layoutY="95.0" text="8" textFill="WHITE">
+      <Label fx:id="nbWorkersLabel" layoutX="741.0" layoutY="95.0" text="8" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font></Label>
-      <Button layoutX="822.0" layoutY="639.0" mnemonicParsing="false" onAction="#QuitGame" text="Quit" />
-      <Button layoutX="800.0" layoutY="600.0" mnemonicParsing="false" onAction="#saveGame" text="Save" />
-      <Canvas fx:id="main1" height="121.0" layoutX="484.0" layoutY="144.0" onMousePressed="#hand1" width="121.0" />
-      <Canvas fx:id="main2" height="121.0" layoutX="613.0" layoutY="144.0" onMousePressed="#hand2" width="121.0" />
-      <Canvas fx:id="main3" height="121.0" layoutX="747.0" layoutY="144.0" onMousePressed="#hand3" width="121.0" />
-      <Canvas fx:id="main4" height="121.0" layoutX="553.0" layoutY="298.0" onMousePressed="#hand4" width="121.0" />
-      <Canvas fx:id="main5" height="121.0" layoutX="687.0" layoutY="298.0" onMousePressed="#hand5" width="121.0" />
-      <Button layoutX="557.0" layoutY="626.0" mnemonicParsing="false" onAction="#NewGame" text="New Game" />
-      <Button layoutX="525.0" layoutY="566.0" mnemonicParsing="false" onAction="#MethodeWorker" text="Le Boutton" />
+      <Button layoutX="177.0" layoutY="19.0" mnemonicParsing="false" onAction="#quitGame" text="Quit" />
+      <Button layoutX="123.0" layoutY="19.0" mnemonicParsing="false" onAction="#saveGame" text="Save" />
+      <Canvas fx:id="hand1" height="121.0" layoutX="484.0" layoutY="144.0" onMousePressed="#Hand1" width="121.0" />
+      <Canvas fx:id="hand2" height="121.0" layoutX="613.0" layoutY="144.0" onMousePressed="#Hand2" width="121.0" />
+      <Canvas fx:id="hand3" height="121.0" layoutX="747.0" layoutY="144.0" onMousePressed="#Hand3" width="121.0" />
+      <Canvas fx:id="hand4" height="121.0" layoutX="553.0" layoutY="298.0" onMousePressed="#Hand4" width="121.0" />
+      <Canvas fx:id="hand5" height="121.0" layoutX="687.0" layoutY="298.0" onMousePressed="#Hand5" width="121.0" />
+      <Button layoutX="697.0" layoutY="545.0" mnemonicParsing="false" onAction="#placeAWorker" text="Place a Worker" />
       <Label fx:id="nbTurn" layoutX="781.0" layoutY="-1.0" text="TOUR" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="HelpButton" layoutX="441.0" layoutY="566.0" mnemonicParsing="false" onAction="#openHelp" text="Help" />
-      <Button layoutX="453.0" layoutY="626.0" mnemonicParsing="false" onAction="#DisplayScore" text="Score" />
+      <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#displayHelp" text="Help" />
+      <Button layoutX="65.0" layoutY="19.0" mnemonicParsing="false" onAction="#displayScore" text="Score" />
+      <Label layoutX="787.0" layoutY="56.0" text="Money" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nbMoney" layoutX="810.0" layoutY="95.0" text="5" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="453.0" layoutY="56.0" text="Research" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nbResearch" layoutX="488.0" layoutY="95.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="357.0" layoutY="56.0" text="Stellarium" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label fx:id="nbStellarium" layoutX="397.0" layoutY="95.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

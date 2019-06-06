@@ -41,9 +41,9 @@ import javafx.stage.Stage;
  */
 public class GameViewController implements Initializable {
 
-    private Round round = new Round();
-    Player player = new Player();
-    Board board = new Board(round, player);
+    static Round round = new Round();
+    static Player player = new Player();
+    static Board board = new Board(round, player);
 
     Building selectedBuilding;
 
@@ -52,19 +52,13 @@ public class GameViewController implements Initializable {
     HashMap<Canvas, Building> buildingsInHand = new HashMap<>();
 
     public int cellSize = 30;
-
     @FXML
-    private Canvas GameBoard, main1, main2, main3, main4, main5;
+    private Canvas GameBoard, hand1, hand2, hand3, hand4, hand5;
     @FXML
-    private Label nbEnergyLabel;
+    private Label nbEnergyLabel, nbMaterialsLabel, nbWorkersLabel, nbTurn, nbMoney,
+            nbResearch, nbStellarium;
     @FXML
-    private Label nbMaterialsLabel;
-    @FXML
-    private Label nbWorkersLabel;
-    @FXML
-    private Label nbTurn;
-    @FXML
-    private Button HelpButton;
+    private Button EndTurn;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -74,6 +68,14 @@ public class GameViewController implements Initializable {
             resumeGame();
         }
         update();
+    }
+
+    private void newGame() {
+        round = new Round();
+        player = new Player();
+        board = new Board(round, player);
+
+        board.drawBoard(GameBoard, cellSize);
     }
 
     public void update() {
@@ -99,6 +101,9 @@ public class GameViewController implements Initializable {
         nbEnergyLabel.setText(Integer.toString(player.getNbEnergy()));
         nbMaterialsLabel.setText(Integer.toString(player.getNbMaterials()));
         nbWorkersLabel.setText(Integer.toString(player.getNbWorkers()));
+        nbMoney.setText(Integer.toString(player.getNbMoney()));
+        nbResearch.setText(Integer.toString(player.getNbResearch()));
+        nbStellarium.setText(Integer.toString(player.getNbStellarium()));
 
     }
 
@@ -150,7 +155,7 @@ public class GameViewController implements Initializable {
     }
 
     private void drawPlayerBuildingsInHandCanvas() {
-        Canvas[] canvas = {main1, main2, main3, main4, main5};
+        Canvas[] canvas = {hand1, hand2, hand3, hand4, hand5};
         for (int i = 0; i < canvas.length; i++) {
             Building b;
             try {
@@ -163,16 +168,15 @@ public class GameViewController implements Initializable {
         }
     }
 
-    @FXML
-    private void endTurn(ActionEvent event) {
-        round.endTurn();
-        board.endTurn();
-        round.setPutBuilding(true);
-        update();
+    private void zBlockRole(Building building) {
+        player.putBuildingFromHandToPile(building);
+        player.drawBuilding();
+        player.disallowToReturnBuilding();
+        selectedBuilding = null;
     }
 
     @FXML
-    private void RotateRight(ActionEvent event) {
+    private void rotateRight(ActionEvent event) {
         try {
             GraphicsContext gc = getAssociatedCanvas(selectedBuilding).getGraphicsContext2D();
             gc.clearRect(0, 0, 121, 121);
@@ -188,7 +192,7 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void RotateLeft(ActionEvent event) {
+    private void rotateLeft(ActionEvent event) {
         try {
             GraphicsContext gc = getAssociatedCanvas(selectedBuilding).getGraphicsContext2D();
             gc.clearRect(0, 0, 120, 120);
@@ -204,12 +208,7 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void QuitGame(ActionEvent event) {
-        System.exit(0);
-    }
-
-    @FXML
-    private void Testclick(MouseEvent event) {
+    private void clickOnBoard(MouseEvent event) {
 
         int mouseX = (int) event.getX() / 30;
         int mouseY = (int) event.getY() / 30;
@@ -249,7 +248,7 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void MoveBuilding(MouseEvent event) {
+    private void mouseHoverBoard(MouseEvent event) {
         if (selectedBuilding != null) {
             int MouseX = (int) event.getX() / 30;
             int MouseY = (int) event.getY() / 30;
@@ -271,22 +270,9 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void NewGame(ActionEvent event) {
-        newGame();
-    }
-
-    private void newGame() {
-        round = new Round();
-        player = new Player();
-        board = new Board(round, player);
-
-        board.drawBoard(GameBoard, cellSize);
-    }
-
-    @FXML
-    private void hand1(MouseEvent event) {
+    private void Hand1(MouseEvent event) {
         if (round.getPutBuilding()) {
-            selectedBuilding = buildingsInHand.get(main1);
+            selectedBuilding = buildingsInHand.get(hand1);
             if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
@@ -295,9 +281,9 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void hand2(MouseEvent event) {
+    private void Hand2(MouseEvent event) {
         if (round.getPutBuilding()) {
-            selectedBuilding = buildingsInHand.get(main2);
+            selectedBuilding = buildingsInHand.get(hand2);
             if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
@@ -306,9 +292,9 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void hand3(MouseEvent event) {
+    private void Hand3(MouseEvent event) {
         if (round.getPutBuilding()) {
-            selectedBuilding = buildingsInHand.get(main3);
+            selectedBuilding = buildingsInHand.get(hand3);
             if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
@@ -317,9 +303,9 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void hand4(MouseEvent event) {
+    private void Hand4(MouseEvent event) {
         if (round.getPutBuilding()) {
-            selectedBuilding = buildingsInHand.get(main4);
+            selectedBuilding = buildingsInHand.get(hand4);
             if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
@@ -328,11 +314,9 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void hand5(MouseEvent event) {
+    private void Hand5(MouseEvent event) {
         if (round.getPutBuilding()) {
-            if (buildingsInHand.get(main5) != null) {
-                selectedBuilding = buildingsInHand.get(main5);
-            }
+            selectedBuilding = buildingsInHand.get(hand5);
             if (player.isAllowToReturnBuilding() && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
             }
@@ -351,16 +335,10 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void MethodeWorker(ActionEvent event) {
-        if (player.getNbWorkerToPlace() > 0) {
+    private void placeAWorker(ActionEvent event) {
+        if (player.getNbWorkerToPlace() > 0 && !board.getBuildings().isEmpty()) {
             player.allowToPlaceWorker();
         }
-    }
-
-    private void zBlockRole(Building building) {
-        player.putBuildingFromHandToPile(building);
-        player.drawBuilding();
-        player.disallowToReturnBuilding();
     }
 
     private void resumeGame() {
@@ -403,13 +381,13 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void openHelp(ActionEvent event) throws IOException {
+    private void displayHelp(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("HelpView.fxml"));
 
         Scene scene = new Scene(root);
         scene.setRoot(root);
-        
+
         stage.setTitle("Help Menu");
         stage.setResizable(false);
         stage.setScene(scene);
@@ -417,17 +395,46 @@ public class GameViewController implements Initializable {
     }
 
     @FXML
-    private void DisplayScore(ActionEvent event) throws IOException {
+    private void displayScore(ActionEvent event) throws IOException {
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(getClass().getResource("ScoreView.fxml"));
 
         Scene scene = new Scene(root);
         scene.setRoot(root);
-        
+
         stage.setTitle("Score Menu");
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void endTurn(ActionEvent event) throws IOException {
+        if (round.getNbTurn() > 29) {
+            Stage stage2 = (Stage) EndTurn.getScene().getWindow();
+            stage2.close();
+            
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(getClass().getResource("ScoreView.fxml"));
+
+            Scene scene = new Scene(root);
+            scene.setRoot(root);
+
+            stage.setTitle("Fin de Partie");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+        } else {
+            round.endTurn();
+            board.endTurn();
+            round.setPutBuilding(true);
+            update();
+        }
+    }
+
+    @FXML
+    private void quitGame(ActionEvent event) {
+        System.exit(0);
     }
 
 }
