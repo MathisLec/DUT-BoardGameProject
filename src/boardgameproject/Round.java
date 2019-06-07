@@ -5,8 +5,6 @@
  */
 package boardgameproject;
 
-import boardgameproject.Buildings.Building;
-import boardgameproject.Buildings.*;
 import java.io.Serializable;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +32,7 @@ public class Round extends Application implements Serializable {
         scene = new Scene(root);
 
         stage.setTitle("Jeu");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
