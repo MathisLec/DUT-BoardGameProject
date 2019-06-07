@@ -6,12 +6,10 @@
 package boardgameproject.Buildings;
 
 import boardgameproject.Board;
-import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
-import java.util.ArrayList;
-import javafx.scene.canvas.Canvas;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -32,37 +30,11 @@ public class JBlockTest {
     }
 
     /**
-     * Test of buildingShape method, of class JBlock.
-     */
-    @Test
-    public void testBuildingShape() {
-        System.out.println("buildingShape");
-        int x = 0;
-        int y = 0;
-        JBlock instance = new JBlock();
-        instance.buildingShape(x, y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of drawBuilding method, of class JBlock.
-     */
-    @Test
-    public void testDrawBuilding() {
-        System.out.println("drawBuilding");
-        Canvas c = null;
-        JBlock instance = new JBlock();
-        instance.drawBuilding(c);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of buildingRole method, of class JBlock with top orientation.
      */
     @Test
-    public void testBuildingRoleTop() throws InvalidLocationException {
+    public void testBuildingRoleTop() throws InvalidLocationException,
+            InsufficientRessourcesException {
         System.out.println("buildingRole");
         JBlock instance = new JBlock();
         player.getBuildings().add(instance);
@@ -82,7 +54,8 @@ public class JBlockTest {
      * Test of buildingRole method, of class JBlock with left orientation.
      */
     @Test
-    public void testBuildingRoleLeft() throws InvalidLocationException {
+    public void testBuildingRoleLeft() throws InvalidLocationException,
+            InsufficientRessourcesException {
         // this test has been done with a research points fixed to 1
         System.out.println("buildingRole");
         JBlock instance = new JBlock();
@@ -107,7 +80,8 @@ public class JBlockTest {
      * Test of buildingRole method, of class JBlock with bottom orientation.
      */
     @Test
-    public void testBuildingRoleBottom() throws InvalidLocationException {
+    public void testBuildingRoleBottom() throws InvalidLocationException,
+            InsufficientRessourcesException {
         // this test has been done with a research points fixed to 1
         System.out.println("buildingRole");
         JBlock instance = new JBlock();
@@ -132,7 +106,8 @@ public class JBlockTest {
      * Test of buildingRole method, of class JBlock with right orientation.
      */
     @Test
-    public void testBuildingRoleRight() throws InvalidLocationException {
+    public void testBuildingRoleRight() throws InvalidLocationException,
+            InsufficientRessourcesException {
         System.out.println("buildingRole");
         JBlock instance = new JBlock();
         player.getBuildings().add(instance);
@@ -149,49 +124,8 @@ public class JBlockTest {
         assertEquals(nbEnergyAfter, player.getNbEnergy());
         assertEquals(nbMoneyAfter, player.getNbMoney());
         assertEquals(nbMaterialAfter, player.getNbMaterials());
-        assertEquals(nbWorkerOnBoardAfter,instance.getNbWorker());
-        assertEquals(nbWorkerInHandAfter,player.getNbWorkers());
-    }
-
-    /**
-     * Test of rotateBuildingLeft method, of class JBlock.
-     */
-    @Test
-    public void testRotateBuildingLeft() {
-        System.out.println("rotateBuildingLeft");
-        JBlock instance = new JBlock();
-        instance.rotateBuildingLeft();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of rotateBuildingRight method, of class JBlock.
-     */
-    @Test
-    public void testRotateBuildingRight() {
-        System.out.println("rotateBuildingRight");
-        JBlock instance = new JBlock();
-        instance.rotateBuildingRight();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPreviewsShape method, of class JBlock.
-     */
-    @Test
-    public void testGetPreviewsShape() {
-        System.out.println("getPreviewsShape");
-        Board board = null;
-        int x = 0;
-        int y = 0;
-        JBlock instance = new JBlock();
-        ArrayList<Cell> expResult = null;
-        ArrayList<Cell> result = instance.getPreviewsShape(board, x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(nbWorkerOnBoardAfter, instance.getNbWorker());
+        assertEquals(nbWorkerInHandAfter, player.getNbWorkers());
     }
 
 }

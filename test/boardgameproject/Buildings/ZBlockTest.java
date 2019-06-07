@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
@@ -32,37 +33,11 @@ public class ZBlockTest {
     }
 
     /**
-     * Test of buildingShape method, of class ZBlock.
-     */
-    @Test
-    public void testBuildingShape() {
-        System.out.println("buildingShape");
-        int x = 0;
-        int y = 0;
-        ZBlock instance = new ZBlock();
-        instance.buildingShape(x, y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of drawBuilding method, of class ZBlock.
-     */
-    @Test
-    public void testDrawBuilding() {
-        System.out.println("drawBuilding");
-        Canvas c = null;
-        ZBlock instance = new ZBlock();
-        instance.drawBuilding(c);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of buildingRole method, of class ZBlock with horizontal orientation.
      */
     @Test
-    public void testBuildingRoleHori() throws InvalidLocationException {
+    public void testBuildingRoleHori() throws InvalidLocationException,
+            InsufficientRessourcesException {
         System.out.println("buildingRole");
         ZBlock instance = new ZBlock();
         player.getBuildings().add(instance);
@@ -71,8 +46,6 @@ public class ZBlockTest {
         board.addBuilding(instance, 1, 1);
         board.addWorker(1, 1);
         board.endTurn();
-
-        player.disallowToReturnBuilding();
 
         int nbEnergyAfter = 18; //16 + 2
         int nbMaterialAfter = 6; // 8 - 2
@@ -86,7 +59,8 @@ public class ZBlockTest {
      * Test of buildingRole method, of class ZBlock with horizontal orientation.
      */
     @Test
-    public void testBuildingRoleVert() throws InvalidLocationException {
+    public void testBuildingRoleVert() throws InvalidLocationException,
+            InsufficientRessourcesException {
         System.out.println("buildingRole");
         ZBlock instance = new ZBlock();
         player.getBuildings().add(instance);
@@ -98,46 +72,4 @@ public class ZBlockTest {
         assertEquals(player.getNbMoney(), 4); // 5 - 1
         assertEquals(player.getNbTurnSpacePort(), 1);
     }
-
-    /**
-     * Test of rotateBuildingLeft method, of class ZBlock.
-     */
-    @Test
-    public void testRotateBuildingLeft() {
-        System.out.println("rotateBuildingLeft");
-        ZBlock instance = new ZBlock();
-        instance.rotateBuildingLeft();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of rotateBuildingRight method, of class ZBlock.
-     */
-    @Test
-    public void testRotateBuildingRight() {
-        System.out.println("rotateBuildingRight");
-        ZBlock instance = new ZBlock();
-        instance.rotateBuildingRight();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPreviewsShape method, of class ZBlock.
-     */
-    @Test
-    public void testGetPreviewsShape() {
-        System.out.println("getPreviewsShape");
-        Board board = null;
-        int x = 0;
-        int y = 0;
-        ZBlock instance = new ZBlock();
-        ArrayList<Cell> expResult = null;
-        ArrayList<Cell> result = instance.getPreviewsShape(board, x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
 }

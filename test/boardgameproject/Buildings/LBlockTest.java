@@ -6,11 +6,8 @@
 package boardgameproject.Buildings;
 
 import boardgameproject.Board;
-import boardgameproject.Cell;
 import boardgameproject.Player;
 import boardgameproject.Round;
-import java.util.ArrayList;
-import javafx.scene.canvas.Canvas;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -28,33 +25,6 @@ public class LBlockTest {
         player = new Player();
         round = new Round();
         board = new Board(round, player);
-    }
-
-    /**
-     * Test of buildingShape method, of class LBlock.
-     */
-    @Test
-    public void testBuildingShape() {
-        System.out.println("buildingShape");
-        int x = 0;
-        int y = 0;
-        LBlock instance = new LBlock();
-        instance.buildingShape(x, y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of drawBuilding method, of class LBlock.
-     */
-    @Test
-    public void testDrawBuilding() {
-        System.out.println("drawBuilding");
-        Canvas c = null;
-        LBlock instance = new LBlock();
-        instance.drawBuilding(c);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -111,7 +81,7 @@ public class LBlockTest {
         assertEquals(player.getNbMoney(), 1); // 5 - 4
         assertEquals(player.getNbWorkers(), 8); // 8 - 1 + 1
     }
-    
+
     /**
      * Test of buildingRole method, of class LBlock with right orientation.
      */
@@ -128,47 +98,6 @@ public class LBlockTest {
 
         assertEquals(player.getNbMoney(), 9); // 5 + 4
         assertEquals(player.getNbEnergy(), 15); // 16 - 1
-    }
-
-    /**
-     * Test of rotateBuildingLeft method, of class LBlock.
-     */
-    @Test
-    public void testRotateBuildingLeft() {
-        System.out.println("rotateBuildingLeft");
-        LBlock instance = new LBlock();
-        instance.rotateBuildingLeft();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of rotateBuildingRight method, of class LBlock.
-     */
-    @Test
-    public void testRotateBuildingRight() {
-        System.out.println("rotateBuildingRight");
-        LBlock instance = new LBlock();
-        instance.rotateBuildingRight();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPreviewsShape method, of class LBlock.
-     */
-    @Test
-    public void testGetPreviewsShape() {
-        System.out.println("getPreviewsShape");
-        Board board = null;
-        int x = 0;
-        int y = 0;
-        LBlock instance = new LBlock();
-        ArrayList<Cell> expResult = null;
-        ArrayList<Cell> result = instance.getPreviewsShape(board, x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }
