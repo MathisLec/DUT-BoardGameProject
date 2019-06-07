@@ -7,6 +7,7 @@ package boardgameproject.Buildings;
 
 import boardgameproject.Board;
 import boardgameproject.Cell;
+import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
 import boardgameproject.Player;
 import boardgameproject.Round;
@@ -32,37 +33,11 @@ public class SBlockTest {
     }
 
     /**
-     * Test of buildingShape method, of class SBlock.
-     */
-    @Test
-    public void testBuildingShape() {
-        System.out.println("buildingShape");
-        int x = 0;
-        int y = 0;
-        SBlock instance = new SBlock();
-        instance.buildingShape(x, y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of drawBuilding method, of class SBlock.
-     */
-    @Test
-    public void testDrawBuilding() {
-        System.out.println("drawBuilding");
-        Canvas c = null;
-        SBlock instance = new SBlock();
-        instance.drawBuilding(c);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of buildingRole method, of class SBlock with horizontal orientation.
      */
     @Test
-    public void testBuildingRoleHori() throws InvalidLocationException {
+    public void testBuildingRoleHori() throws InvalidLocationException,
+            InsufficientRessourcesException {
         System.out.println("buildingRole");
         SBlock instance = new SBlock();
         player.getBuildings().add(instance);
@@ -80,7 +55,8 @@ public class SBlockTest {
      * Test of buildingRole method, of class SBlock with vertical orientation.
      */
     @Test
-    public void testBuildingRoleVert() throws InvalidLocationException {
+    public void testBuildingRoleVert() throws InvalidLocationException,
+            InsufficientRessourcesException {
         // this test has been done with a research points fixed to 1
         System.out.println("buildingRole");
         SBlock instance = new SBlock();
@@ -93,47 +69,6 @@ public class SBlockTest {
         assertEquals(player.getNbEnergy(), 14); // 16 - 2
         assertEquals(player.getNbMoney(), 4); // 5 - 1
         assertEquals(player.getNbMaterials(), 7); // 8 - 2 + 1
-    }
-
-    /**
-     * Test of rotateBuildingLeft method, of class SBlock.
-     */
-    @Test
-    public void testRotateBuildingLeft() {
-        System.out.println("rotateBuildingLeft");
-        SBlock instance = new SBlock();
-        instance.rotateBuildingLeft();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of rotateBuildingRight method, of class SBlock.
-     */
-    @Test
-    public void testRotateBuildingRight() {
-        System.out.println("rotateBuildingRight");
-        SBlock instance = new SBlock();
-        instance.rotateBuildingRight();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getPreviewsShape method, of class SBlock.
-     */
-    @Test
-    public void testGetPreviewsShape() {
-        System.out.println("getPreviewsShape");
-        Board board = null;
-        int x = 0;
-        int y = 0;
-        SBlock instance = new SBlock();
-        ArrayList<Cell> expResult = null;
-        ArrayList<Cell> result = instance.getPreviewsShape(board, x, y);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
 }

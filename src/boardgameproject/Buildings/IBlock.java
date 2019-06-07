@@ -43,7 +43,8 @@ public class IBlock extends Building {
     }
 
     @Override
-    public void buildingRole(Player player, Board board, Round round) throws InsufficientRessourcesException {
+    public void buildingRole(Player player, Board board, Round round) 
+            throws InsufficientRessourcesException {
         switch (state) {
             case TOP:
             case BOTTOM:
