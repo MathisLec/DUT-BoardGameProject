@@ -7,8 +7,11 @@ package boardgameproject;
 
 import boardgameproject.Buildings.Building;
 import boardgameproject.Buildings.IBlock;
+import boardgameproject.Buildings.SBlock;
 import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
+import java.util.ArrayList;
+import javafx.scene.canvas.Canvas;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -71,6 +74,22 @@ public class BoardTest {
         assertEquals(building.getNbWorker(), 1);
         instance.removeWorker(x, y);
         assertEquals(building.getNbWorker(), 0);
+    }
+
+    /**
+     * Test of getNbBuildingsOfEachType method, of class Board.
+     */
+    @Test
+    public void testGetNbBuildingsOfEachType()
+            throws InsufficientRessourcesException, InvalidLocationException {
+        System.out.println("getNbBuildingsOfEachType");
+        Board instance = new Board(round, player);
+        instance.addBuilding(new SBlock(), 5, 5);
+        instance.addBuilding(new SBlock(), 10, 5);
+        for (Character c : instance.getNbBuildingsOfEachType().keySet()) {
+            System.out.println(c + "Block = " + instance.getNbBuildingsOfEachType().get(c));
+        }
+
     }
 
 }

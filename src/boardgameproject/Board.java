@@ -10,6 +10,7 @@ import boardgameproject.Exceptions.InsufficientRessourcesException;
 import boardgameproject.Exceptions.InvalidLocationException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 
@@ -106,10 +107,12 @@ public final class Board implements Serializable {
                 player.placeWorker();
                 player.decreaseNbWorkerToPlace();
             } else {
+                player.disallowToPlaceWorker();
                 throw new InvalidLocationException();
             }
         } catch (NullPointerException ex) {
             System.out.println("Emplacement non valide");
+            player.disallowToPlaceWorker();
         }
     }
 
@@ -274,6 +277,20 @@ public final class Board implements Serializable {
             score += nbPointTurnSpacePort;
         }
         return score;
+    }
+
+    public HashMap<Character, Integer> getNbBuildingsOfEachType() {
+        HashMap<Character, Integer> nbBuildings = new HashMap<>();
+        for (Building b : buildings) {
+            if (!nbBuildings.containsKey(b.getRole())) {
+                nbBuildings.put(b.getRole(), 1);
+            } else {
+                int nb = nbBuildings.get(b.getRole());
+                nb++;
+                nbBuildings.put(b.getRole(), nb);
+            }
+        }
+        return nbBuildings;
     }
 
 }
