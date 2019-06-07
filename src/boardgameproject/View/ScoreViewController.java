@@ -24,6 +24,7 @@ public class ScoreViewController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * And write every value of the score and the player's score
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

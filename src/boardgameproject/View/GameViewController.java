@@ -70,6 +70,9 @@ public class GameViewController implements Initializable {
         update();
     }
 
+    /**
+     * launch a new game
+     */
     private void newGame() {
         round = new Round();
         player = new Player();
@@ -78,6 +81,9 @@ public class GameViewController implements Initializable {
         board.drawBoard(GameBoard, cellSize);
     }
 
+    /**
+     * update the game each time an action is performed
+     */
     public void update() {
         // Clear the board
         GraphicsContext gc = GameBoard.getGraphicsContext2D();
@@ -107,6 +113,13 @@ public class GameViewController implements Initializable {
 
     }
 
+    /**
+     * This method will return a color for each cell of the gameboard
+     *
+     * @param cell the current cell
+     * @param color the default color
+     * @return
+     */
     private Color colorSelector(Cell cell, Color color) {
         char role = cell.getBuildingType();
         switch (role) {
@@ -141,10 +154,13 @@ public class GameViewController implements Initializable {
         return color;
     }
 
+    /**
+     * draw an red rectangle around the selected building
+     */
     private void drawStrokes() {
         for (Building b : buildingsInHand.values()) {
             GraphicsContext gc1 = getAssociatedCanvas(b).getGraphicsContext2D();
-            gc1.clearRect(-2, -2, 125, 125);
+            gc1.clearRect(0, 0, 125, 125);
             gc1.setLineWidth(1);
             if (b == selectedBuilding && b != null) {
                 gc1.setStroke(Color.RED);
@@ -154,6 +170,9 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * draw the buildings in the canvas which represent the player's hand
+     */
     private void drawPlayerBuildingsInHandCanvas() {
         Canvas[] canvas = {hand1, hand2, hand3, hand4, hand5};
         for (int i = 0; i < canvas.length; i++) {
@@ -168,6 +187,13 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * This method will permit the player to change a building from his hand
+     * with a new one from the pile depending of how much workers the ZBlock has
+     * in
+     *
+     * @param building
+     */
     private void zBlockRole(Building building) {
         player.putBuildingFromHandToPile(building);
         player.drawBuilding();
@@ -175,6 +201,10 @@ public class GameViewController implements Initializable {
         selectedBuilding = null;
     }
 
+    /**
+     * This method will rotate the selected building to the right by clicking on
+     * the rotateRight button
+     */
     @FXML
     private void rotateRight(ActionEvent event) {
         try {
@@ -191,6 +221,10 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * This method will rotate the selected building to the left by clicking on
+     * the rotateLeft button
+     */
     @FXML
     private void rotateLeft(ActionEvent event) {
         try {
@@ -207,6 +241,10 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * This method allow the player to interact with the gameBoard by clicking
+     * on it
+     */
     @FXML
     private void clickOnBoard(MouseEvent event) {
 
@@ -247,6 +285,10 @@ public class GameViewController implements Initializable {
 
     }
 
+    /**
+     * This method allow the player to interact with the gameBoard by being over
+     * it
+     */
     @FXML
     private void mouseHoverBoard(MouseEvent event) {
         if (selectedBuilding != null) {
@@ -269,6 +311,9 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * This is the buildingHand number 1 of the player
+     */
     @FXML
     private void Hand1(MouseEvent event) {
         if (round.getPutBuilding()) {
@@ -280,6 +325,9 @@ public class GameViewController implements Initializable {
         update();
     }
 
+    /**
+     * This is the buildingHand number 2 of the player
+     */
     @FXML
     private void Hand2(MouseEvent event) {
         if (round.getPutBuilding()) {
@@ -291,6 +339,9 @@ public class GameViewController implements Initializable {
         update();
     }
 
+    /**
+     * This is the buildingHand number 3 of the player
+     */
     @FXML
     private void Hand3(MouseEvent event) {
         if (round.getPutBuilding()) {
@@ -302,6 +353,9 @@ public class GameViewController implements Initializable {
         update();
     }
 
+    /**
+     * This is the buildingHand number 4 of the player
+     */
     @FXML
     private void Hand4(MouseEvent event) {
         if (round.getPutBuilding()) {
@@ -313,6 +367,9 @@ public class GameViewController implements Initializable {
         update();
     }
 
+    /**
+     * This is the buildingHand number 5 of the player
+     */
     @FXML
     private void Hand5(MouseEvent event) {
         if (round.getPutBuilding()) {
@@ -324,6 +381,11 @@ public class GameViewController implements Initializable {
         update();
     }
 
+    /**
+     * This will return the Canvas where the building needs to be drawn
+     * @param building
+     * @return 
+     */
     private Canvas getAssociatedCanvas(Building building) {
         Canvas canvasToReturn = null;
         for (Canvas c : buildingsInHand.keySet()) {
@@ -334,6 +396,10 @@ public class GameViewController implements Initializable {
         return canvasToReturn;
     }
 
+    /**
+     * This method allow the player to place a worker by clicking on the 
+     * placeAWorker button if he still has movement left
+     */
     @FXML
     private void placeAWorker(ActionEvent event) {
         if (player.getNbWorkerToPlace() > 0 && !board.getBuildings().isEmpty()) {
@@ -341,6 +407,10 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * This method permits the player to resume his game by clicking on the Resume
+     * button on the menu
+     */
     private void resumeGame() {
         FileInputStream fis;
         ObjectInputStream ois;
@@ -360,6 +430,9 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * This method permits the player to save his current game
+     */
     @FXML
     private void saveGame(ActionEvent event) {
         FileOutputStream fos;
@@ -380,6 +453,9 @@ public class GameViewController implements Initializable {
 
     }
 
+    /**
+     * This method will display the Help menu by clicking on the Help button 
+     */
     @FXML
     private void displayHelp(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -394,6 +470,9 @@ public class GameViewController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method will display the Score menu by clicking on the Score button 
+     */
     @FXML
     private void displayScore(ActionEvent event) throws IOException {
         Stage stage = new Stage();
@@ -408,6 +487,10 @@ public class GameViewController implements Initializable {
         stage.show();
     }
 
+    /**
+     * This button triggers the end of the turn actions and end the program if 
+     * the game is finished
+     */
     @FXML
     private void endTurn(ActionEvent event) throws IOException {
         if (round.getNbTurn() > 29) {
@@ -432,6 +515,9 @@ public class GameViewController implements Initializable {
         }
     }
 
+    /**
+     * This method quit the program by clicking on the quit button
+     */
     @FXML
     private void quitGame(ActionEvent event) {
         System.exit(0);
