@@ -273,7 +273,7 @@ public class GameViewController implements Initializable {
                     try {
                         board.addBuilding(selectedBuilding, mouseY, mouseX);
                         selectedBuilding = null;
-                        round.setPutBuilding(false);
+                        round.setHasPlayerPlaceBuilding(false);
                     } catch (InsufficientRessourcesException | InvalidLocationException ex) {
                     }
                 }
@@ -316,7 +316,7 @@ public class GameViewController implements Initializable {
      */
     @FXML
     private void Hand1(MouseEvent event) {
-        if (round.getPutBuilding()) {
+        if (round.hasPlayerPlaceBuilding()) {
             selectedBuilding = buildingsInHand.get(hand1);
             if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
@@ -330,7 +330,7 @@ public class GameViewController implements Initializable {
      */
     @FXML
     private void Hand2(MouseEvent event) {
-        if (round.getPutBuilding()) {
+        if (round.hasPlayerPlaceBuilding()) {
             selectedBuilding = buildingsInHand.get(hand2);
             if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
@@ -344,7 +344,7 @@ public class GameViewController implements Initializable {
      */
     @FXML
     private void Hand3(MouseEvent event) {
-        if (round.getPutBuilding()) {
+        if (round.hasPlayerPlaceBuilding()) {
             selectedBuilding = buildingsInHand.get(hand3);
             if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
@@ -358,7 +358,7 @@ public class GameViewController implements Initializable {
      */
     @FXML
     private void Hand4(MouseEvent event) {
-        if (round.getPutBuilding()) {
+        if (round.hasPlayerPlaceBuilding()) {
             selectedBuilding = buildingsInHand.get(hand4);
             if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
@@ -372,7 +372,7 @@ public class GameViewController implements Initializable {
      */
     @FXML
     private void Hand5(MouseEvent event) {
-        if (round.getPutBuilding()) {
+        if (round.hasPlayerPlaceBuilding()) {
             selectedBuilding = buildingsInHand.get(hand5);
             if (player.getNbBuildingToReturn() > 0 && selectedBuilding != null) {
                 zBlockRole(selectedBuilding);
@@ -383,8 +383,9 @@ public class GameViewController implements Initializable {
 
     /**
      * This will return the Canvas where the building needs to be drawn
+     *
      * @param building
-     * @return 
+     * @return
      */
     private Canvas getAssociatedCanvas(Building building) {
         Canvas canvasToReturn = null;
@@ -397,7 +398,7 @@ public class GameViewController implements Initializable {
     }
 
     /**
-     * This method allow the player to place a worker by clicking on the 
+     * This method allow the player to place a worker by clicking on the
      * placeAWorker button if he still has movement left
      */
     @FXML
@@ -408,8 +409,8 @@ public class GameViewController implements Initializable {
     }
 
     /**
-     * This method permits the player to resume his game by clicking on the Resume
-     * button on the menu
+     * This method permits the player to resume his game by clicking on the
+     * Resume button on the menu
      */
     private void resumeGame() {
         FileInputStream fis;
@@ -454,7 +455,7 @@ public class GameViewController implements Initializable {
     }
 
     /**
-     * This method will display the Help menu by clicking on the Help button 
+     * This method will display the Help menu by clicking on the Help button
      */
     @FXML
     private void displayHelp(ActionEvent event) throws IOException {
@@ -471,7 +472,7 @@ public class GameViewController implements Initializable {
     }
 
     /**
-     * This method will display the Score menu by clicking on the Score button 
+     * This method will display the Score menu by clicking on the Score button
      */
     @FXML
     private void displayScore(ActionEvent event) throws IOException {
@@ -488,7 +489,7 @@ public class GameViewController implements Initializable {
     }
 
     /**
-     * This button triggers the end of the turn actions and end the program if 
+     * This button triggers the end of the turn actions and end the program if
      * the game is finished
      */
     @FXML
@@ -510,7 +511,7 @@ public class GameViewController implements Initializable {
         } else {
             round.endTurn();
             board.endTurn();
-            round.setPutBuilding(true);
+            round.setHasPlayerPlaceBuilding(true);
             update();
         }
     }

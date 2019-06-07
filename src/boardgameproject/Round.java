@@ -20,7 +20,7 @@ public class Round extends Application implements Serializable {
 
     private final int NB_TURN_MAX = 30;
     private int nbTurn;
-    private boolean putBuilding = true;
+    private boolean hasPlayerPlaceBuilding = true;
     public Scene scene;
 
     @Override
@@ -72,8 +72,8 @@ public class Round extends Application implements Serializable {
      *
      * @return true if the player is allowed to put a building on the board
      */
-    public boolean getPutBuilding() {
-        return putBuilding;
+    public boolean hasPlayerPlaceBuilding() {
+        return hasPlayerPlaceBuilding;
     }
 
     /**
@@ -82,8 +82,8 @@ public class Round extends Application implements Serializable {
      *
      * @param b
      */
-    public void setPutBuilding(boolean b) {
-        putBuilding = b;
+    public void setHasPlayerPlaceBuilding(boolean b) {
+        hasPlayerPlaceBuilding = b;
     }
 
     /**

@@ -354,7 +354,9 @@ public class Player implements Serializable {
      * Decrease the number of building to return
      */
     public void decreaseNbBuildingToReturn() {
-        nbBuildingToReturn--;
+        if (nbBuildingToReturn != 0) {
+            nbBuildingToReturn--;
+        }
     }
 
     /**
