@@ -40,7 +40,7 @@ public class CellTest {
     public void testChangeBuildingStatus_Building() {
         System.out.println("changeBuildingStatus");
         Building building = new IBlock();
-        Cell instance = new Cell();
+        Cell instance = new Cell(0, 0);
         instance.changeBuildingStatus(building);
         assertEquals(instance.hasBuilding(), true);
         assertEquals(instance.getBuildingType(), building);
@@ -52,8 +52,9 @@ public class CellTest {
     @Test
     public void testChangeBuildingStatus_0args() {
         System.out.println("changeBuildingStatus");
-        Cell instance = new Cell();
-        instance.changeBuildingStatus();
+        Cell instance = new Cell(0, 0);
+        Building building = new IBlock();
+        instance.changeBuildingStatus(building);
         assertEquals(instance.hasBuilding(), false);
         assertEquals(instance.getBuildingType(), null);
     }
@@ -64,7 +65,7 @@ public class CellTest {
     @Test
     public void testHasWorker() {
         System.out.println("hasWorker");
-        Cell instance = new Cell();
+        Cell instance = new Cell(0, 0);
         boolean expResult = false;
         boolean result = instance.hasWorker();
         assertEquals(expResult, result);
@@ -80,7 +81,7 @@ public class CellTest {
     @Test
     public void testHasBuilding() {
         System.out.println("hasBuilding");
-        Cell instance = new Cell();
+        Cell instance = new Cell(0, 0);
         boolean expResult = false;
         boolean result = instance.hasBuilding();
         assertEquals(expResult, result);
@@ -98,7 +99,7 @@ public class CellTest {
     @Test
     public void testGetBuildingType() {
         System.out.println("getBuildingType");
-        Cell instance = new Cell();
+        Cell instance = new Cell(0, 0);
         Building expResult = null;
         char result = instance.getBuildingType();
         assertEquals(expResult, result);

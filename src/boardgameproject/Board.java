@@ -38,7 +38,7 @@ public final class Board implements Serializable {
     /**
      * This method initialize all cells of the board
      */
-    public void initializeBoard() {
+    private void initializeBoard() {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board[i].length; j++) {
                 board[i][j] = new Cell(i, j);
@@ -69,7 +69,7 @@ public final class Board implements Serializable {
      * @throws InvalidLocationException This Exception will occur if the player
      * doesn't place the building well
      */
-    public void addBuilding(Building building, int x, int y) throws 
+    public void addBuilding(Building building, int x, int y) throws
             InsufficientRessourcesException, InvalidLocationException {
         try {
             if (checkAddBuilding(building, x, y)) {
@@ -138,7 +138,7 @@ public final class Board implements Serializable {
      * @throws InvalidLocationException This Exception will occur if the player
      * doesn't place the building well
      */
-    private boolean checkAddBuilding(Building building, int x, int y) throws 
+    private boolean checkAddBuilding(Building building, int x, int y) throws
             InvalidLocationException, InsufficientRessourcesException {
         boolean isValid = true;
         for (Cell c : building.getPreviewsShape(this, x, y)) {
@@ -220,7 +220,7 @@ public final class Board implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param x posX of the Cell
      * @param y posY of the Cell
      * @return a Cell from the Board
