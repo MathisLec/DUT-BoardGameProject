@@ -51,14 +51,14 @@ public class ZBlock extends Building {
             case TOP:
             case BOTTOM:
                 int nbMoneyToConsume = 1;
-                player.consummeMoney(nbMoneyToConsume);
+                player.consumeMoney(nbMoneyToConsume);
                 player.addTurnSpacePort();
                 break;
             case LEFT:
             case RIGHT:
                 int nbEnergyToConsumme = getNbWorker();
                 player.setNbBuildingToReturnByDefault();
-                player.consummeEnergy(nbEnergyToConsumme);
+                player.consumeEnergy(nbEnergyToConsumme);
                 for (int i = 0; i < getNbWorker(); i++) {
                     player.increaseNbBuildingToReturn();
                 }

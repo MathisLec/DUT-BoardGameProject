@@ -48,7 +48,7 @@ public class IBlock extends Building {
             case TOP:
             case BOTTOM:
                 int nbEnergyToConsume = player.getNbResearch();
-                player.consummeEnergy(nbEnergyToConsume);
+                player.consumeEnergy(nbEnergyToConsume);
                 player.addMaterial(player.getNbResearch());
                 player.addMaterial(player.getNbResearch());
                 break;
@@ -56,7 +56,7 @@ public class IBlock extends Building {
             case RIGHT:
                 int nbMaterialToAdd = 2;
                 nbEnergyToConsume = 1;
-                player.consummeEnergy(nbEnergyToConsume);
+                player.consumeEnergy(nbEnergyToConsume);
                 player.addMaterial(nbMaterialToAdd);
                 break;
         }

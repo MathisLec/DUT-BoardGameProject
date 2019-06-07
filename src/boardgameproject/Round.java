@@ -20,7 +20,6 @@ public class Round extends Application implements Serializable {
 
     private final int NB_TURN_MAX = 30;
     private int nbTurn;
-    private int nbPlayer;
     private boolean putBuilding = true;
     public Scene scene;
 
@@ -45,30 +44,51 @@ public class Round extends Application implements Serializable {
         launch(args);
     }
 
+    /**
+     *
+     * @return the max number of turn
+     */
     public int getNbTurnMax() {
         return NB_TURN_MAX;
     }
 
+    /**
+     *
+     * @return the current turn
+     */
     public int getNbTurn() {
         return nbTurn;
     }
 
-    public int getNbPlayer() {
-        return nbPlayer;
-    }
-
+    /**
+     *
+     * @return the scene
+     */
     public Scene getScene() {
         return scene;
     }
 
+    /**
+     *
+     * @return true if the player is allowed to put a building on the board
+     */
     public boolean getPutBuilding() {
         return putBuilding;
     }
 
+    /**
+     * this method will change putBuilding to make it know if the player already
+     * built a building this turn or not
+     *
+     * @param b
+     */
     public void setPutBuilding(boolean b) {
         putBuilding = b;
     }
 
+    /**
+     * This method will increase the number of turn
+     */
     public void endTurn() {
         nbTurn++;
         System.out.println("nbTurn:" + nbTurn);

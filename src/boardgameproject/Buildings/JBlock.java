@@ -48,23 +48,23 @@ public class JBlock extends Building {
         switch (state) {
             case TOP:
                 int nbEnergyToConsume = 4;
-                player.consummeEnergy(nbEnergyToConsume);
+                player.consumeEnergy(nbEnergyToConsume);
                 player.drawBuilding();
                 break;
             case BOTTOM:
                 nbEnergyToConsume = player.getNbResearch();
                 int nbMoneyToConsume = player.getNbResearch();
                 int nbWorkerToAdd = (int) player.getNbResearch() / 2;
-                player.consummeEnergy(nbEnergyToConsume);
-                player.consummeMoney(nbMoneyToConsume);
+                player.consumeEnergy(nbEnergyToConsume);
+                player.consumeMoney(nbMoneyToConsume);
                 player.addWorkerInHand(nbWorkerToAdd);
                 break;
             case LEFT:
                 nbEnergyToConsume = 2;
                 nbMoneyToConsume = 2;
                 int nbResearchToAdd = 1;
-                player.consummeEnergy(nbEnergyToConsume);
-                player.consummeMoney(nbMoneyToConsume);
+                player.consumeEnergy(nbEnergyToConsume);
+                player.consumeMoney(nbMoneyToConsume);
                 player.addResearch(nbResearchToAdd);
                 break;
             case RIGHT:

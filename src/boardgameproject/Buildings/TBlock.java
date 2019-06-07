@@ -61,7 +61,7 @@ public class TBlock extends Building {
             case LEFT:
                 int nbMaterialToConsume = 1;
                 nbEnergyToAdd = 2;
-                player.consummeMaterial(nbMaterialToConsume);
+                player.consumeMaterial(nbMaterialToConsume);
                 player.addEnergy(nbEnergyToAdd);
                 break;
             case RIGHT:

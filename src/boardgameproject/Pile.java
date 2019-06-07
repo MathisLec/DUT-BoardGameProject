@@ -22,16 +22,27 @@ public final class Pile implements Serializable {
     private List<Building> pile;
     private int firstIndex;
 
+    /**
+     * Constructor
+     */
     public Pile() {
         this.pile = InitializePile();
         this.nbBuildingsPile = pile.size();
         this.firstIndex = 0;
     }
 
+    /**
+     *  This method will shuffle the Pile at the start of the game
+     * @param list The list which will be shuffled
+     */
     private void randomizePile(ArrayList<Building> list) {
         Collections.shuffle(list);
     }
 
+    /**
+     * This method will fill the Pile with Buildings
+     * @return A pile of buildings
+     */
     private ArrayList<Building> InitializePile() {
         ArrayList<Building> list = new ArrayList<>();
         for (int i = 0; i < 25; i++) {
@@ -66,23 +77,42 @@ public final class Pile implements Serializable {
         return list;
     }
 
+    /**
+     *
+     * @return the a List of Building which represents the Pile
+     */
     public List<Building> getPile() {
         return pile;
     }
 
+    /**
+     *
+     * @return the number of Buildings in the Pile
+     */
     public int getNbBuildingsPile() {
         return nbBuildingsPile;
     }
 
+    /**
+     * Delete the building which is drawn
+     * @param building 
+     */
     private void deleteBuilding(Building building) {
         pile.remove(building);
         updateNbBuildingPile();
     }
 
+    /**
+     * Update the Size of the pile
+     */
     private void updateNbBuildingPile() {
         nbBuildingsPile = pile.size();
     }
 
+    /**
+     * This method will Draw a Building from the Pile
+     * @return the Building drawn
+     */
     public Building drawBuilding() {
         Building building = pile.get(firstIndex);
         deleteBuilding(building);

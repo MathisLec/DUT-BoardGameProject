@@ -54,8 +54,8 @@ public class SBlock extends Building {
                 int nbEnergyToConsume = 2;
                 int nbMoneyToConsume = 1;
                 int nbStellariumToAdd = 1;
-                player.consummeEnergy(nbEnergyToConsume);
-                player.consummeMoney(nbMoneyToConsume);
+                player.consumeEnergy(nbEnergyToConsume);
+                player.consumeMoney(nbMoneyToConsume);
                 player.addMaterial(nbMaterialToAdd);
                 if (player.getNbResearch() == player.getLimitNbResearch()) {
                     player.addStellarium(nbStellariumToAdd);

@@ -51,7 +51,7 @@ public class LBlock extends Building {
                 int nbWorkerToAdd = 3;
                 int nbEnergyToConsume = 1;
                 if (getNbWorker() == 2) {
-                    player.consummeEnergy(nbEnergyToConsume);
+                    player.consumeEnergy(nbEnergyToConsume);
                     player.addWorkerInHand(nbWorkerToAdd);
                     clearWorkers();
                 }
@@ -59,7 +59,7 @@ public class LBlock extends Building {
             case BOTTOM:
                 int nbMoneyToConsumme = 4;
                 nbWorkerToAdd = 1;
-                player.consummeMoney(nbMoneyToConsumme);
+                player.consumeMoney(nbMoneyToConsumme);
                 player.addWorkerInHand(nbWorkerToAdd);
                 break;
             case LEFT:
@@ -69,7 +69,7 @@ public class LBlock extends Building {
             case RIGHT:
                 nbEnergyToConsume = 1;
                 nbMoneyToAdd = 4;
-                player.consummeEnergy(nbEnergyToConsume);
+                player.consumeEnergy(nbEnergyToConsume);
                 player.addMoney(nbMoneyToAdd);
                 break;
         }
