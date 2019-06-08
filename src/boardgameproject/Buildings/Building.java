@@ -40,7 +40,7 @@ public abstract class Building implements Serializable {
     }
 
     /**
-     * 
+     *
      * @param x
      * @param y
      */
@@ -48,6 +48,7 @@ public abstract class Building implements Serializable {
 
     /**
      * This method will give a role to the building
+     *
      * @param player
      * @param board
      * @param round
@@ -69,8 +70,8 @@ public abstract class Building implements Serializable {
     public abstract void rotateBuildingLeft();
 
     /**
-     * This method will change the state of the building when rotated 
-     * to the left
+     * This method will change the state of the building when rotated to the
+     * left
      */
     protected void changeStateRotateLeft() {
         switch (state) {
@@ -95,8 +96,8 @@ public abstract class Building implements Serializable {
     public abstract void rotateBuildingRight();
 
     /**
-     * This method will change the state of the building when rotated 
-     * to the right
+     * This method will change the state of the building when rotated to the
+     * right
      */
     protected void changeStateRotateRight() {
         switch (state) {
@@ -117,6 +118,7 @@ public abstract class Building implements Serializable {
 
     /**
      * this method will draw the building
+     *
      * @param c the Canvas where the building will be drawn
      * @param cellSize the size of the Building's Cells
      */
@@ -149,22 +151,6 @@ public abstract class Building implements Serializable {
     }
 
     /**
-     * remove the worker from the building if the player doesn't have enough 
-     * ressources to trigger the action
-     */
-    public void removeWorker() {
-        int limit = 1;
-        int currentCounter = 0;
-        for (Cell c : cells) {
-            // Check if a worker has already been removed
-            if (c.hasWorker() && currentCounter < limit) {
-                c.setHasNotWorkerStatus();
-                currentCounter++;
-            }
-        }
-    }
-
-    /**
      * Clear the building of all his workers
      */
     public void clearWorkers() {
@@ -184,43 +170,24 @@ public abstract class Building implements Serializable {
     }
 
     /**
-     * set the selectedBuilding attribute to true 
-     */
-    public void setToSelectedBuilding() {
-        isSelectedBuilding = true;
-    }
-
-    /**
-     * set the selectedBuilding attribute to false 
-     */
-    public void unsetToSelectedBuilding() {
-        isSelectedBuilding = false;
-    }
-
-    /**
+     * This method will return the positions of the cells where we will build
+     * the selected building
      *
-     * @return true if the building is the selected One
-     */
-    public boolean isSelectedBuilding() {
-        return isSelectedBuilding;
-    }
-
-    //Warning here, vertical and horizontal axis are reversed (x is vertical axe and y is horizontal axe)
-    /**
-     * This method will return the positions of the cells where we will build the selected building
      * @param board the gameboard
      * @param x the PosX of the building
-     * @param y the PosY of the building 
+     * @param y the PosY of the building
      * @return
      * @throws ArrayIndexOutOfBoundsException
      */
+    //Warning here, vertical and horizontal axis are reversed (x is vertical axe and y is horizontal axe)
     public abstract ArrayList<Cell> getPreviewsShape(Board board, int x, int y) throws ArrayIndexOutOfBoundsException;
 
     /**
      * put the previews cells in a list
+     *
      * @param board gameboard
      * @param x the PosX of the building
-     * @param y the PosY of the building 
+     * @param y the PosY of the building
      */
     public void putPreviewsCellsInList(Board board, int x, int y) {
         cells.addAll(getPreviewsShape(board, x, y));

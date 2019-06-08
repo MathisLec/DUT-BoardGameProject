@@ -494,7 +494,7 @@ public class GameViewController implements Initializable {
      */
     @FXML
     private void endTurn(ActionEvent event) throws IOException {
-        if (round.getNbTurn() > 29) {
+        if (round.getNbTurn() > round.getNbTurnMax()) {
             Stage stage2 = (Stage) EndTurn.getScene().getWindow();
             stage2.close();
 
