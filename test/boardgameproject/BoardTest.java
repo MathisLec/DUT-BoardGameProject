@@ -112,4 +112,17 @@ public class BoardTest {
 
     }
 
+    /**
+     * Test of getNbWorkerOnBoard method, of class Board.
+     */
+    @Test
+    public void testGetNbWorkerOnBoard()
+            throws InsufficientRessourcesException, InvalidLocationException {
+        System.out.println("getNbWorkerOnBoard");
+        Board instance = new Board(round, player);
+        instance.addBuilding(new SBlock(), 5, 5);
+        instance.addWorker(5, 5);
+        assertEquals(instance.getNbWorkerOnBoard(), 1);
+    }
+
 }

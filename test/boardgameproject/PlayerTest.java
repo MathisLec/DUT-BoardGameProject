@@ -6,7 +6,6 @@
 package boardgameproject;
 
 import boardgameproject.Buildings.Building;
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -299,6 +298,16 @@ public class PlayerTest {
         Player instance = new Player();
         instance.disallowToPlaceWorker();
         assertFalse(instance.isAllowToPlaceWorker());
+    }
+
+    /**
+     * Test of getPileSize method, of class Player
+     */
+    @Test
+    public void testGetPileSize() {
+        System.out.println("getPileSize");
+        Player instance = new Player();
+        assertEquals(46, instance.getPileSize());
     }
 
 }

@@ -396,4 +396,13 @@ public class Player implements Serializable {
         isAllowToPlaceWorker = false;
     }
 
+    /**
+     * Return the number of builings in the pile
+     *
+     * @return
+     */
+    public int getPileSize() {
+        return pile.getNbBuildingsPile();
+    }
+
 }

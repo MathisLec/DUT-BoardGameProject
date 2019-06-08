@@ -296,6 +296,12 @@ public final class Board implements Serializable {
         return score;
     }
 
+    /**
+     * Return an HashMap with in key the letter associate to the building and in
+     * value, the number of it letter
+     *
+     * @return
+     */
     public HashMap<Character, Integer> getNbBuildingsOfEachType() {
         HashMap<Character, Integer> nbBuildings = new HashMap<>();
         for (Building b : buildings) {
@@ -308,6 +314,19 @@ public final class Board implements Serializable {
             }
         }
         return nbBuildings;
+    }
+
+    /**
+     * return the number of workers on the board
+     *
+     * @return
+     */
+    public int getNbWorkerOnBoard() {
+        int nb = 0;
+        for (Building b : buildings) {
+            nb += b.getNbWorker();
+        }
+        return nb;
     }
 
 }
