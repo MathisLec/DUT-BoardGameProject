@@ -15,7 +15,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label alignment="CENTER" layoutX="103.0" layoutY="47.0" prefHeight="73.0" prefWidth="395.0" style="-fx-background-color: #EE5253;" text="JEU PLATEAU BATIMENTS" textAlignment="CENTER">
+      <Label alignment="CENTER" layoutX="103.0" layoutY="47.0" prefHeight="73.0" prefWidth="395.0" style="-fx-background-color: #EE5253;" text="T E T R O C I T Y" textAlignment="CENTER">
          <font>
             <Font size="29.0" />
          </font></Label>
