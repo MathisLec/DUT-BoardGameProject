@@ -43,13 +43,13 @@ public class ScoreViewController implements Initializable {
         for (Building b : GameViewController.board.getBuildings()) {
             i += b.getNbWorker();
         }
-        nbWorkersOnBoard.setText("There is " + i + " Workers on the board.");
-        sizeOfBuildingPile.setText("There is " +
-                GameViewController.player.getPileSize() + " Buildings left in the pile.");
+        nbWorkersOnBoard.setText("The board contains " + i + " Workers .");
+        sizeOfBuildingPile.setText("The pile contains " +
+                GameViewController.player.getPileSize() + " Buildings.");
         String s = "";
         for (Character b : GameViewController.board.getNbBuildingsOfEachType().keySet()) {
-            s += "There is " + GameViewController.board.getNbBuildingsOfEachType().get(b)
-                    + " " + b + "Block on the board.\n";
+            s += "The board contains " + GameViewController.board.getNbBuildingsOfEachType().get(b)
+                    + " " + b + "Block.\n";
         }
         buildingsOnBoard.setText(s);
 
