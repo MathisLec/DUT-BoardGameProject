@@ -59,6 +59,26 @@ public class BoardTest {
     }
 
     /**
+     * Test of moveWorker method, of class Board.
+     *
+     */
+    @Test
+    public void testMoveWorker() throws Exception {
+        System.out.println("moveWorker");
+        Building building = new IBlock();
+        int x = 0;
+        int x2 = 1;
+        int y = 0;
+        Board instance = new Board(round, player);
+        instance.addBuilding(building, x, y);
+        instance.addWorker(x, y);
+        instance.endTurn();
+        instance.removeWorker(x, y);
+        instance.moveWorker(x2, y);
+        assertEquals(player.getNbWorkers(), 7);
+    }
+
+    /**
      * Test of removeWorker method, of class Board.
      */
     @Test

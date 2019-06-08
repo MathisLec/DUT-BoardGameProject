@@ -266,7 +266,7 @@ public class GameViewController implements Initializable {
                     // Here x is vertical axe and y is horizontal axe
                     board.removeWorker(selectedWorker.getX(), selectedWorker.getY());
                     // Here x is horizontal axe and y is vertical axe
-                    board.addWorker(mouseY, mouseX);
+                    board.moveWorker(mouseY, mouseX);
                     selectedWorker = null;
                 }
                 if (selectedBuilding != null && !selectedBuilding.getPreviewsShape(board, mouseY, mouseX).isEmpty()) {

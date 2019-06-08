@@ -116,6 +116,23 @@ public final class Board implements Serializable {
         }
     }
 
+    public void moveWorker(int x, int y) throws InvalidLocationException {
+        try {
+            // x is vertical axe and y is horizontal axe
+            Cell selectedCell = getCell(x, y);
+            if (checkAddWorker(selectedCell)) {
+                selectedCell.setHasWorkerStatus();
+                player.decreaseNbWorkerToPlace();
+            } else {
+                player.disallowToPlaceWorker();
+                throw new InvalidLocationException();
+            }
+        } catch (NullPointerException ex) {
+            System.out.println("Emplacement non valide");
+            player.disallowToPlaceWorker();
+        }
+    }
+
     /**
      * This worker will remove a worker if the player doesn't have enough
      * ressources to trigger the action of the building
